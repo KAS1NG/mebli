@@ -1,0 +1,79 @@
+.checkout-page {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+  
+    .checkout-page__order-summary {
+      margin-bottom: 30px;
+  
+      h3 {
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+      }
+  
+      ul {
+        list-style-type: none;
+        padding: 0;
+  
+        li {
+          margin-bottom: 10px;
+          font-size: 1.1rem;
+        }
+      }
+  
+      .checkout-page__total {
+        font-size: 1.3rem;
+        font-weight: 600;
+        margin-top: 10px;
+      }
+    }
+  
+    .checkout-page__form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+  
+      .checkout-page__section {
+        margin-bottom: 20px;
+  
+        h3 {
+          font-size: 1.5rem;
+          margin-bottom: 10px;
+        }
+  
+        input {
+          width: 100%;
+          padding: 10px;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+          font-size: 1rem;
+          margin-bottom: 10px;
+        }
+      }
+  
+      .checkout-page__btn {
+        padding: 15px;
+        background-color: #0070f3;
+        color: white;
+        font-size: 1.2rem;
+        font-weight: bold;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+  
+        &:hover {
+          background-color: #005bb5;
+        }
+      }
+    }
+  }
+  
