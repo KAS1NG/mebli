@@ -4,32 +4,15 @@ import React, { useState } from 'react';
 import '@/app/styles/checkout.scss'
 import { IPost } from '../types/post';
 
-interface CheckoutItem {
-  name: string;
-  price: number;
-  quantity: number;
-}
 
 const ProceedToCheckout = ({ products }: { products: IPost[] }) => {
 
 
   // Стани для форм
   const [name, setName] = useState('');
-  const [address, setAddress] = useState('');
-  const [city, setCity] = useState('');
-  const [postalCode, setPostalCode] = useState('');
-  const [cardNumber, setCardNumber] = useState('');
-  const [expiration, setExpiration] = useState('');
-  const [cvv, setCvv] = useState('');
-
-  // Демо-товари для замовлення
-  const items: CheckoutItem[] = [
-    { name: 'Product 1', price: 50, quantity: 2 },
-    { name: 'Product 2', price: 30, quantity: 1 },
-  ];
 
   // Загальна сума
-  const total = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  // const total = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
   // Функція для підтвердження замовлення
   const handleSubmit = (e: React.FormEvent) => {
