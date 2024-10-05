@@ -34,24 +34,24 @@ function MySlider({ slides, title }: ISlider) {
           navigation
           pagination={{ clickable: true }}
           // slidesPerView={Math.min(slides.length, 3)}
-          breakpoints={{
-            640: {
-              slidesPerView: 1, // Для маленьких екранів: максимум 1.5 слайда
-              spaceBetween: 20,
-            },
-            768: {
-              slidesPerView: Math.min(slides.length, 1.5), // Для середніх екранів: максимум 2 слайда
-              spaceBetween: 20,
-            },
-            1024: {
-              slidesPerView: Math.min(slides.length, 2), // Для великих екранів: максимум 2.5 слайда
-              spaceBetween: 20,
-            },
-            1280: {
-              slidesPerView: Math.min(slides.length, 2.5), // Для дуже великих екранів: максимум 3 слайда
-              spaceBetween: 20,
-            },
-          }}
+          // breakpoints={{
+          //   640: {
+          //     slidesPerView: 1, // Для маленьких екранів: максимум 1.5 слайда
+          //     spaceBetween: 20,
+          //   },
+          //   768: {
+          //     slidesPerView: Math.min(slides.length, 1.5), // Для середніх екранів: максимум 2 слайда
+          //     spaceBetween: 20,
+          //   },
+          //   1024: {
+          //     slidesPerView: Math.min(slides.length, 2), // Для великих екранів: максимум 2.5 слайда
+          //     spaceBetween: 20,
+          //   },
+          //   1280: {
+          //     slidesPerView: Math.min(slides.length, 2.5), // Для дуже великих екранів: максимум 3 слайда
+          //     spaceBetween: 20,
+          //   },
+          // }}
         >
           {slides.map((image, index) => (
             <SwiperSlide key={index}>

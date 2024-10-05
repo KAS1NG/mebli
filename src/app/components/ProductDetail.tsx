@@ -9,6 +9,7 @@ import { removePost } from '../actions/removePost';
 import { removeProperty } from '../actions/removeProperty';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 interface ProductDetailProps {
   product: IPost;
@@ -71,7 +72,9 @@ const ProductDetail = ({ product, productProperty }: ProductDetailProps) => {
               <strong>Tags: </strong>
               {tagsArray.map((tag, index) => (
                 <span key={index} className="product-page__tag">
-                  {tag}
+                  <Link href={`/products?page=1&query=${tag}`} >
+                    {tag}
+                  </Link>
                 </span>
               ))}
             </div>

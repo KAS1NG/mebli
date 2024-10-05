@@ -1,18 +1,26 @@
 .footer {
   background-color: #333;
   color: #fff;
-  padding: 40px;
+  padding-top: 60px;
+  padding-bottom: 40px;
   font-size: 16px;
+  font-family: var(--font-Geometria-mono);
 
   @media (max-width: 768px) {
-    padding: 20px;
+    padding: 40px;
   }
 
-  &__container {
+  .footer__container-inner {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .footer__container {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
-    max-width: 1200px;
+    max-width: 1400px;
+    padding: 0 20px;
     margin: 0 auto;
 
     @media (max-width: 768px) {
@@ -20,24 +28,35 @@
     }
   }
 
-  &__column {
+  .footer__column {
     flex: 1;
     min-width: 200px;
-    margin: 20px;
+    padding: 40px 60px;
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+
+    &:last-child {
+      border-right: 1px solid rgba(255, 255, 255, 0.1);
+    }
 
     @media (max-width: 768px) {
-      margin: 10px;
-      min-width: 150px;
+      min-width: 250px;
+      border: none;
+      &:last-child {
+        border: none;
+      }
     }
 
     @media (max-width: 480px) {
       min-width: 100%;
+      padding: 20px 30px;
     }
 
-    &__heading {
-      font-size: 20px;
+    .footer__heading {
+      font-size: 16px;
+      text-transform: uppercase;
       margin-bottom: 15px;
       color: #fff;
+      font-weight: 100;
 
       @media (max-width: 768px) {
         font-size: 18px;
@@ -48,9 +67,9 @@
       }
     }
 
-    &__text {
+    .footer__text {
       font-size: 16px;
-      color: #ccc;
+      color: #767676;
       line-height: 1.5;
 
       @media (max-width: 768px) {
@@ -63,7 +82,7 @@
     }
   }
 
-  &__links {
+  .footer__links {
     list-style: none;
     padding: 0;
 
@@ -71,20 +90,24 @@
       margin-bottom: 10px;
 
       a {
-        color: #0070f3;
-        text-decoration: none;
+        color: #767676;
+        transition: .6s;
 
         &:hover {
+          color: #cfa56f;
           text-decoration: underline;
         }
       }
     }
   }
 
-  &__bottom {
-    margin-top: 30px;
-    padding-top: 20px;
-    border-top: 1px solid #444;
+  .footer__bottom {
+    // margin-top: 30px;
+    padding: 0 20px;
+    padding-top: 40px;
+    // border-top: 1px solid #444;
+    margin: 0 auto;
+    max-width: 1400px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -100,9 +123,9 @@
     }
   }
 
-  &__copyright {
+  .footer__copyright {
     font-size: 14px;
-    color: #ccc;
+    color: #767676;
 
     @media (max-width: 480px) {
       margin-top: 10px;
@@ -110,7 +133,7 @@
     }
   }
 
-  &__socials {
+  .footer__socials {
     display: flex;
     gap: 20px;
 
@@ -120,91 +143,13 @@
     }
 
     a {
-      color: #0070f3;
-      text-decoration: none;
+      color: #767676;
+      transition: .6s;
 
       &:hover {
+        color: #cfa56f;
         text-decoration: underline;
       }
     }
   }
 }
-
-// .footer {
-//     background-color: #333;
-//     color: #fff;
-//     padding: 40px;
-//     font-size: 16px;
-  
-//     &__container {
-//       display: flex;
-//       justify-content: space-between;
-//       flex-wrap: wrap;
-//       max-width: 1200px;
-//       margin: 0 auto;
-//     }
-  
-//     &__column {
-//       flex: 1;
-//       min-width: 200px;
-//       margin: 20px;
-  
-//       &__heading {
-//         font-size: 20px;
-//         margin-bottom: 15px;
-//         color: #fff;
-//       }
-  
-//       &__text {
-//         font-size: 16px;
-//         color: #ccc;
-//         line-height: 1.5;
-//       }
-//     }
-  
-//     &__links {
-//       list-style: none;
-//       padding: 0;
-  
-//       li {
-//         margin-bottom: 10px;
-  
-//         a {
-//           color: #0070f3;
-//           text-decoration: none;
-//           &:hover {
-//             text-decoration: underline;
-//           }
-//         }
-//       }
-//     }
-  
-//     &__bottom {
-//       margin-top: 30px;
-//       padding-top: 20px;
-//       border-top: 1px solid #444;
-//       display: flex;
-//       justify-content: space-between;
-//       align-items: center;
-//       flex-wrap: wrap;
-//     }
-  
-//     &__copyright {
-//       font-size: 14px;
-//       color: #ccc;
-//     }
-  
-//     &__socials {
-//       display: flex;
-//       gap: 20px;
-  
-//       a {
-//         color: #0070f3;
-//         text-decoration: none;
-//         &:hover {
-//           text-decoration: underline;
-//         }
-//       }
-//     }
-//   }
-  

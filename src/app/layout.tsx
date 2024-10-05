@@ -17,6 +17,12 @@ const geistMono = localFont({
   weight: "100 900",
 });
 
+const Geometria = localFont({
+  src: "./fonts/Geometria.ttf",
+  variable: "--font-Geometria-mono",
+  weight: "100 900",
+});
+
 export const metadata: Metadata = {
   title: "Manufacture P",
   description: "Меблі, шафи купе, кухні, столи, стільці, софи, ліжка, матраси місто Ромни",
@@ -35,7 +41,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="uk">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
+      <body className={`${geistSans.variable} ${geistMono.variable} ${Geometria.variable}`}>
         <Providers>
           <div className="heightContainer">
             <Header />

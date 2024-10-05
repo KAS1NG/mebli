@@ -12,9 +12,6 @@ export const fetchPosts = async (query: string, page: number): Promise<IPost[]> 
   try {
     const response = await fetch(`${config.serverURL}/posts/?page=${page}&limit=${limit}&query=${query}`, {
       next: { tags: ['posts'] },
-      // headers: {
-      //   'Cache-Control': 'no-cache'
-      // },
     });
 
     return await handleResponse(response);

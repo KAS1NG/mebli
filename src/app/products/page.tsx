@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import { fetchPageCount } from '../actions/fetchPageCount';
 import InvoicesTable from '../components/table';
 import PaginationPages from '../utils/generatePagination';
+import BedTypes from '../components/BedTypes';
 import '@/app/styles/products.scss'
 
 interface ProductsProps {
@@ -21,8 +22,8 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: 'Меблі',
-  },
-};
+  }
+}
 
 const Products = async ({ searchParams }: ProductsProps) => {
   const query = searchParams?.query || '';
@@ -33,10 +34,13 @@ const Products = async ({ searchParams }: ProductsProps) => {
   return (
     <main className="products">
       <section className="products__hero">
-        <h1 className="products__title">Наші меблі</h1>
-        <p className="products__description">
+        <h1 className="products__title">{query ? query : 'Наші меблі'}</h1>
+        {query == 'ліжка' && 
+          <BedTypes />
+        }
+        {/* <p className="products__description">
           Відкрийте для себе наш вибір меблів преміум-класу, призначених для покращення вашого дому та офісу.
-        </p>
+        </p> */}
         <InvoicesTable query={query} currentPage={currentPage} />
         <PaginationPages totalPages={totalPages} />
       </section>

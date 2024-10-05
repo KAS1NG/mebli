@@ -1,9 +1,12 @@
 import React from 'react'
 import ProceedToCheckout from '../components/ProceedToCheckout'
+import { fetchCart } from '../actions/fetchCart';
 
-function page() {
+async function page() {
+  const products = await fetchCart();
+
   return (
-    <ProceedToCheckout />
+    <ProceedToCheckout products={products} />
   )
 }
 

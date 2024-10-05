@@ -2,6 +2,8 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import { signOut, useSession } from 'next-auth/react';
+import Image from 'next/image';
+import logoPic from '@/app/public/logo.svg'
 import '@/app/styles/header.scss'
 
 const Header = () => {
@@ -20,7 +22,17 @@ const Header = () => {
         <header className="header">
             <div className="header__container">
                 <Link href="/" className="header__logo">
-                    Manufacture P
+                    <div className='logo__container'>
+                        <Image
+                            src={logoPic}
+                            width={40}
+                            height={40}
+                            alt="Picture of the author"
+                        />
+                        <div>
+                            Manufacture P
+                        </div>
+                    </div>
                 </Link>
 
                 {/* Іконка гамбургер */}
@@ -37,11 +49,18 @@ const Header = () => {
                             <Link href="/products">Меблі</Link>
                         </li>
                         <li className="header__item">
+                            <Link href="/products?page=1&query=ліжка">Ліжка</Link>
+                        </li>
+                        <li className="header__item">
                             <Link href="/about">Про нас</Link>
                         </li>
                         <li className="header__item">
                             <Link href="/contact">Контакти</Link>
                         </li>
+                        <li className="header__item">
+                            <Link href="tel:+380968119976">+380968119976</Link>
+                        </li>
+
                         {accessToken && (
                             <li className="header__item">
                                 <a>{user?.name}</a>
