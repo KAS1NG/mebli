@@ -24,6 +24,7 @@
   @media (max-width: 768px) {
     padding: 20px;
     gap: 15px;
+    flex-direction: column;
   }
 
   @media (max-width: 480px) {
@@ -98,6 +99,10 @@
     .swiper-pagination-bullet-active {
       background-color: #3300ff;
     }
+
+    @media (max-width: 768px) {
+      max-width: 100%;
+    }
   }
 
   /* Інформація про продукт */
@@ -165,6 +170,10 @@
           font-size: 12px;
         }
       }
+    }
+
+    @media (max-width: 768px) {
+      width: 100%;
     }
   }
 
