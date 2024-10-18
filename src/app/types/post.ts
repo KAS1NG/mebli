@@ -3,8 +3,6 @@ export interface IPost {
     title: string,
     description: string,
     price: number,
-    color: string,
-    brand: string,
     createdAt: string,
     updatedAt: string,
     views: number,

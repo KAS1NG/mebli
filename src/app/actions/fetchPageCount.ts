@@ -8,6 +8,7 @@ const config = {
   
 export const fetchPageCount = async (query: string): Promise<number> => {
     const limit = 6
+
     try {
       const response = await fetch(`${config.serverURL}/posts/fetch?query=${query}&page=1&limit=${limit}`, {
         next: { tags: ['pagination'] },

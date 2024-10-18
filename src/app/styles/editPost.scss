@@ -1,0 +1,94 @@
+.postCard {
+    background-color: #fff;
+    border-radius: 12px;
+    padding: 24px;
+    margin: 0 auto;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    max-width: 600px;
+    font-family: 'Arial', sans-serif;
+    
+    &:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+    }
+  }
+  
+  .title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 12px;
+  }
+  
+  .images {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 16px;
+    overflow-x: auto;
+
+    .imageDelete {
+        color: rgb(128, 44, 44);
+        font-size: 20px;
+        display: flex;
+        cursor: pointer;
+    }
+    
+    img {
+      flex-shrink: 0;
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 8px;
+      border: 2px solid #eee;
+      transition: border 0.3s ease;
+  
+      &:hover {
+        border-color: #888;
+      }
+    }
+  }
+  
+  .description {
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 16px;
+  }
+  
+  .price {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #28a745;
+    margin-bottom: 8px;
+  }
+  
+  .views, .tags, .createdAt, .updatedAt {
+    font-size: 0.9rem;
+    color: #888;
+    margin: 4px 0;
+  }
+  
+  .tags {
+    margin-bottom: 12px;
+  }
+  
+  .createdAt, .updatedAt {
+    font-style: italic;
+  }
+  
+  @media (min-width: 768px) {
+    .postCard {
+      max-width: 800px;
+    }
+    
+    .title {
+      font-size: 2.4rem;
+    }
+  
+    .images img {
+      width: 160px;
+      height: 160px;
+    }
+  }
+  

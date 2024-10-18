@@ -19,7 +19,7 @@
   padding: 40px;
   width: 100%;
   margin: 0 auto;
-  background-color: #fff;
+  background-color: #f9f9f9;
 
   @media (max-width: 768px) {
     padding: 20px;
@@ -53,6 +53,8 @@
       object-fit: cover;
       max-width: 45vw;
       cursor: pointer;
+      outline: none;
+      user-select: none;
 
       @media (max-width: 768px) {
         max-width: 100%;
@@ -78,8 +80,9 @@
       }
 
       @media (max-width: 480px) {
-        width: 25px;
-        height: 25px;
+        display: none;
+        // width: 25px;
+        // height: 25px;
       }
     }
 
@@ -97,7 +100,7 @@
     }
 
     .swiper-pagination-bullet-active {
-      background-color: #3300ff;
+      background-color: #343435;
     }
 
     @media (max-width: 768px) {
@@ -144,7 +147,7 @@
       font-size: 24px;
       font-weight: bold;
       margin-bottom: 20px;
-      color: #0070f3;
+      color: #474747;
 
       @media (max-width: 768px) {
         font-size: 22px;

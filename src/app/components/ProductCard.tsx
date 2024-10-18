@@ -13,7 +13,20 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   return (
     <Link href={`/products/${transliterateAndClear(product.title)}/${product.id}`} passHref>
       <div className="product-card" role="link" aria-label={`View details of ${product.title}`}>
+
         <figure className="product-card__figure">
+          <div className="product-card__image-wrapper">
+            <Image
+              src={product.images[0]}
+              alt={`Image of ${product.title}`}
+              layout="fill"  // This makes the image fill its container
+              objectFit="cover"  // Ensures that the image covers the container without distortion
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              className="product-card__image"
+              priority={false}
+            />
+          </div>
+          {/* <figure className="product-card__figure">
           <Image
             src={product.images[0]}
             alt={`Image of ${product.title}`}
@@ -29,14 +42,14 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             priority={false}  // Set `true` if this image is critical to the page load
             // placeholder="blur" // You can also use a blur placeholder for better UX
             // blurDataURL={product.images[0]} // Use a low-quality image as a blur placeholder
-          />
+          /> */}
           <figcaption className="product-card__caption">
             <h3 className="product-card__name">{product.title}</h3>
             <p className="product-card__price">від {product.price} ₴</p>
           </figcaption>
         </figure>
       </div>
-    </Link>
+    </Link >
   );
 };
 

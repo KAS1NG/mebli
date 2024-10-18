@@ -1,6 +1,7 @@
 .products {
   padding: 40px;
   background-color: #f9f9f9;
+  flex: 1;
 
   .products__hero {
     text-align: left;
@@ -9,11 +10,34 @@
 
     .products__title {
       font-size: 36px;
-      margin-bottom: 10px;
+      margin-bottom: 40px;
       text-transform: uppercase;
+
+      .main-title {
+        font-weight: 400; // Звичайна вага для легкої головної частини
+        font-size: 22px; // Стандартний розмір заголовка
+        color: #8f8e8e; // Світло-сірий колір для м'якості
+        margin-bottom: 4px; // Невеликий відступ знизу для відокремлення
+      }
+
+      .styled-title {
+        font-weight: 400; // Жирніший текст для виразності
+        font-size: 18px; // Трохи більший розмір для акценту
+        color: #333333; // Темніший сірий для виразності
+        text-transform: uppercase; // Великі перші літери для кращої читабельності
+        word-spacing: 2px;
+      }
 
       @media (max-width: 768px) {
         padding: 0 15px;
+
+        .main-title {
+          font-size: 18px;
+        }
+
+        .styled-title {
+          font-size: 16px;
+        }
       }
     }
 
@@ -32,9 +56,17 @@
 
   .products__grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: 20px;
     margin: 0 auto;
+
+    @media (max-width: 1024px) {
+      grid-template-columns: repeat(2, 1fr); // Два стовпці на середніх екранах (планшет)
+    }
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr; // Один стовпець на маленьких екранах (мобільні)
+    }
   }
 
   @media (max-width: 768px) {
@@ -84,11 +116,35 @@
   transition: box-shadow 0.3s ease;
   margin-bottom: 2.6vw;
 
+  .product-card__figure {
+    margin: 0;
+    padding: 0;
+    position: relative;
+  }
+
+  .product-card__image-wrapper {
+    position: relative;
+    width: 100%; // Ширина на весь контейнер
+    height: 0; // Встановлюємо висоту через відношення сторін
+    padding-bottom: 75%; // Це забезпечує співвідношення сторін 4:3 (100% * 3 / 4)
+    overflow: hidden; // Прибирає вихід зображення за межі контейнера
+  }
+
+  .product-card__image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; // Зображення покриває контейнер з обрізанням
+  }
+
   .product-card__caption {
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 10px;
+    padding: 10px 0;
     color: #4e4e4e;
     text-transform: uppercase;
     // font-family: var(--font-Geometria-mono);

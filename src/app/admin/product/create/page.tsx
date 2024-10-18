@@ -13,26 +13,6 @@ export default function LoginForm() {
   const { accessToken } = session || {};
 
   const credentialsAction = async (formData: FormData) => {
-    const title = formData.get("title") as string
-    const price = formData.get("price") as string
-    const description = formData.get("description") as string
-    const color = formData.get("colors") as string
-    const tag = formData.get("tags") as string
-    const brand = formData.get("brand") as string
-
-    const tags = tag.toLowerCase()
-
-    formData.delete("title")
-    formData.delete("price")
-    formData.delete("description")
-    formData.delete("colors")
-    formData.delete("tags")
-    formData.delete("brand")
-
-    formData.append('data', new Blob([JSON.stringify(
-      { title, price, description, color, tags, brand }
-    )], { type: 'application/json' }));
-
     await createPost(formData, accessToken || null);
     router.push('/products?page=1')
   }
@@ -70,17 +50,6 @@ export default function LoginForm() {
             required
           />
         </div>
-
-        <div className="create-product__form-group">
-          <label htmlFor="colors">Колір</label>
-          <input
-            type="text"
-            id="colors"
-            name="colors"
-            required
-          />
-        </div>
-
         <div className="create-product__form-group">
           <label htmlFor="tags">Тег</label>
           <input
@@ -90,17 +59,6 @@ export default function LoginForm() {
             required
           />
         </div>
-
-        <div className="create-product__form-group">
-          <label htmlFor="brand">Виробник | Бренд</label>
-          <input
-            type="text"
-            id="brand"
-            name="brand"
-            required
-          />
-        </div>
-
         <div className="create-product__form-group">
           <label htmlFor="images">Зображення</label>
           <input

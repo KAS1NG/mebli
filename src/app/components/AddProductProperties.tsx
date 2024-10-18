@@ -1,10 +1,21 @@
 'use client';
 
+import { useRef } from 'react';
 import { addProductProperty } from '../actions/addProductProperty';
 import CustomSubmitBtn from '../utils/CustomSubmitBtn';
 import '@/app/styles/AddProductProperties.scss'
 
 const AddProductProperties = ({ productId }: { productId: number }) => {
+  // Створюємо реф для форми
+  const formRef = useRef<HTMLFormElement>(null);
+
+  // Функція для очищення полів
+  const clearForm = () => {
+    if (formRef.current) {
+      formRef.current.reset(); // Очищає всі поля форми
+    }
+  };
+
   const credentialsAction = async (formData: FormData) => {
     const name = formData.get("text") as string
     const text = formData.get("description") as string
@@ -12,13 +23,14 @@ const AddProductProperties = ({ productId }: { productId: number }) => {
     const productProperty = { name, text }
 
     await addProductProperty(productProperty, productId)
+    clearForm(); // Очищаємо поля форми після успішної відправки
   }
 
   return (
     <div className="add-properties">
-      <h2>Add Product Properties</h2>
+      <h2>Додати характеристики товару</h2>
       {/* Форма для додавання нової властивості */}
-      <form action={credentialsAction} className="add-properties__form">
+      <form ref={formRef} action={credentialsAction} className="add-properties__form">
         <input
           type="text"
           id='text'

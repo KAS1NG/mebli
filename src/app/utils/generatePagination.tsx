@@ -38,7 +38,7 @@ export default function PaginationPages({ totalPages }: PaginationProps) {
 
       {/* Page Info */}
       <span className="pagination__info">
-        Сторінка {currentPage} з {totalPages}
+        {currentPage} з {totalPages}
       </span>
 
       {/* Next Button */}

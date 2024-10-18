@@ -53,15 +53,15 @@ const ProductDetail = ({ product, productProperty }: ProductDetailProps) => {
           {/* Product Title and Description */}
           <h1 className="product-page__title">{product.title}</h1>
           <p className="product-page__description">{product.description}</p>
-          <p className="product-page__price">Price: ${product.price}</p>
+          <p className="product-page__price">Ціна: {product.price} ₴</p>
 
           {/* Product Details */}
           <div className="product-page__details">
-            <p><strong>Color:</strong> {product.color}</p>
-            <p><strong>Brand:</strong> {product.brand}</p>
             {productProperty && productProperty?.map(item => (
               <p key={item.id}><strong>{item.name}:</strong> {item.text}
-                <button onClick={() => removeProperty(item.id)}>X</button>
+                {isAdmin &&
+                  <button onClick={() => removeProperty(item.id)}>X</button>
+                }
               </p>
             ))}
           </div>
@@ -69,7 +69,7 @@ const ProductDetail = ({ product, productProperty }: ProductDetailProps) => {
           {/* Tags */}
           {tagsArray.length > 0 && (
             <div className="product-page__tags">
-              <strong>Tags: </strong>
+              <strong>Теги: </strong>
               {tagsArray.map((tag, index) => (
                 <span key={index} className="product-page__tag">
                   <Link href={`/products?page=1&query=${tag}`} >
@@ -100,6 +100,11 @@ const ProductDetail = ({ product, productProperty }: ProductDetailProps) => {
             {isAdmin && <button className="product-page__btn product-page__btn--delete-btn" onClick={() => removePost(product.id)}>
               <i className="fas fa-trash-alt"></i> Видалити
             </button>}
+            <button
+              className="product-page__btn product-page__btn--view-3d"
+              onClick={() => router.push(`/admin/product/update/${product.id}`)}>
+              Редагувати
+            </button>
           </div>
         </section>
       </div>

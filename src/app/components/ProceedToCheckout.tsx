@@ -1,24 +1,51 @@
 'use client';
 
-import React, { useState } from 'react';
-import '@/app/styles/checkout.scss'
+import React from 'react';
 import { IPost } from '../types/post';
+import { checkout } from '../actions/checkout';
+import '@/app/styles/checkout.scss'
+import { useRouter } from 'next/navigation';
+import { useSession } from 'next-auth/react';
 
 
 const ProceedToCheckout = ({ products }: { products: IPost[] }) => {
 
+  const router = useRouter()
+
+  const { data: session } = useSession();
+  const { accessToken } = session || {};
 
   // Стани для форм
-  const [name, setName] = useState('');
+  // const [name, setName] = useState('');
 
   // Загальна сума
   // const total = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
   // Функція для підтвердження замовлення
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    alert('Order confirmed!'); // Можна додати інші дії, наприклад, інтеграцію з API
-  };
+  const credentialsAction = async (formData: FormData) => {
+    const title = formData.get("title") as string
+    const price = formData.get("price") as string
+    const description = formData.get("description") as string
+    const color = formData.get("colors") as string
+    const tag = formData.get("tags") as string
+    const brand = formData.get("brand") as string
+
+    const tags = tag.toLowerCase()
+
+    formData.delete("title")
+    formData.delete("price")
+    formData.delete("description")
+    formData.delete("colors")
+    formData.delete("tags")
+    formData.delete("brand")
+
+    formData.append('data', new Blob([JSON.stringify(
+      { title, price, description, color, tags, brand }
+    )], { type: 'application/json' }));
+
+    await checkout(formData, accessToken || null);
+    router.push('/products?page=1')
+  }
 
   return (
     <div className="checkout-page">
@@ -38,24 +65,28 @@ const ProceedToCheckout = ({ products }: { products: IPost[] }) => {
       </div>
 
       {/* Форма для доставки та оплати */}
-      <form className="checkout-page__form" onSubmit={handleSubmit}>
+      <form action={credentialsAction} className="checkout-page__form">
         {/* Форма для доставки */}
         <div className="checkout-page__section">
           <h3>Інформація про покупця</h3>
           <input
             type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            name='name'
+            id='name'
             placeholder="Ім'я"
             required
           />
           <input
             type="Email"
+            name='email'
+            id='email'
             placeholder="Емайл"
             required
           />
           <input
             type="tel"
+            name='phoneNumber'
+            id='phoneNumber'
             placeholder="Телефон"
             required
           />
