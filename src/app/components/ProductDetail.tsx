@@ -97,14 +97,16 @@ const ProductDetail = ({ product, productProperty }: ProductDetailProps) => {
             <button className="product-page__btn product-page__btn--view-3d">
               3D Модель
             </button>
-            {isAdmin && <button className="product-page__btn product-page__btn--delete-btn" onClick={() => removePost(product.id)}>
-              <i className="fas fa-trash-alt"></i> Видалити
-            </button>}
-            <button
-              className="product-page__btn product-page__btn--view-3d"
-              onClick={() => router.push(`/admin/product/update/${product.id}`)}>
-              Редагувати
-            </button>
+            {isAdmin && <>
+              <button className="product-page__btn product-page__btn--delete-btn" onClick={() => removePost(product.id)}>
+                <i className="fas fa-trash-alt"></i> Видалити
+              </button>
+              <button
+                className="product-page__btn product-page__btn--view-3d"
+                onClick={() => router.push(`/admin/product/update/${product.id}`)}>
+                Редагувати
+              </button>
+            </>}
           </div>
         </section>
       </div>

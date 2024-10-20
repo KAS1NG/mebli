@@ -1,39 +1,76 @@
 .postCard {
-    background-color: #fff;
-    border-radius: 12px;
-    padding: 24px;
-    margin: 0 auto;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    max-width: 600px;
-    font-family: 'Arial', sans-serif;
-    
-    &:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
-    }
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 24px;
+  margin: 0 auto;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  max-width: 800px;
+  font-family: 'Arial', sans-serif;
+
+  .priceEditor,
+  .tagsEditor {
+    display: flex;
+    gap: 10px;
+    align-items: center;
   }
-  
-  .title {
-    font-size: 2rem;
-    font-weight: bold;
-    color: #333;
-    margin-bottom: 12px;
-  }
-  
+
   .images {
     display: flex;
     gap: 12px;
     margin-bottom: 16px;
     overflow-x: auto;
 
-    .imageDelete {
-        color: rgb(128, 44, 44);
-        font-size: 20px;
-        display: flex;
-        cursor: pointer;
+    .create-product__form-group {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 120px;
+      // max-width: 400px;
+      // height: 200px;
+      // margin: 0 auto;
+      padding: 20px;
+      border: 2px dashed #ccc;
+      border-radius: 12px;
+      text-align: center;
+      background-color: #f9f9f9;
+      cursor: pointer;
+      transition: border-color 0.3s ease;
     }
-    
+
+    .create-product__form-group:hover {
+      border-color: #888;
+    }
+
+    .custom-file-upload {
+      font-size: 1.2rem;
+      color: #555;
+      cursor: pointer;
+      // background-color: #888;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 8px;
+      transition: background-color 0.3s ease;
+    }
+
+    .custom-file-upload:hover {
+      background-color: #0056b3;
+    }
+
+    .file-input {
+      display: none;
+      /* Приховуємо стандартне поле вибору файлу */
+    }
+
+
+    .imageDelete {
+      color: rgb(128, 44, 44);
+      font-size: 20px;
+      display: flex;
+      cursor: pointer;
+    }
+
     img {
       flex-shrink: 0;
       width: 120px;
@@ -42,53 +79,174 @@
       border-radius: 8px;
       border: 2px solid #eee;
       transition: border 0.3s ease;
-  
+
       &:hover {
         border-color: #888;
       }
     }
   }
-  
-  .description {
-    font-size: 1rem;
-    color: #555;
-    line-height: 1.6;
-    margin-bottom: 16px;
-  }
-  
-  .price {
-    font-size: 1.2rem;
-    font-weight: bold;
-    color: #28a745;
-    margin-bottom: 8px;
-  }
-  
-  .views, .tags, .createdAt, .updatedAt {
-    font-size: 0.9rem;
-    color: #888;
-    margin: 4px 0;
-  }
-  
-  .tags {
-    margin-bottom: 12px;
-  }
-  
-  .createdAt, .updatedAt {
-    font-style: italic;
-  }
-  
-  @media (min-width: 768px) {
-    .postCard {
-      max-width: 800px;
-    }
-    
-    .title {
-      font-size: 2.4rem;
-    }
-  
-    .images img {
-      width: 160px;
-      height: 160px;
-    }
-  }
-  
+}
+
+.description {
+  font-size: 1rem;
+  color: #555;
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+
+.price {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #28a745;
+}
+
+.tags {
+  font-size: 0.9rem;
+  color: #888;
+  margin: 4px 0;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 12px;
+}
+
+[contenteditable] {
+  outline: 0;
+  border-bottom: 1px dashed #ccc;
+}
+
+
+.postContainer {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+// .postForm {
+//   display: flex;
+//   flex-direction: column;
+
+//   input, textarea {
+//     margin-bottom: 15px;
+//     padding: 10px;
+//     border: 1px solid #ccc;
+//     border-radius: 4px;
+//   }
+
+//   input {
+//     height: 40px;
+//   }
+
+//   textarea {
+//     height: 150px;
+//     resize: vertical;
+//   }
+// }
+
+.button {
+  padding: 10px 15px;
+  background-color: #0070f3;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: center;
+  width: 150px;
+  margin-top: 10px;
+}
+
+.cancelButton {
+  background-color: red;
+  margin-left: 10px;
+}
+
+.buttonsContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+// .postCard {
+//   background-color: #fff;
+//   border-radius: 12px;
+//   padding: 24px;
+//   margin: 0 auto;
+//   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+//   transition: transform 0.3s ease, box-shadow 0.3s ease;
+//   max-width: 800px;
+//   font-family: 'Arial', sans-serif;
+// }
+
+// .title {
+//   font-size: 2rem;
+//   font-weight: bold;
+//   color: #333;
+//   margin-bottom: 12px;
+// }
+
+// .images {
+//   display: flex;
+//   gap: 12px;
+//   margin-bottom: 16px;
+//   overflow-x: auto;
+
+//   .imageDelete {
+//     color: rgb(128, 44, 44);
+//     font-size: 20px;
+//     display: flex;
+//     cursor: pointer;
+//   }
+
+//   img {
+//     flex-shrink: 0;
+//     width: 120px;
+//     height: 120px;
+//     object-fit: cover;
+//     border-radius: 8px;
+//     border: 2px solid #eee;
+//     transition: border 0.3s ease;
+
+//     &:hover {
+//       border-color: #888;
+//     }
+//   }
+// }
+
+// .description {
+//   font-size: 1rem;
+//   color: #555;
+//   line-height: 1.6;
+//   margin-bottom: 16px;
+// }
+
+// .price {
+//   font-size: 1.2rem;
+//   font-weight: bold;
+//   color: #28a745;
+//   margin-bottom: 8px;
+// }
+
+// .tags {
+//   font-size: 0.9rem;
+//   color: #888;
+//   margin: 4px 0;
+//   margin-bottom: 12px;
+// }
+
+// @media (min-width: 768px) {
+//   .postCard {
+//     max-width: 800px;
+//   }
+
+//   .title {
+//     font-size: 2.4rem;
+//   }
+
+//   .images img {
+//     width: 160px;
+//     height: 160px;
+//   }
+// }

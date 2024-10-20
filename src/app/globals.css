@@ -54,3 +54,20 @@ a {
     color-scheme: dark;
   }
 }
+
+.icon-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon {
+  width: 25px;
+  height: 25px;
+  color: #007bff;
+  transition: color 0.3s ease;
+}
+
+.icon-container:hover .icon {
+  color: #ffffff;
+}

@@ -1,4 +1,4 @@
-.header {
+.header  {
   background-color: #f9f9f9;
 
   &__container {
@@ -6,7 +6,14 @@
     justify-content: space-between;
     align-items: center;
     position: relative;
-    padding: 20px;
+    padding: 20px 40px;
+
+    @media (max-width: 768px) { 
+      padding: 20px 35px;
+    }
+    @media (max-width: 480px) {  
+      padding: 20px 20px;
+    }
   }
 
   .logo__container {
@@ -116,8 +123,12 @@
 
         .header__menu {
           flex-direction: column;
-          padding: 10px 20px;
+          padding: 10px 35px;
           gap: 10px;
+
+          @media (max-width: 480px) { 
+            padding: 10px 20px;
+          }
         }
       }
     }
@@ -131,7 +142,7 @@
 
   // Стилі для менших екранів
   @media (max-width: 768px) {
-    padding: 10px;
+    // padding: 10px;
 
     &__logo {
       font-size: 20px;

@@ -8,10 +8,10 @@ const config = {
     localURL: 'http://localhost:8080',
 };
 
-export async function createPost(formData: FormData, token: string | null) {
+export async function editPost(formData: FormData, postId: number, token: string | null) {
 
     try {
-        const response = await fetch(`${config.serverURL}/posts/create`, {
+        const response = await fetch(`${config.serverURL}/posts/update/${postId}`, {
             method: 'POST',
             headers: {
                 Authorization: `Bearer ${token}`,
@@ -19,8 +19,7 @@ export async function createPost(formData: FormData, token: string | null) {
             body: formData,
         });
 
-        // revalidateTag('posts')
-        revalidateMultipleTags(['posts', 'pagination'])
+        revalidateMultipleTags(['post', 'posts', 'pagination'])
         return await handleResponse(response);
     } catch (error) {
         console.error('Failed to create post:', error);

@@ -21,7 +21,7 @@ const Header = () => {
   };
 
   return (
-    <header className="header">
+    <header className='header'>
       <div className="header__container">
         <Link href="/" className="header__logo">
           <div className='logo__container'>

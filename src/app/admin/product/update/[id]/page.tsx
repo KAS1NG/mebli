@@ -17,7 +17,7 @@ async function page({ params }: { params: { id: string } }) {
 
     return (
         <div>
-            <EditPost post={product} />
+            <EditPost postItem={product} />
         </div>
     )
 }
