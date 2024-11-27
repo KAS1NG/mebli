@@ -38,7 +38,6 @@ const ProductDetail = ({ product, productProperty }: ProductDetailProps) => {
     }
   }
 
-
   // Memoize tags array to avoid unnecessary re-calculations
   const tagsArray = useMemo(() => stringToArray(product.tags || ''), [product?.tags]);
 

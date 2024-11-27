@@ -1,13 +1,17 @@
-import { useFormStatus } from "react-dom";
+interface CustomBtnProps {
+  text: string
+  classN: string
+  disabled?: boolean
+}
 
-export default function CustomSubmitBtn({ text, classN }: { text: string, classN: string }) {
-  const { pending } = useFormStatus();
+export default function CustomSubmitBtn({ text, classN, disabled }: CustomBtnProps) {
+
   return (
     <button
-      disabled={pending}
+      disabled={disabled}
       type="submit"
       className={classN}>
-      {pending ? 'Loading...' : text}
+      {disabled ? 'Loading...' : text}
     </button>
   );
 }

@@ -10,6 +10,14 @@ export interface IPost {
     images: string[]
 }
 
+export type Post = {
+    title: string;
+    description: string;
+    price: number;
+    tags: string;
+    images: string[];
+};
+
 export interface IAddCartInfo {
     userId?: string,
     itemId: number,

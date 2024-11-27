@@ -10,6 +10,10 @@ const config = {
 
 export async function createPost(formData: FormData, token: string | null) {
 
+    if (!token) {
+        throw new Error('Unauthorized: No access token');
+      }
+
     try {
         const response = await fetch(`${config.serverURL}/posts/create`, {
             method: 'POST',

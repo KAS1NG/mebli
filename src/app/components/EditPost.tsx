@@ -1,33 +1,29 @@
 'use client'
 import React, { useState } from 'react';
-import { IPost } from '../types/post';
+import { IPost, Post } from '../types/post';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import '@/app/styles/editPost.scss'
-import { editPost } from '../actions/editPost';
 import { useSession } from 'next-auth/react';
+import { editPost } from '../actions/editPost';
 import { transliterateAndClear } from '../utils/clearUrlString';
 import FileUploadIcon from '../utils/FileUploadIcon';
 import CustomSubmitBtn from '../utils/CustomSubmitBtn';
+import '@/app/styles/editPost.scss'
 
 interface PostCardProps {
     postItem: IPost;
 }
 
-type Post = {
-    title: string;
-    description: string;
-    price: number;
-    tags: string;
-    images: string[];
-};
-
 const EditPost = ({ postItem }: PostCardProps) => {
+
+    const router = useRouter();
 
     const { data: session } = useSession();
     const { accessToken } = session || {};
 
-    const router = useRouter();
+    const [loading, setLoading] = useState(false);
+    const [deletedImg, setDeletedImg] = useState('')
+    const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
 
     const [post, setPost] = useState<Post>({
         title: postItem.title,
@@ -37,8 +33,10 @@ const EditPost = ({ postItem }: PostCardProps) => {
         images: postItem.images,
     });
 
-    const [deletedImg, setDeletedImg] = useState('')
-    const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
+    if (!accessToken) {
+        router.push('/auth/login'); // Redirect to login if not authenticated
+        return null;
+    }
 
     const handleEdit = (e: React.FormEvent<HTMLParagraphElement | HTMLHeadingElement>, field: keyof Post) => {
         const updatedPost = {
@@ -89,6 +87,7 @@ const EditPost = ({ postItem }: PostCardProps) => {
     // Обробник збереження посту
     const credentialsAction = async (formData: FormData) => {
         const value: FormDataEntryValue | null = formData.get('file');
+        setLoading(true);
 
         if (value instanceof File && value.name == '') {
             formData.delete("file");
@@ -101,16 +100,12 @@ const EditPost = ({ postItem }: PostCardProps) => {
         formData.append("deleteImg", deletedImg);
 
         await editPost(formData, postItem.id, accessToken || null)
-
-        // для продакшена
-        router.push(`https://manufacture-p.vercel.app/products/${transliterateAndClear(post.title)}/${postItem?.id}`);
-        // для розробки
-        // router.push(`http://localhost:3000/products/${transliterateAndClear(post.title)}/${postItem?.id}`);
+        setLoading(false);
+        router.replace(`/products/${transliterateAndClear(post.title)}/${postItem?.id}`)
     }
 
     return (
         <div className="postContainer">
-
             <form action={credentialsAction} className='postCard'>
                 <h2
                     className='title'
@@ -136,7 +131,6 @@ const EditPost = ({ postItem }: PostCardProps) => {
                             onChange={handleFileChange}
                         />
                     </div>
-
                     {post.images.map((image, index) => (
                         <React.Fragment key={index}>
                             <Image
@@ -200,7 +194,7 @@ const EditPost = ({ postItem }: PostCardProps) => {
                     </p>
                 </div>
                 <div className='buttonsContainer'>
-                    <CustomSubmitBtn text="Зберегти зміни" classN="button" />
+                    <CustomSubmitBtn text="Зберегти зміни" classN="button" disabled={loading} />
                     <button className='button cancelButton' onClick={handleCancel}>
                         Cancel
                     </button>

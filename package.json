@@ -17,7 +17,8 @@
     "react-dom": "^18",
     "sass": "^1.78.0",
     "swiper": "^11.1.14",
-    "use-debounce": "^10.0.3"
+    "use-debounce": "^10.0.3",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@types/lodash": "^4.17.11",
