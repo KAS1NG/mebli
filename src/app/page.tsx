@@ -8,7 +8,7 @@ export default function Home() {
         <p className="subtitle">
           Стильні та якісні меблі для вашого дому та офісу
         </p>
-        <a href="/catalog" className="button">Переглянути каталог</a>
+        <a href="/products" className="button">Переглянути каталог</a>
       </section>
 
       <section className="featured">
