@@ -10,7 +10,6 @@ export default function Home() {
         </p>
         <a href="/products" className="button">Переглянути каталог</a>
       </section>
-
       <section className="featured">
         <h2>Популярні товари</h2>
         <div className="products">
@@ -31,7 +30,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
       <section className="about">
         <h2>Про нас</h2>
         <p>
