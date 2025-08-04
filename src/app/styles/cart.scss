@@ -216,6 +216,27 @@
   }
 }
 
+.product-page__btn--remove-from-cart {
+  background-color: #e0e0e0; // сірий, невиразний
+  color: #888; // приглушений текст
+  border: 1px solid #ccc;
+  padding: 10px 20px;
+  font-size: 14px;
+  cursor: not-allowed;
+  opacity: 0.6;
+  transition: none;
+
+  &:hover {
+    background-color: #e0e0e0; // не змінюється при ховері
+    color: #888;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+}
+
 // .emptyBlock {
 //   padding: 20px;
 //   text-align: center;

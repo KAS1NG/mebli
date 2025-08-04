@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { IPost } from '../types/post';
 import { removeCartItem } from '../actions/removeCartItem';
-import Image from 'next/image';
+import Image from 'next/image'
+import { removeFromCart } from '../utils/CartTest';
 
 interface CartItemProps {
   item: IPost
@@ -13,7 +14,9 @@ const CartItem: React.FC<CartItemProps> = ({ item }) => {
 
   const handleRemove = async () => {
     setIsLoading(true)
+
     await removeCartItem(item.id)
+    removeFromCart(item.id)
     setIsLoading(false)
   }
 

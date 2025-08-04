@@ -9,8 +9,12 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@types/js-cookie": "^3.0.6",
     "@types/next-auth": "^3.13.0",
     "@vercel/speed-insights": "^1.0.12",
+    "framer-motion": "^12.23.12",
+    "js-cookie": "^3.0.5",
+    "lucide-react": "^0.536.0",
     "next": "14.2.11",
     "next-auth": "^4.24.8",
     "react": "^18",

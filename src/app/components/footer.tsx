@@ -24,9 +24,9 @@ const Footer = () => {
           <div className="footer__column">
             <h4 className="footer__heading">Контактна інформація</h4>
             <p className="footer__text">
-              123 Furniture Street, Suite 100<br />
-              mebelshik@gmail.com<br />
-              +38 096 811 9976
+              м. Ромни, 1-й провулок Свободи, 10<br />
+              mebelshuk@gmail.com<br />
+              +38 050 307 34 36
             </p>
           </div>
         </div>
@@ -38,7 +38,6 @@ const Footer = () => {
         <div className="footer__socials">
           <Link href="https://facebook.com" target="_blank" rel="noopener noreferrer">Facebook</Link>
           <Link href="https://instagram.com" target="_blank" rel="noopener noreferrer">Instagram</Link>
-          <Link href="https://twitter.com" target="_blank" rel="noopener noreferrer">Twitter</Link>
         </div>
       </div>
     </footer>

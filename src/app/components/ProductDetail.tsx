@@ -10,6 +10,8 @@ import { removeProperty } from '../actions/removeProperty';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { addToCartTest } from '../utils/CartTest';
+import CartToast from './CartToast';
 
 interface ProductDetailProps {
   product: IPost;
@@ -20,22 +22,34 @@ const ProductDetail = ({ product, productProperty }: ProductDetailProps) => {
   const { data: session } = useSession();
 
   const router = useRouter()
+  const [showToast, setShowToast] = useState(false);
 
   const user = session?.user;
   const isAdmin = user?.role === 'ROLE_ADMIN';
 
   const [isLoading, setIsLoading] = useState(false)
+  const [isRemoving, setIsRemoving] = useState(false)
+
+  const handleRemoveFromCart = () => {
+    setIsRemoving(true)
+    
+    setIsRemoving(false)
+  }
 
   const handleAddToCart = async () => {
     if (!user) {
-      router.push('/auth/login')
+      setIsLoading(true)
+      addToCartTest(product.id);
+      setIsLoading(false)
     } else {
 
       setIsLoading(true)
-      const res = await addToCart({ itemId: product.id })
+      await addToCart({ itemId: product.id })
       setIsLoading(false)
-      alert(res)
     }
+
+    setShowToast(true);
+    setTimeout(() => setShowToast(false), 2000);
   }
 
   // Memoize tags array to avoid unnecessary re-calculations
@@ -93,9 +107,14 @@ const ProductDetail = ({ product, productProperty }: ProductDetailProps) => {
             >
               {isLoading ? 'Loading...' : 'Додати в корзину'}
             </button>
-            <button className="product-page__btn product-page__btn--view-3d">
-              3D Модель
+            <button
+              className="product-page__btn product-page__btn--remove-from-cart"
+              onClick={handleRemoveFromCart}
+              disabled={isRemoving}
+            >
+              {isRemoving ? 'Loading...' : 'Убрати з корзини'}
             </button>
+
             {isAdmin && <>
               <button className="product-page__btn product-page__btn--delete-btn" onClick={() => removePost(product.id)}>
                 <i className="fas fa-trash-alt"></i> Видалити
@@ -106,6 +125,7 @@ const ProductDetail = ({ product, productProperty }: ProductDetailProps) => {
                 Редагувати
               </button>
             </>}
+            <CartToast show={showToast} />
           </div>
         </section>
       </div>
