@@ -12,6 +12,7 @@
     "@types/js-cookie": "^3.0.6",
     "@types/next-auth": "^3.13.0",
     "@vercel/speed-insights": "^1.0.12",
+    "clsx": "^2.1.1",
     "framer-motion": "^12.23.12",
     "js-cookie": "^3.0.5",
     "lucide-react": "^0.536.0",

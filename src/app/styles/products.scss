@@ -4,25 +4,26 @@
   flex: 1;
 
   .products__hero {
-    text-align: left;
-    margin-bottom: 40px;
     font-family: var(--font-Geometria-mono);
 
     .products__title {
       font-size: 36px;
       margin-bottom: 40px;
       text-transform: uppercase;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+
 
       .main-title {
         font-weight: 400; // Звичайна вага для легкої головної частини
         font-size: 22px; // Стандартний розмір заголовка
         color: #8f8e8e; // Світло-сірий колір для м'якості
-        margin-bottom: 4px; // Невеликий відступ знизу для відокремлення
       }
 
       .styled-title {
         font-weight: 400; // Жирніший текст для виразності
-        font-size: 18px; // Трохи більший розмір для акценту
+        font-size: 20px; // Трохи більший розмір для акценту
         color: #333333; // Темніший сірий для виразності
         text-transform: uppercase; // Великі перші літери для кращої читабельності
         word-spacing: 2px;

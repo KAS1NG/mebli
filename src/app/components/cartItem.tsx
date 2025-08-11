@@ -22,33 +22,40 @@ const CartItem: React.FC<CartItemProps> = ({ item }) => {
 
   return (
     <div className="cart-item">
-      <Image
-        src={item.images[0]}
-        alt={item.title}
-        className="cart-item__image"
-        layout="responsive"     // The image will scale responsively based on the container width
-        width={4}              // Aspect ratio (can be set arbitrarily)
-        height={3}              // Aspect ratio (can be set arbitrarily)
-        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-      />
+      <div className="cart-item__image">
+        <Image
+          src={item.images[0]}
+          alt={item.title}
+          layout="responsive"     // The image will scale responsively based on the container width 
+          width={400}
+          height={300}
+          quality={90}
+          loading="lazy"
+          placeholder="blur"
+          blurDataURL="/images/wardrobe-blur.jpg"            // Aspect ratio (can be set arbitrarily)
+        />
+      </div>
       <div className="cart-item__details">
         <h3 className="cart-item__name">{item.title}</h3>
-        <p className="cart-item__price">${item.price.toFixed(2)}</p>
+        <p className="cart-item__price">{item.price.toFixed(2)} грн.</p>
         <div className="cart-item__controls">
-          <label htmlFor={`quantity-${item.id}`}>Quantity:</label>
+          <label htmlFor={`quantity-${item.id}`}>Кількість:</label>
           <input
             type="number"
             id={`quantity-${item.id}`}
             min="1"
+            defaultValue={1}
             // onChange={(e) => onQuantityChange(item.id, Number(e.target.value))}
             className="cart-item__quantity"
           />
           <button
             onClick={handleRemove}
-            className="cart-item__remove-button"
+            className="cart-item__remove-btn"
             disabled={isLoading}
           >
-            {isLoading ? 'Loading...' : 'Remove'}
+            <div>
+              {isLoading ? 'Loading...' : "Видалити"}
+            </div>
           </button>
         </div>
       </div>

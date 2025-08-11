@@ -1,10 +1,11 @@
 import { notFound } from 'next/navigation';
-import ProductDetail from '@/app/components/ProductDetail';
+// import ProductDetail from '@/app/components/ProductDetail';
 import { fetchOnePost, fetchProductProperty } from '@/app/api/post/postService';
 import { Metadata, ResolvingMetadata } from 'next';
 import { IPost } from '@/app/types/post';
 import { transliterateAndClear } from '@/app/utils/clearUrlString';
 import '@/app/styles/productDetail.scss';
+import ProductDetail from '@/app/components/product/ProductDetail';
 
 interface ProductPageProps {
     params: {
@@ -28,9 +29,9 @@ export async function generateMetadata(
     } else {
 
         const previousImages = (await parent).openGraph?.images || []
-    
+
         const img = product.images[0]
-    
+
         return {
             title: product.title,
             alternates: {

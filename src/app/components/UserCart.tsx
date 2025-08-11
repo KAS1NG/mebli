@@ -24,7 +24,7 @@ function UserCart({ products }: { products: IPost[] }) {
             </section>
             <section className="cart__summary">
                 <h2 className="cart__summary-title">Сума замовлення</h2>
-                <p className="cart__total">Разом: ${total.toFixed(2)}</p>
+                <p className="cart__total">Разом: {total.toFixed(2)} грн.</p>
                 <Link href={`/payment`}>
                     <button className="cart__checkout-button">Оформлення замовлення</button>
                 </Link>
