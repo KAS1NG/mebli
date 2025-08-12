@@ -1,6 +1,6 @@
 'use client';
 
-import React, { memo, useCallback, useMemo } from 'react';
+import React, { memo, useCallback, useMemo, useState } from 'react';
 import { removePost } from '../../actions/removePost';
 import { useRouter } from 'next/navigation';
 import clsx from 'clsx';
@@ -18,9 +18,20 @@ const ProductActions = memo(function ProductActions({
   isAdmin,
   loadingAction,
   onAdd,
-  onRemove,
+  // onRemove,
 }: ProductActionsProps) {
   const router = useRouter();
+
+  const [showToast] = useState(false);
+  
+    // const confirmOrder = () => {
+    //   setShowToast(true);
+  
+    //   // Автоматично ховаємо через 3 сек
+    //   setTimeout(() => {
+    //     setShowToast(false);
+    //   }, 3000);
+    // };
 
   // Функції обробники обгортаємо useCallback — щоб не створювати заново
   const handleDelete = useCallback(() => {
@@ -36,10 +47,10 @@ const ProductActions = memo(function ProductActions({
     () => clsx('product-page__btn', 'product-page__btn--add-to-cart'),
     []
   );
-  const removeBtnClass = useMemo(
-    () => clsx('product-page__btn', 'product-page__btn--remove-from-cart'),
-    []
-  );
+  // const removeBtnClass = useMemo(
+  //   () => clsx('product-page__btn', 'product-page__btn--remove-from-cart'),
+  //   []
+  // );
   const deleteBtnClass = useMemo(
     () => clsx('product-page__btn', 'product-page__btn--delete-btn'),
     []
@@ -57,17 +68,17 @@ const ProductActions = memo(function ProductActions({
         disabled={loadingAction === 'add'}
         aria-label="Додати товар до кошика"
       >
-        {loadingAction === 'add' ? 'Завантаження...' : 'Додати в кошик'}
+        {loadingAction === 'add' ? 'Завантаження...' : <span>Додати в кошик</span>}
       </button>
 
-      <button
+      {/* <button
         className={removeBtnClass}
         onClick={onRemove}
         disabled={loadingAction === 'remove'}
         aria-label="Видалити товар з кошика"
       >
         {loadingAction === 'remove' ? 'Завантаження...' : 'Убрати з кошика'}
-      </button>
+      </button> */}
 
       {isAdmin && (
         <>
@@ -87,6 +98,11 @@ const ProductActions = memo(function ProductActions({
             ✏ Редагувати
           </button>
         </>
+      )}
+      {showToast && (
+        <div className="toast-message">
+          Товар додано!
+        </div>
       )}
     </div>
   );

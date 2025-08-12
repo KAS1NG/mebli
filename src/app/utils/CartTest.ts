@@ -1,5 +1,6 @@
 // utils/cart.ts
 import Cookies from 'js-cookie';
+import { revalidateCart } from '../actions/revalidateCart';
 
 const CART_COOKIE_NAME = 'cart_ids';
 
@@ -16,10 +17,13 @@ export function getCartIds(): number[] {
   }
 }
 
-export function addToCartTest(productId: number): void {
+export async function addToCartTest(productId: number) {
   const ids = getCartIds();
   ids.push(productId);
   Cookies.set(CART_COOKIE_NAME, JSON.stringify(ids), { expires: 7 });
+
+  // Тригеримо оновлення кешу на сервері
+  await revalidateCart();
 }
 
 export function removeFromCart(productId: number): void {

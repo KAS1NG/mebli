@@ -70,8 +70,8 @@ export function useCartActions(user?: User) {
 
   const handleRemoveFromCart = useCallback(
     async (productId: number) => {
+      console.log(productId)
       try {
-        console.log(productId)
         setLoadingAction('remove');
         // TODO: Виклик API для видалення з кошика
         showToast('Товар видалено з кошика');

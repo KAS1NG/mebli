@@ -216,51 +216,91 @@
       gap: 10px;
     }
 
+    // .product-page__btn {
+    //   padding: 15px 30px;
+    //   border-radius: 5px;
+    //   font-size: 1.1rem;
+    //   font-weight: 600;
+    //   cursor: pointer;
+    //   transition: background-color 0.3s ease, transform 0.2s ease;
+    //   display: inline-block;
+    //   text-transform: uppercase;
+    //   border: none;
+
+    //   &:hover {
+    //     transform: scale(1.05);
+    //   }
+
+    //   &--add-to-cart {
+    //     background-color: #28a745;
+    //     color: #fff;
+
+    //     &:hover {
+    //       background-color: #218838;
+    //     }
+    //   }
+
+    //   &--view-3d {
+    //     background-color: #0070f3;
+    //     color: #fff;
+
+    //     &:hover {
+    //       background-color: #005bb5;
+    //     }
+    //   }
+
+    //   &--delete-btn {
+    //     background-color: #f44336;
+    //     color: #fff;
+
+    //     &:hover {
+    //       background-color: #df6057;
+    //     }
+    //   }
+
+    //   @media (max-width: 768px) {
+    //     font-size: .8rem;
+    //     padding: 8px 15px;
+    //   }
+    // }
     .product-page__btn {
-      padding: 15px 30px;
-      border-radius: 5px;
-      font-size: 1.1rem;
-      font-weight: 600;
+      position: relative;
+      padding: 10px 28px;
+      border: 1.5px solid black;
+      background: transparent;
+      color: black;
+      font-size: 15px;
+      font-weight: 500;
+      letter-spacing: 0.5px;
       cursor: pointer;
-      transition: background-color 0.3s ease, transform 0.2s ease;
-      display: inline-block;
-      text-transform: uppercase;
-      border: none;
+      overflow: hidden;
+      transition: color 0.4s ease;
+
+      // Ефект заливки
+      &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: #baa239;
+        z-index: 0;
+        transition: left 0.4s ease;
+      }
 
       &:hover {
-        transform: scale(1.05);
-      }
+        color: white;
 
-      &--add-to-cart {
-        background-color: #28a745;
-        color: #fff;
-
-        &:hover {
-          background-color: #218838;
+        &::before {
+          left: 0;
         }
       }
 
-      &--view-3d {
-        background-color: #0070f3;
-        color: #fff;
-
-        &:hover {
-          background-color: #005bb5;
-        }
-      }
-
-      &--delete-btn {
-        background-color: #f44336;
-        color: #fff;
-
-        &:hover {
-          background-color: #df6057;
-        }
-      }
-
-      @media (max-width: 768px) {
-        font-size: .8rem;
-        padding: 8px 15px;
+      // Щоб текст був поверх ефекту
+      span {
+        position: relative;
+        z-index: 1;
       }
     }
   }

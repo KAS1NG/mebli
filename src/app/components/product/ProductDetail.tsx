@@ -8,7 +8,7 @@ import { stringToArray } from '../../utils/stringToArr';
 import { useCartActions } from '@/app/hooks/useCartActions';
 
 const ProductActions = dynamic(() => import('./ProductActions'), { ssr: false });
-const CartToast = dynamic(() => import('./CartToast'), { ssr: false });
+const CartToast = dynamic(() => import('../../components/CartToast'), { ssr: false });
 const AddProductProperties = dynamic(() => import('../AddProductProperties'), { ssr: false });
 const ProductProperties = dynamic(() => import('./ProductProperties'), { ssr: false });
 const ProductTags = dynamic(() => import('./ProductTags'), { ssr: false });
@@ -49,7 +49,7 @@ export default function ProductDetail({ product, productProperty }: ProductDetai
                         onRemove={() => handleRemoveFromCart(product.id)}
                     />
 
-                    <CartToast show={toast.show} message={toast.message} />
+                    <CartToast show={toast.show} />
                 </section>
             </div>
         </main>

@@ -1,12 +1,14 @@
 'use client'
 import Link from 'next/link';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { signOut, useSession } from 'next-auth/react';
 import Image from 'next/image';
 import logoPic from '@/app/public/logo.svg'
 import CategoryDropdown from './CategoryDropdown';
-import '@/app/styles/header.scss'
 import { categories } from '../utils/categoriesData';
+import { fetchCart } from '../actions/fetchCart';
+import { IPost } from '../types/post';
+import '@/app/styles/header.scss'
 
 const Header = () => {
   const { data: session } = useSession();
@@ -15,6 +17,21 @@ const Header = () => {
   const user = session?.user;
   const isAdmin = user?.role === 'ROLE_ADMIN';
   const [menuOpen, setMenuOpen] = useState(false);
+
+  const [SOmething, setSOmething] = useState<IPost[]>()
+
+  useEffect( () => {
+    const doIt = async () => {
+      const products = await fetchCart();
+      setSOmething(products)
+      return products
+    }
+
+    doIt()
+  }, [])
+
+  console.log(SOmething && SOmething.length)
+  
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
@@ -83,6 +100,7 @@ const Header = () => {
         </nav>
         <Link href="/cart">
           <div className="header__cart">
+            <span className='cart__count'>{SOmething && SOmething.length != 0 && SOmething.length}</span>
             🛒 Корзина
           </div>
         </Link>

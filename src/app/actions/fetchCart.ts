@@ -1,3 +1,4 @@
+'use server'
 import { getServerSession } from "next-auth/next";
 import { defaultHeaders } from "../utils/defaultHeaders";
 import { handleResponse } from "../utils/handleResponse";
@@ -21,8 +22,6 @@ export const fetchCart = async () => {
 
     if (!session) {
         const ids = JSON.parse(cartCookie.value)
-
-        
 
         try {
             const response = await fetch(`${config.serverURL}/cart/byIds`, {

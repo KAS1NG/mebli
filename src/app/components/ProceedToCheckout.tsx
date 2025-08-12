@@ -1,59 +1,38 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { IPost } from '../types/post';
 import { makeOrder } from '../actions/checkout';
 import { useRouter } from 'next/navigation';
-import '@/app/styles/checkout.scss'
 import { clearCart } from '../utils/CartTest';
+import '@/app/styles/checkout.scss'
 
 const ProceedToCheckout = ({ products }: { products: IPost[] }) => {
 
   const router = useRouter()
 
-  // Стани для форм
-  // const [name, setName] = useState('');
+  const [showToast, setShowToast] = useState(false);
 
-  // Загальна сума
-  // const total = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  const confirmOrder = () => {
+    setShowToast(true);
 
-  // Функція для підтвердження замовлення
-  // const credentialsAction = async (formData: FormData) => {
-  //   const title = formData.get("title") as string
-  //   const price = formData.get("price") as string
-  //   const description = formData.get("description") as string
-  //   const color = formData.get("colors") as string
-  //   const tag = formData.get("tags") as string
-  //   const brand = formData.get("brand") as string
-
-  //   const tags = tag.toLowerCase()
-
-  //   formData.delete("title")
-  //   formData.delete("price")
-  //   formData.delete("description")
-  //   formData.delete("colors")
-  //   formData.delete("tags")
-  //   formData.delete("brand")
-
-  //   formData.append('data', new Blob([JSON.stringify(
-  //     { title, price, description, color, tags, brand }
-  //   )], { type: 'application/json' }));
-
-  //   await checkout(formData, accessToken || null);
-  //   router.push('/products?page=1')
-  // }
+    // Автоматично ховаємо через 3 сек
+    setTimeout(() => {
+      setShowToast(false);
+      router.push('/products')
+    }, 3000);
+  };
 
   const credentialsAction = async (formData: FormData) => {
-
     products.map((item) => (
       formData.append("postsID", `${item.id}`)
     ))
     formData.append("orderType", "True")
-
+    
     await makeOrder(formData);
-    //очищення cookie
+    // очищення cookie
+    confirmOrder()
     clearCart()
-    router.push('/products?page=1')
   }
 
   return (
@@ -101,6 +80,12 @@ const ProceedToCheckout = ({ products }: { products: IPost[] }) => {
           Підтвердити замовлення
         </button>
       </form>
+
+       {showToast && (
+        <div className="toast-message">
+          Дякуємо за замовлення!
+        </div>
+      )}
     </div>
   );
 };
