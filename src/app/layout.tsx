@@ -6,6 +6,7 @@ import Footer from "./components/footer";
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import AnalyticsProvider from "./providers/AnalyticsProvider";
 import "./globals.css";
+import ConsentBanner from "./components/ConsentBanner";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -51,6 +52,7 @@ export default function RootLayout({
           </div>
         </Providers>
         <SpeedInsights />
+        <ConsentBanner />
         <AnalyticsProvider />
       </body>
     </html>

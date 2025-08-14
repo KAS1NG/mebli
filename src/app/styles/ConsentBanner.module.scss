@@ -1,0 +1,73 @@
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.banner {
+  position: fixed;
+  bottom: 1.5rem;
+  left: 1.5rem;
+  background: #fdfaf6;
+  border: 1px solid #e4d9c6;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  padding: 1.2rem 1.4rem;
+  border-radius: 0.75rem;
+  max-width: 320px;
+  z-index: 1000;
+  animation: fadeInUp 0.4s ease forwards;
+  font-family: 'Georgia', serif;
+}
+
+.text {
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+  color: #4b3832;
+  line-height: 1.5;
+}
+
+.buttons {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.btnYes,
+.btnNo {
+  flex: 1;
+  padding: 0.5rem 0.9rem;
+  border-radius: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+/* Так - теплий золотисто-бежевий */
+.btnYes {
+  background-color: #c7a97f;
+  color: #fff;
+  box-shadow: 0 4px 10px rgba(199, 169, 127, 0.3);
+
+  &:hover {
+    background-color: #b8926a;
+    box-shadow: 0 6px 14px rgba(199, 169, 127, 0.4);
+  }
+}
+
+/* Ні - спокійний сірий */
+.btnNo {
+  background-color: #b0a79f;
+  color: #fff;
+  box-shadow: 0 4px 10px rgba(176, 167, 159, 0.3);
+
+  &:hover {
+    background-color: #978f88;
+    box-shadow: 0 6px 14px rgba(176, 167, 159, 0.4);
+  }
+}

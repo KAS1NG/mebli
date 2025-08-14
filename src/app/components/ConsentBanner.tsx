@@ -1,12 +1,15 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import styles from '../styles/ConsentBanner.module.scss';
 
 export default function ConsentBanner() {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
+    console.log("ConsentBanner mounted");
     const consent = localStorage.getItem('consent');
+    console.log("consent value:", consent);
     if (!consent) setVisible(true);
   }, []);
 
@@ -27,20 +30,20 @@ export default function ConsentBanner() {
   if (!visible) return null;
 
   return (
-    <div className="fixed bottom-4 left-4 bg-white shadow-lg p-4 rounded-lg max-w-sm">
-      <p className="text-sm mb-3">
+    <div className={styles.banner}>
+      <p className={styles.text}>
         Ми використовуємо файли cookie для аналітики та реклами. Ви згодні?
       </p>
-      <div className="flex gap-2">
+      <div className={styles.buttons}>
         <button
           onClick={() => handleConsent(true)}
-          className="bg-green-600 text-white px-3 py-1 rounded"
+          className={styles.btnYes}
         >
           Так
         </button>
         <button
           onClick={() => handleConsent(false)}
-          className="bg-gray-400 text-white px-3 py-1 rounded"
+          className={styles.btnNo}
         >
           Ні
         </button>
