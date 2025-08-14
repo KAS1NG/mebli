@@ -14,9 +14,8 @@ export default function ConsentBanner() {
     localStorage.setItem('consent', granted ? 'granted' : 'denied');
     setVisible(false);
 
-    // Виклик Google Consent Mode API
-    if (typeof window !== 'undefined' && (window as any).gtag) {
-      (window as any).gtag('consent', 'update', {
+    if (typeof window !== 'undefined' && window.gtag) {
+      window.gtag('consent', 'update', {
         ad_user_data: granted ? 'granted' : 'denied',
         ad_personalization: granted ? 'granted' : 'denied',
         ad_storage: granted ? 'granted' : 'denied',

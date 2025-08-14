@@ -9,8 +9,8 @@ const TIKTOK_PIXEL = 'XXXXXXXXXX'; // 🔹 твій TikTok Pixel ID
 export default function AnalyticsProvider() {
   useEffect(() => {
     const consent = localStorage.getItem('consent');
-    if (consent === 'granted') {
-      (window as any).gtag?.('consent', 'update', {
+    if (consent === 'granted' && window.gtag) {
+      window.gtag('consent', 'update', {
         ad_user_data: 'granted',
         ad_personalization: 'granted',
         ad_storage: 'granted',
