@@ -27,7 +27,7 @@ const Geometria = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Manufacture P",
+  title: "Меблі ромни",
   description: "Меблі, шафи купе, кухні, столи, стільці, софи, ліжка, матраси місто Ромни",
   alternates: {
     languages: {
