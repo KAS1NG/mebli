@@ -7,6 +7,7 @@ import { SpeedInsights } from '@vercel/speed-insights/next';
 import AnalyticsProvider from "./providers/AnalyticsProvider";
 import "./globals.css";
 import ConsentBanner from "./components/ConsentBanner";
+import Preloader from "./components/Preloader";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -44,6 +45,7 @@ export default function RootLayout({
   return (
     <html lang="uk">
       <body className={`${geistSans.variable} ${geistMono.variable} ${Geometria.variable}`}>
+        <Preloader />
         <Providers>
           <div className="heightContainer">
             <Header />

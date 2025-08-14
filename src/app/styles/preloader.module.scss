@@ -1,0 +1,49 @@
+// 🎨 Змінні
+$bg-color: #111;
+$progress-color: #4cafef;
+$text-color: #fff;
+$transition-time: 0.3s;
+
+.preloader {
+  position: fixed;
+  inset: 0;
+  background: $bg-color;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  opacity: 0;
+  transition: opacity $transition-time ease;
+
+  &.active {
+    opacity: 1; // fade-in
+  }
+
+  &.hidden {
+    opacity: 0; // fade-out
+  }
+
+  .loaderBox {
+    text-align: center;
+    width: 300px;
+
+    .progressBar {
+      height: 8px;
+      background: rgba($text-color, 0.1);
+      border-radius: 4px;
+      overflow: hidden;
+      margin-bottom: 10px;
+
+      .progressFill {
+        height: 100%;
+        background: $progress-color;
+        transition: width $transition-time ease;
+      }
+    }
+
+    .percent {
+      font-size: 1.2rem;
+      color: $text-color;
+    }
+  }
+}
