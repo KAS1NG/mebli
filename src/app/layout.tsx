@@ -4,6 +4,7 @@ import Providers from "./providers";
 import Header from "./components/header";
 import Footer from "./components/footer";
 import { SpeedInsights } from '@vercel/speed-insights/next';
+import AnalyticsProvider from "./providers/AnalyticsProvider";
 import "./globals.css";
 
 const geistSans = localFont({
@@ -50,6 +51,7 @@ export default function RootLayout({
           </div>
         </Providers>
         <SpeedInsights />
+        <AnalyticsProvider />
       </body>
     </html>
   );
