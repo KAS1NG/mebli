@@ -1,14 +1,19 @@
-
 import type { MetadataRoute } from 'next'
 import { fetchAll } from './api/post/postService';
 import { transliterateAndClear } from './utils/clearUrlString';
-const BASE_URL = "https://mebliromny.com.ua"
- 
+
+const BASE_URL = "https://mebliromny.com.ua";
+
+function formatDate(date: string | Date | null | undefined) {
+  const parsedDate = date ? new Date(date) : null;
+  return parsedDate instanceof Date && !isNaN(parsedDate.getTime())
+    ? parsedDate.toISOString()
+    : new Date().toISOString();
+}
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  // Отримуємо всі товари
   const products = await fetchAll();
 
-  // Головна + каталог
   const staticPages: MetadataRoute.Sitemap = [
     {
       url: `${BASE_URL}/`,
@@ -24,10 +29,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
   ];
 
-  // Сторінки товарів
   const productPages: MetadataRoute.Sitemap = products.map((product) => ({
     url: `${BASE_URL}/products/${transliterateAndClear(product.title)}/${product.id}`,
-    lastModified: new Date(product.updatedAt).toISOString() || new Date().toISOString(),
+    lastModified: formatDate(product.updatedAt),
     changeFrequency: 'weekly',
     priority: 0.8,
   }));
