@@ -27,7 +27,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Сторінки товарів
   const productPages: MetadataRoute.Sitemap = products.map((product) => ({
     url: `${BASE_URL}/products/${transliterateAndClear(product.title)}/${product.id}`,
-    lastModified: product.updatedAt || new Date().toISOString(),
+    lastModified: new Date(product.updatedAt).toISOString() || new Date().toISOString(),
     changeFrequency: 'weekly',
     priority: 0.8,
   }));
