@@ -48,9 +48,9 @@ const Header = () => {
               height={40}
               alt="Picture of the author"
             />
-            <div>
-              Manufacture P
-            </div>
+            <h1>
+              Меблі Ромни
+            </h1>
           </div>
         </Link>
 
@@ -73,10 +73,6 @@ const Header = () => {
             <li className="header__item">
               <Link href="/contact">Контакти</Link>
             </li>
-            {/* <li className="header__item">
-              <Link href="tel:+380968119976">+380968119976</Link>
-            </li> */}
-
             {accessToken && (
               <li className="header__item">
                 <a>{user?.name}</a>
@@ -100,7 +96,7 @@ const Header = () => {
         </nav>
         <Link href="/cart">
           <div className="header__cart">
-            <span className='cart__count'>{SOmething && SOmething.length != 0 && SOmething.length}</span>
+            {/* <span className='cart__count'>{SOmething && SOmething.length != 0 && SOmething.length}0</span> */}
             🛒 Корзина
           </div>
         </Link>

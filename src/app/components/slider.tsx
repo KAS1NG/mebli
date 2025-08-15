@@ -33,6 +33,7 @@ function MySlider({ slides, title }: ISlider) {
           spaceBetween={20}
           navigation
           pagination={{ clickable: true }}
+          loop={true}
         // slidesPerView={Math.min(slides.length, 3)}
         // breakpoints={{
         //   640: {

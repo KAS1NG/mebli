@@ -13,7 +13,7 @@ interface ProductsProps {
 }
 
 export const metadata: Metadata = {
-  title: 'Manufacture P | Меблі',
+  title: 'Меблі Ромни | Каталог',
   alternates: {
     languages: {
       'uk-UA': '/uk-UA',  // Українська
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: 'Меблі',
+    title: 'Каталог',
   }
 }
 

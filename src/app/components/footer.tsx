@@ -33,7 +33,7 @@ const Footer = () => {
       </div>
       <div className="footer__bottom">
         <p className="footer__copyright">
-          &copy; {new Date().getFullYear()} Manufacture P. All rights reserved.
+          &copy; {new Date().getFullYear()} Mebli Romny. All rights reserved.
         </p>
         <div className="footer__socials">
           <Link href="https://facebook.com" target="_blank" rel="noopener noreferrer">Facebook</Link>
