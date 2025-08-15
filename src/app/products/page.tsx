@@ -2,8 +2,8 @@ import { Metadata } from 'next';
 import { fetchPageCount } from '../actions/fetchPageCount';
 import InvoicesTable from '../components/table';
 import PaginationPages from '../utils/generatePagination';
-import '@/app/styles/products.scss'
 import { formatTitle } from '../utils/formatTitle';
+import '@/app/styles/products.scss'
 
 interface ProductsProps {
   searchParams?: {
@@ -39,12 +39,6 @@ const Products = async ({ searchParams }: ProductsProps) => {
           <span className="main-title">{main}</span>{' '} {/* Основна частина */}
           <span className="styled-title">{styledPart}</span> {/* Стилізована частина */}
         </h1>
-        {/* {query == 'ліжка' &&
-          <BedTypes />
-        } */}
-        {/* <p className="products__description">
-          Відкрийте для себе наш вибір меблів преміум-класу, призначених для покращення вашого дому та офісу.
-        </p> */}
         <InvoicesTable query={query} currentPage={currentPage} />
         {/* якщо сторінко більше ніж одна то показується пагінація сторінок */}
         {totalPages > 1 && <PaginationPages totalPages={totalPages} />}

@@ -1,17 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     images: {
-        domains: ['firebasestorage.googleapis.com'], // Додаємо домен Firebase
+        domains: ['firebasestorage.googleapis.com'],
     },
-    // async redirects() {
-    //     return [
-    //         {
-    //             source: '/',
-    //             destination: '/products',
-    //             permanent: true, // або false для тимчасового редиректу
-    //         },
-    //     ];
-    // },
-};
+}
+
+export const metadataBase = new URL(process.env.NEXT_PUBLIC_BASE_URL);
 
 export default nextConfig;

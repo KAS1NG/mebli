@@ -1,11 +1,17 @@
-import { notFound } from 'next/navigation';
-// import ProductDetail from '@/app/components/ProductDetail';
-import { fetchOnePost, fetchProductProperty } from '@/app/api/post/postService';
-import { Metadata, ResolvingMetadata } from 'next';
-import { IPost } from '@/app/types/post';
-import { transliterateAndClear } from '@/app/utils/clearUrlString';
-import '@/app/styles/productDetail.scss';
-import ProductDetail from '@/app/components/product/ProductDetail';
+// src/app/products/[slug]/[id]/page.tsx
+
+import { notFound, redirect } from "next/navigation";
+import type { Metadata, ResolvingMetadata } from "next";
+
+import {
+    fetchOnePost,
+    fetchProductProperty,
+    fetchAllPostIds,
+} from "@/app/api/post/postService";
+
+import { transliterateAndClear } from "@/app/utils/clearUrlString";
+import ProductDetail from "@/app/components/product/ProductDetail";
+import "@/app/styles/productDetail.scss";
 
 interface ProductPageProps {
     params: {
@@ -14,59 +20,87 @@ interface ProductPageProps {
     };
 }
 
+// ======================================================
+// 1️⃣ generateStaticParams — SSG
+// ======================================================
+export async function generateStaticParams(): Promise<
+    ProductPageProps["params"][]
+> {
+    const products = await fetchAllPostIds();
+    return products.map((p) => ({
+        id: p.id.toString(),
+        slug: transliterateAndClear(p.title),
+    }));
+}
+
+// ======================================================
+// 2️⃣ generateMetadata — SEO + OpenGraph
+// ======================================================
 export async function generateMetadata(
     { params }: ProductPageProps,
     parent: ResolvingMetadata
 ): Promise<Metadata> {
-    // read route params
-    const id = params.id
-
-    // fetch data
-    const product: IPost = await fetch(`${process.env.SERVER_URL}/posts/getOne/${id}`).then((res) => res.json())
-
-    if (!product || !product.id) {
-        notFound();
-    } else {
-
-        const previousImages = (await parent).openGraph?.images || []
-
-        const img = product.images[0]
-
-        return {
-            title: product.title,
-            alternates: {
-                canonical: `${process.env.NEXT_PUBLIC_BASE_URL}/products/${transliterateAndClear(product.title)}/${product.id}`,
-                languages: {
-                    'uk-UA': '/uk-UA',  // Українська
-                    'ru-RU': '/ru-RU',  // Російська
-                },
-            },
-            openGraph: {
-                images: [`${img}`, ...previousImages],
-            },
-        }
-    }
-
-    // optionally access and extend (rather than replace) parent metadata
-}
-
-export default async function ProductPage({ params }: ProductPageProps) {
-
     const { id } = params;
 
-    // Fetch product and its properties in parallel
-    const [product, productProperty] = await Promise.all([
-        fetchOnePost(id),
-        fetchProductProperty(id),
-    ]);
+    const product = await fetchOnePost(id, {
+        next: { revalidate: 60 },
+    });
 
-    // If the product is not found, show the 404 page
-    if (!product || !product.id) {
-        notFound();
-        return; // Ensure the function exits after showing the 404 page
-    }
+    if (!product?.id) notFound();
 
-    // Render the ProductDetail component with the fetched data
-    return <ProductDetail product={product} productProperty={productProperty} />;
+    const previousImages = (await parent).openGraph?.images || [];
+    const img =
+        product.images?.[0] ||
+        `${process.env.NEXT_PUBLIC_BASE_URL}/default.jpg`;
+
+    return {
+        title: product.title,
+        description: product.description ?? undefined,
+        alternates: {
+            canonical: `/products/${transliterateAndClear(product.title)}/${product.id}`,
+            languages: {
+                "uk-UA": `/uk-UA/products/${transliterateAndClear(product.title)}/${product.id}`,
+                "ru-RU": `/ru-RU/products/${transliterateAndClear(product.title)}/${product.id}`,
+            },
+        },
+        openGraph: {
+            type: "article",
+            title: product.title,
+            description: product.description ?? undefined,
+            images: [img, ...previousImages],
+        },
+    };
 }
 
+// ======================================================
+// 3️⃣ ProductPage — серверний компонент
+// ======================================================
+export default async function ProductPage({ params }: ProductPageProps) {
+    const { id, slug } = params;
+
+    // 🚀 Паралельні запити — швидше, ніж послідовно
+    const [product, productProperty] = await Promise.all([
+        fetchOnePost(id, { next: { revalidate: 60 } }),
+        fetchProductProperty(id, { next: { revalidate: 60 } }), // ✅ тип IGetProperty[]
+    ]);
+
+    if (!product?.id) notFound();
+
+    // 🔗 Перевірка slug для SEO
+    const cleanSlug = transliterateAndClear(product.title);
+    if (slug !== cleanSlug) {
+        redirect(`/products/${cleanSlug}/${product.id}`);
+    }
+
+    return (
+        <ProductDetail
+            product={product}
+            productProperty={productProperty}
+        />
+    );
+}
+
+// ======================================================
+// 4️⃣ ISR — глобальне revalidate
+// ======================================================
+export const revalidate = 60;
