@@ -1,6 +1,8 @@
 import Image from 'next/image';
 import styles from './styles/home.module.scss';
 import Link from 'next/link';
+import { faqSchema } from './lib/constants';
+import Script from 'next/script';
 
 export default function HomePage() {
   return (
@@ -73,6 +75,14 @@ export default function HomePage() {
           Ми пропонуємо великий вибір меблів від перевірених виробників. Якість, стиль та доступні ціни — наші головні переваги.
         </p>
       </section>
+      <Script
+        id="json-ld-faq"
+        type="application/ld+json"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(faqSchema),
+        }}
+      />
     </main>
   );
 }
