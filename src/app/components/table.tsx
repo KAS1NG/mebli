@@ -1,21 +1,26 @@
 import { Suspense } from "react";
 import { fetchPosts } from "../api/post/postService";
 import ProductCard from "./ProductCard";
+import Preloader from "./Preloader";
 
-export default async function InvoicesTable({
-    query,
-    currentPage,
-}: {
-    query: string;
-    currentPage: number;
-}) {
+interface IInvoicesTable {
+    query: string
+    currentPage: number
+}
+
+export default async function InvoicesTable({ query, currentPage, }: IInvoicesTable) {
+
     const invoices = await fetchPosts(query, currentPage);
 
     return (
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<Preloader />}>
             <section className="products__grid">
-                {invoices.map(product =>
-                    <ProductCard key={product.id} product={product} />
+                {invoices.map((product, index) =>
+                    <ProductCard
+                        key={index}
+                        product={product}
+                        index={index}
+                    />
                 )}
             </section>
         </Suspense>

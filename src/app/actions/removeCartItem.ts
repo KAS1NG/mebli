@@ -3,12 +3,7 @@ import { getServerSession } from "next-auth/next";
 import { defaultHeaders } from "../utils/defaultHeaders";
 import { revalidateTag } from "next/cache";
 import authOptions from "../utils/authOptions";
-
-const config = {
-    serverURL: process.env.SERVER_URL,
-    apiURL: 'https://furniture.fly.dev',
-    localURL: 'http://localhost:8080',
-}
+import { SERVER_URL } from "../lib/constants";
 
 export const removeCartItem = async (itemId: number) => {
    
@@ -18,7 +13,7 @@ export const removeCartItem = async (itemId: number) => {
         console.log('unautorizationnnnnnnn')
     } else {
         try {
-            const response = await fetch(`${config.serverURL}/cart/${itemId.toString()}`, {
+            const response = await fetch(`${SERVER_URL}/cart/${itemId.toString()}`, {
                 method: 'DELETE',
                 headers: defaultHeaders(session.accessToken),
             });

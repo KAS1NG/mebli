@@ -9,6 +9,8 @@ export default function Preloader() {
   const [visible, setVisible] = useState(true);
   const [active, setActive] = useState(true); // для плавного приховування
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const activeRef = useRef(active);
+  const visibleRef = useRef(visible);
 
   // Показуємо при першому завантаженні
   useEffect(() => {
@@ -47,8 +49,14 @@ export default function Preloader() {
   }, []);
 
   // Показуємо при переходах
+
   useEffect(() => {
-    if (!active && !visible) {
+    activeRef.current = active;
+    visibleRef.current = visible;
+  }, [active, visible]);
+
+  useEffect(() => {
+    if (!activeRef.current && !visibleRef.current) {
       showPreloader();
     }
 

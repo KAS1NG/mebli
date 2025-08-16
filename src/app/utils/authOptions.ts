@@ -1,13 +1,6 @@
-// authOptions.ts
-
 import { AuthOptions } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
-
-const config = {
-  serverURL: process.env.SERVER_URL,
-  apiURL: 'https://furniture.fly.dev',
-  localURL: 'http://localhost:8080',
-};
+import { SERVER_URL } from "../lib/constants";
 
 const authOptions: AuthOptions = {
   providers: [
@@ -18,7 +11,7 @@ const authOptions: AuthOptions = {
       },
       authorize: async (credentials) => {
         try {
-          const res = await fetch(`${config.serverURL}/auth/login`, {
+          const res = await fetch(`${SERVER_URL}/auth/login`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({

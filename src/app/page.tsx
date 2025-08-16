@@ -6,7 +6,7 @@ export default function HomePage() {
   return (
     <main className={styles.main}>
       <section className={styles.hero}>
-        <h1 className={styles.title}>Ласкаво просимо до нашого меблевого магазину</h1>
+        <h1 className={styles.title}>Роменський меблевий комбінат</h1>
         <p className={styles.subtitle}>
           Стильні та якісні меблі для вашого дому та офісу
         </p>

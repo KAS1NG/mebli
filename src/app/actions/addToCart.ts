@@ -4,12 +4,7 @@ import { IAddCartInfo } from "../types/post";
 import { defaultHeaders } from "../utils/defaultHeaders";
 import { getServerSession } from "next-auth"
 import authOptions from "../utils/authOptions";
-
-const config = {
-    serverURL: process.env.SERVER_URL,
-    apiURL: 'https://furniture.fly.dev',
-    localURL: 'http://localhost:8080',
-};
+import { SERVER_URL } from "../lib/constants";
 
 export async function addToCart(cartItemDTO: IAddCartInfo) {
 
@@ -19,7 +14,7 @@ export async function addToCart(cartItemDTO: IAddCartInfo) {
         console.log('unautorizationnnnnnnn')
     } else {
         try {
-            const response = await fetch(`${config.serverURL}/cart/add`, {
+            const response = await fetch(`${SERVER_URL}/cart/add`, {
                 method: 'POST',
                 headers: defaultHeaders(session.accessToken),
                 body: JSON.stringify({

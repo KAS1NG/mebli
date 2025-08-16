@@ -1,5 +1,3 @@
-// src/app/products/[slug]/[id]/page.tsx
-
 import { notFound, redirect } from "next/navigation";
 import type { Metadata, ResolvingMetadata } from "next";
 
@@ -50,8 +48,7 @@ export async function generateMetadata(
 
     const previousImages = (await parent).openGraph?.images || [];
     const img =
-        product.images?.[0] ||
-        `${process.env.NEXT_PUBLIC_BASE_URL}/default.jpg`;
+        product.images?.[0]
 
     return {
         title: product.title,

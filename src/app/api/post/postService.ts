@@ -1,16 +1,11 @@
+import { SERVER_URL } from "@/app/lib/constants";
 import { IGetProperty, IPost } from "@/app/types/post";
 import { handleResponse } from "@/app/utils/handleResponse"
-
-const config = {
-  serverURL: process.env.SERVER_URL,
-  apiURL: 'https://furniture.fly.dev',
-  localURL: 'http://localhost:8080',
-}
 
 export const fetchPosts = async (query: string, page: number): Promise<IPost[]> => {
   const limit = 6;
   try {
-    const response = await fetch(`${config.serverURL}/posts/?page=${page}&limit=${limit}&query=${query}`, {
+    const response = await fetch(`${SERVER_URL}/posts/?page=${page}&limit=${limit}&query=${query}`, {
       next: { tags: ['posts'] },
     });
 
@@ -20,52 +15,6 @@ export const fetchPosts = async (query: string, page: number): Promise<IPost[]> 
     throw error;
   }
 };
-
-// export const fetchProductProperty = async (itemId: string, options?: RequestInit) => {
-//   try {
-//     const response = await fetch(`${config.serverURL}/comments/byPostId/${itemId}`, {
-//       method: 'GET',
-//       next: { tags: ['property'] },
-//       headers: { 'Content-Type': 'application/json' },
-//     });
-//     return await handleResponse(response);
-//   } catch (error) {
-//     console.error('Failed to fetch product property:', error);
-//     throw error;
-//   }
-// };
-
-// export const fetchOnePost = async (id: string, options?: RequestInit): Promise<IPost> => {
-//   try {
-//     const response = await fetch(`${config.serverURL}/posts/getOne/${id}`, {
-//       next: { tags: ['post'] },
-//     });
-
-//     return await handleResponse(response);
-//   } catch (error) {
-//     console.error('Failed to fetch post:', error);
-//     throw error;
-//   }
-// };
-
-// export const fetchAll = async (): Promise<IPost[]> => {
-//   try {
-//     const response = await fetch(`${config.serverURL}/posts/all`);
-
-//     return await handleResponse(response);
-//   } catch (error) {
-//     console.error('Failed to fetch post:', error);
-//     throw error;
-//   }
-// };
-
-// export async function fetchAllPostIds() {
-//     const posts = await fetchAll(); // [{ id, title, ... }]
-//     return posts.map((p: { id: string | number, title: string }) => ({
-//         id: p.id,
-//         title: p.title
-//     }));
-// }
 
 /**
  * Базовий fetch-запит із дефолтними опціями.
@@ -93,7 +42,7 @@ export const fetchProductProperty = async (
   itemId: string,
   options?: RequestInit
 ): Promise<IGetProperty[]> => {
-  return baseFetch<IGetProperty[]>(`${config.serverURL}/comments/byPostId/${itemId}`, {
+  return baseFetch<IGetProperty[]>(`${SERVER_URL}/comments/byPostId/${itemId}`, {
     method: "GET",
     next: { tags: ["property"], revalidate: 60 },
     ...options,
@@ -108,7 +57,7 @@ export const fetchOnePost = async (
   id: string,
   options?: RequestInit
 ): Promise<IPost> => {
-  return baseFetch<IPost>(`${config.serverURL}/posts/getOne/${id}`, {
+  return baseFetch<IPost>(`${SERVER_URL}/posts/getOne/${id}`, {
     next: { tags: ["post"], revalidate: 60 },
     ...options,
   });
@@ -119,7 +68,7 @@ export const fetchOnePost = async (
  * Додаємо тег для можливості revalidateTag('posts').
  */
 export const fetchAll = async (options?: RequestInit): Promise<IPost[]> => {
-  return baseFetch<IPost[]>(`${config.serverURL}/posts/all`, {
+  return baseFetch<IPost[]>(`${SERVER_URL}/posts/all`, {
     next: { tags: ["posts"], revalidate: 300 }, // список можна рідше оновлювати
     ...options,
   });

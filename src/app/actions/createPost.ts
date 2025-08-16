@@ -1,12 +1,7 @@
 "use server"
 import { handleResponse } from "@/app/utils/handleResponse"
 import { revalidateMultipleTags } from "../utils/revalidateItems";
-
-const config = {
-    serverURL: process.env.SERVER_URL,
-    apiURL: 'https://furniture.fly.dev',
-    localURL: 'http://localhost:8080',
-};
+import { SERVER_URL } from "../lib/constants";
 
 export async function createPost(formData: FormData, token: string | null) {
     if (!token) {
@@ -24,7 +19,7 @@ export async function createPost(formData: FormData, token: string | null) {
     }
 
     try {
-        const response = await fetch(`${config.serverURL}/posts/create`, {
+        const response = await fetch(`${SERVER_URL}/posts/create`, {
             method: 'POST',
             headers: {
                 Authorization: `Bearer ${token}`,

@@ -4,12 +4,7 @@ import { defaultHeaders } from "../utils/defaultHeaders";
 import { handleResponse } from "../utils/handleResponse";
 import { cookies } from "next/headers";
 import authOptions from "../utils/authOptions";
-
-const config = {
-    serverURL: process.env.SERVER_URL,
-    apiURL: 'https://furniture.fly.dev',
-    localURL: 'http://localhost:8080',
-}
+import { SERVER_URL } from "../lib/constants";
 
 export const fetchCart = async () => {
     const session = await getServerSession(authOptions)
@@ -24,7 +19,7 @@ export const fetchCart = async () => {
         const ids = JSON.parse(cartCookie.value)
 
         try {
-            const response = await fetch(`${config.serverURL}/cart/byIds`, {
+            const response = await fetch(`${SERVER_URL}/cart/byIds`, {
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json"
@@ -40,7 +35,7 @@ export const fetchCart = async () => {
         }
     } else {
         try {
-            const response = await fetch(`${config.serverURL}/cart/${session.user.userId}`, {
+            const response = await fetch(`${SERVER_URL}/cart/${session.user.userId}`, {
                 headers: defaultHeaders(session.accessToken),
                 next: { tags: ['cart'] },
             });

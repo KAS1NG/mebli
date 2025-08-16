@@ -7,7 +7,6 @@ import logoPic from '@/app/public/logo.svg'
 import CategoryDropdown from './CategoryDropdown';
 import { categories } from '../utils/categoriesData';
 import { fetchCart } from '../actions/fetchCart';
-import { IPost } from '../types/post';
 import '@/app/styles/header.scss'
 
 const Header = () => {
@@ -18,21 +17,18 @@ const Header = () => {
   const isAdmin = user?.role === 'ROLE_ADMIN';
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const [SOmething, setSOmething] = useState<IPost[]>()
+  // const [SOmething, setSOmething] = useState<IPost[]>()
 
   useEffect( () => {
     const doIt = async () => {
       const products = await fetchCart();
-      setSOmething(products)
+      // setSOmething(products)
       return products
     }
 
     doIt()
   }, [])
-
-  console.log(SOmething && SOmething.length)
   
-
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };

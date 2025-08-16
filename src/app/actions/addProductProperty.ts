@@ -4,12 +4,7 @@ import { defaultHeaders } from "../utils/defaultHeaders";
 import { handleResponse } from "../utils/handleResponse";
 import { revalidateTag } from "next/cache";
 import authOptions from "../utils/authOptions";
-
-const config = {
-    serverURL: process.env.SERVER_URL,
-    apiURL: 'https://furniture.fly.dev',
-    localURL: 'http://localhost:8080',
-}
+import { SERVER_URL } from "../lib/constants";
 
 export const addProductProperty = async (property: Record<string, string>, itemId: number) => {
     const session = await getServerSession(authOptions)
@@ -18,7 +13,7 @@ export const addProductProperty = async (property: Record<string, string>, itemI
         console.log('Недостатньо прав')
     } else {
         try {
-            const response = await fetch(`${config.serverURL}/comments/${itemId}`, {
+            const response = await fetch(`${SERVER_URL}/comments/${itemId}`, {
                 method: 'POST',
                 headers: defaultHeaders(session.accessToken),
                 body: JSON.stringify(property),

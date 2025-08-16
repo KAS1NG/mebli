@@ -1,17 +1,12 @@
 "use server"
 import { handleResponse } from "@/app/utils/handleResponse"
 import { revalidateMultipleTags } from "../utils/revalidateItems";
-
-const config = {
-    serverURL: process.env.SERVER_URL,
-    apiURL: 'https://furniture.fly.dev',
-    localURL: 'http://localhost:8080',
-};
+import { SERVER_URL } from "../lib/constants";
 
 export async function editPost(formData: FormData, postId: number, token: string | null) {
 
     try {
-        const response = await fetch(`${config.serverURL}/posts/update/${postId}`, {
+        const response = await fetch(`${SERVER_URL}/posts/update/${postId}`, {
             method: 'POST',
             headers: {
                 Authorization: `Bearer ${token}`,

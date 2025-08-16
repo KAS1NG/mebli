@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
-import { IPost } from '../types/post';
-import { removeCartItem } from '../actions/removeCartItem';
 import Image from 'next/image'
-import { removeFromCart } from '../utils/CartTest';
+import { useState } from 'react';
+import { IPost } from '../../types/post';
+import { removeCartItem } from '../../actions/removeCartItem';
+import { removeFromCart } from '../../utils/CartTest';
+import styles from '../../styles/cart/cartItem.module.scss';
 
 interface CartItemProps {
   item: IPost
 }
 
-const CartItem: React.FC<CartItemProps> = ({ item }) => {
-
+const CartItem = ({ item }: CartItemProps) => {
   const [isLoading, setIsLoading] = useState(false)
 
   const handleRemove = async () => {
@@ -21,8 +21,8 @@ const CartItem: React.FC<CartItemProps> = ({ item }) => {
   }
 
   return (
-    <div className="cart-item">
-      <div className="cart-item__image">
+    <div className={styles.item}>
+      <div className={styles.image}>
         <Image
           src={item.images[0]}
           alt={item.title}
@@ -35,22 +35,21 @@ const CartItem: React.FC<CartItemProps> = ({ item }) => {
           blurDataURL="/images/wardrobe-blur.jpg"            // Aspect ratio (can be set arbitrarily)
         />
       </div>
-      <div className="cart-item__details">
-        <h3 className="cart-item__name">{item.title}</h3>
-        <p className="cart-item__price">{item.price.toFixed(2)} грн.</p>
-        <div className="cart-item__controls">
+      <div className={styles.details}>
+        <h3 className={styles.name}>{item.title}</h3>
+        <p className={styles.price}>{item.price.toFixed(2)} грн.</p>
+        <div className={styles.controls}>
           <label htmlFor={`quantity-${item.id}`}>Кількість:</label>
           <input
             type="number"
             id={`quantity-${item.id}`}
             min="1"
             defaultValue={1}
-            // onChange={(e) => onQuantityChange(item.id, Number(e.target.value))}
-            className="cart-item__quantity"
+            className={styles.quantity}
           />
           <button
             onClick={handleRemove}
-            className="cart-item__remove-btn"
+            className={styles.removeBtn}
             disabled={isLoading}
           >
             <div>

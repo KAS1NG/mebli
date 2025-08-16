@@ -3,12 +3,7 @@ import { getServerSession } from "next-auth/next";
 import { revalidateMultipleTags } from "../utils/revalidateItems";
 import { redirect } from "next/navigation";
 import authOptions from "../utils/authOptions";
-
-const config = {
-    serverURL: process.env.SERVER_URL,
-    apiURL: 'https://furniture.fly.dev',
-    localURL: 'http://localhost:8080',
-}
+import { SERVER_URL } from "../lib/constants";
 
 export const removePost = async (itemId: number) => {
    
@@ -18,7 +13,7 @@ export const removePost = async (itemId: number) => {
         console.log('unautorizationnnnnnnn')
     } else {
         try {
-            const response = await fetch(`${config.serverURL}/posts/delete/${itemId.toString()}`, {
+            const response = await fetch(`${SERVER_URL}/posts/delete/${itemId.toString()}`, {
                 method: 'DELETE',
                 headers: {
                     Authorization: `Bearer ${session.accessToken}`,
