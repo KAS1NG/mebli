@@ -17,7 +17,6 @@ export const metadata: Metadata = {
   alternates: {
     languages: {
       'uk-UA': '/uk-UA',  // Українська
-      'ru-RU': '/ru-RU',  // Російська
     },
   },
   openGraph: {
