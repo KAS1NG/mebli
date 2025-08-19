@@ -1,91 +1,71 @@
-'use client'
+'use client';
+
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination } from 'swiper/modules'; // Правильний імпорт модулів
+import { Navigation, Pagination } from 'swiper/modules';
 import Image from 'next/image';
-import Modal from './Modal';
-import { useState } from 'react';
+import dynamic from 'next/dynamic';
+import { useState, KeyboardEvent } from 'react';
+
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
+import { IPost } from '../types/post';
 
-interface ISlider {
-  slides: string[],
-  title: string
+interface ISliderProps {
+  product: IPost;
+  title: string;
 }
 
-function MySlider({ slides, title }: ISlider) {
+const Modal = dynamic(() => import('./Modal'), { ssr: false });
 
+export default function MySlider({ product, title }: ISliderProps) {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
-  const openModal = (image: string) => {
-    setSelectedImage(image);
-  };
+  const slides = product.images
 
-  const closeModal = () => {
-    setSelectedImage(null);
+  const openModal = (image: string) => setSelectedImage(image);
+  const closeModal = () => setSelectedImage(null);
+
+  const handleKeyPress = (e: KeyboardEvent<HTMLImageElement>, image: string) => {
+    if (e.key === 'Enter') openModal(image);
   };
 
   return (
     <div className="product-page__gallery">
-      {slides.length > 1 ? (
-        <Swiper
-          modules={[Navigation, Pagination]}
-          spaceBetween={20}
-          navigation
-          pagination={{ clickable: true }}
-          loop={true}
-        // slidesPerView={Math.min(slides.length, 3)}
-        // breakpoints={{
-        //   640: {
-        //     slidesPerView: 1, // Для маленьких екранів: максимум 1.5 слайда
-        //     spaceBetween: 20,
-        //   },
-        //   768: {
-        //     slidesPerView: Math.min(slides.length, 1.5), // Для середніх екранів: максимум 2 слайда
-        //     spaceBetween: 20,
-        //   },
-        //   1024: {
-        //     slidesPerView: Math.min(slides.length, 2), // Для великих екранів: максимум 2.5 слайда
-        //     spaceBetween: 20,
-        //   },
-        //   1280: {
-        //     slidesPerView: Math.min(slides.length, 2.5), // Для дуже великих екранів: максимум 3 слайда
-        //     spaceBetween: 20,
-        //   },
-        // }}
-        >
-          {slides.map((image, index) => (
-            <SwiperSlide key={image}>
-              <Image
-                src={image}
-                alt={title}
-                width={500}
-                height={500}
-                priority={index === 0} // Пріоритет лише для першого слайда
-                className="product-page__image"
-                onClick={() => openModal(image)}
-              />
-            </SwiperSlide>
-          ))}
-        </Swiper>
-      ) : (
-        // Якщо тільки одна картинка, просто відображаємо зображення
-        <Image
-          src={slides[0]}
-          alt={title}
-          width={500}
-          height={500}
-          priority
-          className="product-page__image"
-          onClick={() => openModal(slides[0])}
-        />
-      )}
+      <Swiper
+        modules={[Navigation, Pagination]}
+        spaceBetween={20}
+        navigation={slides.length > 1}
+        pagination={slides.length > 1 ? { clickable: true } : false}
+        loop={slides.length > 1}
+      >
+        {slides.map((image, index) => (
+          <SwiperSlide key={image}>
+            <Image
+              src={image}
+              alt={`${title} — зображення ${index + 1}`}
+              width={500}
+              height={500}
+              // priority={index === 0}
+              sizes="(max-width: 768px) 100vw, 500px"
+              className="product-page__image cursor-pointer"
+              style={
+                index === 0
+                  ? { viewTransitionName: `post-image-${product.id}-0` }
+                  : {}
+              }
+              onClick={() => openModal(image)}
+              onKeyDown={(e) => handleKeyPress(e, image)}
+              role="button"
+              tabIndex={0}
+            />
+          </SwiperSlide>
+        ))}
+      </Swiper>
 
       {selectedImage && (
         <Modal selectedImage={selectedImage} closeModal={closeModal} />
       )}
     </div>
-  )
+  );
 }
-
-export default MySlider

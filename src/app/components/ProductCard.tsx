@@ -20,6 +20,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, index }) => {
       className="product-card"
       aria-label={`View details of ${product.title}`}
       prefetch={true}
+      style={{ viewTransitionName: `post-image-${product.id}-0` }} // унікальне ім’я
     >
       <figure className="product-card__figure">
         <div className="product-card__image-wrapper">

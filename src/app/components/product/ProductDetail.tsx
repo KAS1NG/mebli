@@ -29,7 +29,7 @@ export default function ProductDetail({ product, productProperty }: ProductDetai
     return (
         <main className="product_container">
             <div className="product-page">
-                <MySlider slides={product.images} title={product.title} />
+                <MySlider product={product} title={product.title} />
 
                 <section className="product-page__info">
                     <h1 className="product-page__title">{product.title}</h1>
