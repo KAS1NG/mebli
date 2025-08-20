@@ -9,7 +9,7 @@ interface ProductCardProps {
   index: number
 }
 
-const ProductCard: React.FC<ProductCardProps> = ({ product, index }) => {
+const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
   const URL_LINK = `/products/${transliterateAndClear(product.title)}/${product.id}`
 
@@ -31,7 +31,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, index }) => {
             objectFit="cover"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             className="product-card__image"
-            priority={index < 3}
+            priority={true}
           />
         </div>
         <figcaption className="product-card__caption">
