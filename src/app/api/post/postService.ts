@@ -16,10 +16,10 @@ import { handleResponse } from "@/app/utils/handleResponse"
 //   }
 // };
 
-export const fetchPosts = async (page: number): Promise<IPreviewPost[]> => {
+export const fetchPosts = async (query: string, page: number): Promise<IPreviewPost[]> => {
   const limit = 6;
   try {
-    const response = await fetch(`${SERVER_URL}/posts/preview?page=${page}&limit=${limit}`, {
+    const response = await fetch(`${SERVER_URL}/posts/preview?page=${page}&limit=${limit}&query=${query}`, {
       next: { tags: ['posts'] },
     });
 
