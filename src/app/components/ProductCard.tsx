@@ -1,11 +1,11 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import React from 'react';
-import { IPost } from '../types/post';
+import { IPreviewPost } from '../types/post';
 import { transliterateAndClear } from '../utils/clearUrlString';
 
 interface ProductCardProps {
-  product: IPost;
+  product: IPreviewPost;
   index: number
 }
 
@@ -25,7 +25,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, index }) => {
       <figure className="product-card__figure">
         <div className="product-card__image-wrapper">
           <Image
-            src={product.images[0]}
+            src={product.thumbnail}
             alt={`Image of ${product.title}`}
             layout="fill"
             objectFit="cover"

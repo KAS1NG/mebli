@@ -3,7 +3,6 @@ import localFont from "next/font/local";
 import Providers from "./providers";
 import Header from "./components/header";
 import Footer from "./components/footer";
-import { SpeedInsights } from '@vercel/speed-insights/next';
 import AnalyticsProvider from "./providers/AnalyticsProvider";
 import "./globals.css";
 import ConsentBanner from "./components/ConsentBanner";
@@ -83,7 +82,6 @@ export default function RootLayout({
             <Footer />
           </div>
         </Providers>
-        <SpeedInsights />
         <ConsentBanner />
         <AnalyticsProvider />
         <Script

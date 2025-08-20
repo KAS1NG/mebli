@@ -10,6 +10,13 @@ export interface IPost {
     images: string[]
 }
 
+export interface IPreviewPost {
+    id: number,
+    title: string,
+    price: number,
+    thumbnail: string
+}
+
 export type Post = {
     title: string;
     description: string;
