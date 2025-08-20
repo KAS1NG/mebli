@@ -46,7 +46,6 @@ export default function MySlider({ product, title }: ISliderProps) {
               alt={`${title} — зображення ${index + 1}`}
               width={500}
               height={500}
-              // priority={index === 0}
               sizes="(max-width: 768px) 100vw, 500px"
               className="product-page__image cursor-pointer"
               style={
