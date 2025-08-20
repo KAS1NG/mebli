@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "postinstall": "npm rebuild sharp"
   },
   "dependencies": {
     "@types/js-cookie": "^3.0.6",
@@ -20,6 +21,7 @@
     "react": "^18",
     "react-dom": "^18",
     "sass": "^1.78.0",
+    "sharp": "^0.34.3",
     "swiper": "^11.1.14",
     "zod": "^3.23.8"
   },
