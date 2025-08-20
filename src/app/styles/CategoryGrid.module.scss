@@ -1,0 +1,120 @@
+$gap: 28px;
+$radius: 16px;
+$shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+$shadow-strong: 0 18px 40px rgba(0, 0, 0, 0.12);
+$overlay: linear-gradient(to top, rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0));
+
+$color-text: #0f172a;
+$color-muted: #475569;
+$color-bg: #f8fafc;
+$color-card: #f3f4f6;
+$color-accent: #0ea5e9;
+$color-badge: #e11d48;
+
+.wrap {
+  max-width: 1180px;
+  margin: 40px auto 80px;
+  padding: 0 20px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: $gap;
+
+  @media (max-width: 1024px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  @media (max-width: 640px) {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+}
+
+.card {
+  position: relative;
+  border-radius: $radius;
+  overflow: hidden;
+  background: $color-card;
+  box-shadow: $shadow;
+  isolation: isolate;
+  aspect-ratio: 16/11;
+  transition: transform 0.28s ease, box-shadow 0.28s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: $shadow-strong;
+
+    img {
+      transform: scale(1.06);
+    }
+
+    .arrow {
+      transform: translateX(4px);
+    }
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    transform: scale(1.02);
+    transition: transform 0.6s ease;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: auto 0 0 0;
+    height: 45%;
+    background: $overlay;
+    z-index: 1;
+  }
+}
+
+.cta {
+  position: absolute;
+  left: 22px;
+  bottom: 22px;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #fff;
+  color: $color-text;
+  border-radius: 999px;
+  padding: 12px 18px;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.1);
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s;
+
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+  }
+
+  .arrow {
+    display: inline-block;
+    transition: transform 0.22s ease;
+  }
+}
+
+.badge {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 2;
+  background: $color-badge;
+  color: #f9f9f9;
+  font-weight: 800;
+  font-size: 0.85rem;
+  padding: 6px 10px;
+  border-radius: 10px;
+  transform: rotate(12deg);
+  box-shadow: 0 10px 24px rgba(225, 17, 72, 0.35);
+  user-select: none;
+}

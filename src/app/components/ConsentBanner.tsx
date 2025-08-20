@@ -7,9 +7,7 @@ export default function ConsentBanner() {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    console.log("ConsentBanner mounted");
     const consent = localStorage.getItem('consent');
-    console.log("consent value:", consent);
     if (!consent) setVisible(true);
   }, []);
 

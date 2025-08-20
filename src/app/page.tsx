@@ -1,8 +1,7 @@
-import Image from 'next/image';
 import styles from './styles/home.module.scss';
-import Link from 'next/link';
 import { faqSchema } from './lib/constants';
 import Script from 'next/script';
+import CategoryGrid from './components/CategoryGrid';
 
 export default function HomePage() {
   return (
@@ -17,56 +16,7 @@ export default function HomePage() {
 
       <section className={styles.featured}>
         <h2>Популярні товари</h2>
-        <div className={styles.products}>
-          <div className={styles.productCard}>
-            <Link href={"/products?page=1&query=диван,крісло,пуф"}>
-              <Image
-                src="https://firebasestorage.googleapis.com/v0/b/sicero-9aa5f.appspot.com/o/8ca1b6e1-0765-4e00-b575-c75ed5bfc1e4.png?alt=media"
-                alt="Великий диван"
-                width={300}
-                height={200}
-                quality={90}
-                loading="lazy"
-                placeholder="blur"
-                blurDataURL="/images/wardrobe-blur.jpg"
-              />
-              <h3>Зручні дивани</h3>
-              <p>Ціна: від 10 000 грн</p>
-            </Link>
-          </div>
-          <div className={styles.productCard}>
-            <Link href={"/products?page=1&query=крісло,стілець"}>
-              <Image
-                src="https://firebasestorage.googleapis.com/v0/b/sicero-9aa5f.appspot.com/o/3611e007-0bc9-4c1d-9e48-33e50b310cbb.png?alt=media"
-                alt="Сучасті стільці"
-                width={300}
-                height={200}
-                quality={90}
-                loading="lazy"
-                placeholder="blur"
-                blurDataURL="/images/wardrobe-blur.jpg"
-              />
-              <h3>Сучасні стільці</h3>
-              <p>Ціна: від 2 500 грн</p>
-            </Link>
-          </div>
-          <div className={styles.productCard}>
-            <Link href={"/products?page=1&query=шафа-купе,комод"}>
-              <Image
-                src="https://firebasestorage.googleapis.com/v0/b/sicero-9aa5f.appspot.com/o/0d1adbb4-f08d-40a7-89e7-211b74705ae3.png?alt=media"
-                alt="Великі шафи"
-                width={300}
-                height={200}
-                quality={90}
-                loading="lazy"
-                placeholder="blur"
-                blurDataURL="/images/wardrobe-blur.jpg"
-              />
-            </Link>
-            <h3>Великі шафи</h3>
-            <p>Ціна: від 15 000 грн</p>
-          </div>
-        </div>
+        <CategoryGrid />
       </section>
 
       <section className={styles.about}>
