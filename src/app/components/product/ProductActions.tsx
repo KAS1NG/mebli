@@ -4,6 +4,7 @@ import React, { memo, useCallback, useMemo, useState } from 'react';
 import { removePost } from '../../actions/removePost';
 import { useRouter } from 'next/navigation';
 import clsx from 'clsx';
+import { ShoppingCart } from 'lucide-react';
 
 interface ProductActionsProps {
   productId: number;
@@ -23,15 +24,15 @@ const ProductActions = memo(function ProductActions({
   const router = useRouter();
 
   const [showToast] = useState(false);
-  
-    // const confirmOrder = () => {
-    //   setShowToast(true);
-  
-    //   // Автоматично ховаємо через 3 сек
-    //   setTimeout(() => {
-    //     setShowToast(false);
-    //   }, 3000);
-    // };
+
+  // const confirmOrder = () => {
+  //   setShowToast(true);
+
+  //   // Автоматично ховаємо через 3 сек
+  //   setTimeout(() => {
+  //     setShowToast(false);
+  //   }, 3000);
+  // };
 
   // Функції обробники обгортаємо useCallback — щоб не створювати заново
   const handleDelete = useCallback(() => {
@@ -66,19 +67,13 @@ const ProductActions = memo(function ProductActions({
         className={addBtnClass}
         onClick={onAdd}
         disabled={loadingAction === 'add'}
-        aria-label="Додати товар до кошика"
-      >
-        {loadingAction === 'add' ? 'Завантаження...' : <span>Додати в кошик</span>}
+        aria-label="Додати товар до кошика">
+        {loadingAction === 'add' ? 'Завантаження...' :
+          <span className='btn__contant'>
+            <span>Додати в кошик</span>
+            <ShoppingCart size={16} />
+          </span>}
       </button>
-
-      {/* <button
-        className={removeBtnClass}
-        onClick={onRemove}
-        disabled={loadingAction === 'remove'}
-        aria-label="Видалити товар з кошика"
-      >
-        {loadingAction === 'remove' ? 'Завантаження...' : 'Убрати з кошика'}
-      </button> */}
 
       {isAdmin && (
         <>

@@ -2,22 +2,9 @@ import { SERVER_URL } from "@/app/lib/constants";
 import { IGetProperty, IPost, IPreviewPost } from "@/app/types/post";
 import { handleResponse } from "@/app/utils/handleResponse"
 
-// export const fetchPosts = async (query: string, page: number): Promise<IPost[]> => {
-//   const limit = 6;
-//   try {
-//     const response = await fetch(`${SERVER_URL}/posts/?page=${page}&limit=${limit}&query=${query}`, {
-//       next: { tags: ['posts'] },
-//     });
-
-//     return await handleResponse(response);
-//   } catch (error) {
-//     console.error('Failed to fetch posts:', error);
-//     throw error;
-//   }
-// };
 
 export const fetchPosts = async (query: string, page: number): Promise<IPreviewPost[]> => {
-  const limit = 6;
+  const limit = 9;
   try {
     const response = await fetch(`${SERVER_URL}/posts/preview?page=${page}&limit=${limit}&query=${query}`, {
       next: { tags: ['posts'] },

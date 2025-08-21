@@ -6,6 +6,7 @@ import { useSession } from 'next-auth/react';
 import { IPost, IGetProperty } from '../../types/post';
 import { stringToArray } from '../../utils/stringToArr';
 import { useCartActions } from '@/app/hooks/useCartActions';
+import DeliveryInfo from './DeliveryInfo';
 
 const ProductActions = dynamic(() => import('./ProductActions'), { ssr: false });
 const CartToast = dynamic(() => import('../../components/CartToast'), { ssr: false });
@@ -48,6 +49,8 @@ export default function ProductDetail({ product, productProperty }: ProductDetai
                         onAdd={() => handleAddToCart(product.id)}
                         onRemove={() => handleRemoveFromCart(product.id)}
                     />
+
+                    <DeliveryInfo />
 
                     <CartToast show={toast.show} />
                 </section>
