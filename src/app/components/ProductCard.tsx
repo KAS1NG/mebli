@@ -36,7 +36,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         </div>
         <figcaption className="product-card__caption">
           <h3 className="product-card__name">{product.title}</h3>
-          <p className="product-card__price">від {product.price} ₴</p>
+          <p className="product-card__price">{product.price} грн</p>
         </figcaption>
       </figure>
     </Link >
