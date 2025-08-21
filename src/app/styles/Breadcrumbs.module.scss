@@ -1,0 +1,69 @@
+.breadcrumbs {
+    font-size: 15px;
+    font-weight: 400;
+    padding: 0 40px;
+    padding-top: 20px;
+    color: #5a5245; // натуральний відтінок (теплий сірий)
+    background-color: #f9f9f9;
+
+    .list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .item {
+        display: flex;
+        align-items: center;
+
+        &:not(:last-child)::after {
+            content: "›";
+            font-size: 14px;
+            margin-left: 10px;
+            color: #c2b8a3; // м'який бежевий акцент
+        }
+    }
+
+    .link {
+        text-decoration: none;
+        color: #4a4337; // темно-кавовий
+        padding: 2px 4px;
+        border-radius: 6px;
+        transition: all 0.25s ease;
+
+        &:hover {
+            color: #2c251b;
+            background: #f5f3ef; // легкий фон при наведенні
+        }
+    }
+
+    .current {
+        font-weight: 400;
+        color: #27262e; // насичений натуральний
+    }
+}
+
+/* 🔹 Адаптивність */
+@media (max-width: 768px) {
+    .breadcrumbs {
+        font-size: 14px;
+
+        .list {
+            gap: 6px;
+        }
+
+        .item:not(:last-child)::after {
+            margin-left: 6px;
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    .breadcrumbs {
+        padding: 0 20px;
+        color: #5a5245;
+    }
+}

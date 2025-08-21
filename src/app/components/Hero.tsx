@@ -30,7 +30,7 @@ export default function Hero() {
             </h1>
             <a href="/products" className={styles.catalogBtn}>
                 <div className={styles.contentBtn}>
-                    <span>Переглянути каталог</span>
+                    <span>До каталогу</span>
                     <ChevronRight size={18} />
                 </div>
             </a>

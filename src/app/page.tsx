@@ -10,7 +10,7 @@ export default function HomePage() {
       <Hero />
       <main className={styles.main}>
         <section className={styles.featured}>
-          <h2>Популярні товари</h2>
+          <h2>Топ по категоріях</h2>
           <CategoryGrid />
         </section>
 
