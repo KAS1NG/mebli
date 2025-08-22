@@ -34,10 +34,10 @@ const Products = async ({ searchParams }: ProductsProps) => {
   return (
     <main className="products">
       <section className="products__hero">
-        <h1 className="products__title">
+       {styledPart && <h1 className="products__title">
           <span className="main-title">{main}</span>{' '} {/* Основна частина */}
           <span className="styled-title">{styledPart}</span> {/* Стилізована частина */}
-        </h1>
+        </h1>}
         <InvoicesTable query={query} currentPage={currentPage} />
         {/* якщо сторінко більше ніж одна то показується пагінація сторінок */}
         {totalPages > 1 && <PaginationPages totalPages={totalPages} />}
