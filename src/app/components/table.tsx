@@ -10,7 +10,9 @@ interface IInvoicesTable {
 
 export default async function InvoicesTable({ query, currentPage, }: IInvoicesTable) {
 
-    const invoices = await fetchPosts(query, currentPage);
+    const limit = 9
+    
+    const invoices = await fetchPosts(query, currentPage, limit);
 
     return (
         <Suspense fallback={<Preloader />}>

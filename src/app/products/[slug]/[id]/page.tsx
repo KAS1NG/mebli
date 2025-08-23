@@ -5,12 +5,14 @@ import {
     fetchOnePost,
     fetchProductProperty,
     fetchAllPostIds,
+    fetchPosts,
 } from "@/app/api/post/postService";
 
 import { transliterateAndClear } from "@/app/utils/clearUrlString";
 import ProductDetail from "@/app/components/product/ProductDetail";
 import "@/app/styles/productDetail.scss";
 import Script from "next/script";
+import { stringToArray } from "@/app/utils/stringToArr";
 
 interface ProductPageProps {
     params: {
@@ -100,6 +102,8 @@ export async function generateMetadata(
 // ======================================================
 export default async function ProductPage({ params }: ProductPageProps) {
     const { id, slug } = params;
+    const currentPage = 1
+    const limit = 6
 
     // 🚀 Паралельні запити — швидше, ніж послідовно
     const [product, productProperty] = await Promise.all([
@@ -108,6 +112,8 @@ export default async function ProductPage({ params }: ProductPageProps) {
     ]);
 
     if (!product?.id) notFound();
+
+    const tagsArray = stringToArray(product.tags || '');
 
     // генерація productSchema 
 
@@ -138,11 +144,14 @@ export default async function ProductPage({ params }: ProductPageProps) {
         redirect(`/products/${cleanSlug}/${product.id}`);
     }
 
+    const invoices = await fetchPosts(tagsArray[0], currentPage, limit)
+
     return (
         <>
             <ProductDetail
                 product={product}
                 productProperty={productProperty}
+                invoices={invoices}
             />
             <Script
                 id="json-ld-product"

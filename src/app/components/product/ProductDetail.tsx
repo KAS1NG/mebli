@@ -3,7 +3,7 @@
 import dynamic from 'next/dynamic';
 import MySlider from '@/app/components/slider';
 import { useSession } from 'next-auth/react';
-import { IPost, IGetProperty } from '../../types/post';
+import { IPost, IGetProperty, IPreviewPost } from '../../types/post';
 import { stringToArray } from '../../utils/stringToArr';
 import { useCartActions } from '@/app/hooks/useCartActions';
 import DeliveryInfo from './DeliveryInfo';
@@ -13,13 +13,15 @@ const CartToast = dynamic(() => import('../../components/CartToast'), { ssr: fal
 const AddProductProperties = dynamic(() => import('../AddProductProperties'), { ssr: false });
 const ProductProperties = dynamic(() => import('./ProductProperties'), { ssr: false });
 const ProductTags = dynamic(() => import('./ProductTags'), { ssr: false });
+const ProductPage = dynamic(() => import('./ProductPage'), { ssr: false });
 
 interface ProductDetailProps {
     product: IPost;
     productProperty: IGetProperty[];
+    invoices: IPreviewPost[]
 }
 
-export default function ProductDetail({ product, productProperty }: ProductDetailProps) {
+export default function ProductDetail({ product, productProperty, invoices }: ProductDetailProps) {
     const { data: session } = useSession();
     const user = session?.user;
     const isAdmin = user?.role === 'ROLE_ADMIN';
@@ -54,7 +56,9 @@ export default function ProductDetail({ product, productProperty }: ProductDetai
 
                     <CartToast show={toast.show} />
                 </section>
+
             </div>
+            {invoices && <ProductPage invoices={invoices} currentProductId={product.id} />}
         </main>
     );
 }
