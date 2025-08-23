@@ -1,7 +1,10 @@
-
 .recommendedSection {
   text-align: center;
   padding: 40px;
+
+  @media (max-width: 765px) {
+    padding: 10px;
+  }
 
   h3 {
     font-size: clamp(1.4rem, 1.2rem + 1vw, 1.9rem);
@@ -15,6 +18,7 @@
     transform: translateY(8px);
     animation: fadeUp 0.6s ease forwards;
   }
+
 }
 
 @keyframes fadeUp {
@@ -51,12 +55,20 @@
     font-weight: 600;
     margin-bottom: 0.3rem;
     color: #2a2a2a;
+
+    @media (max-width: 765px) {
+      font-size: .8rem;
+    }
   }
 
   .price {
     font-size: 0.95rem;
     font-weight: 500;
     color: #555;
+
+    @media (max-width: 765px) {
+      font-size: .8rem;
+    }
   }
 }
 
@@ -105,12 +117,22 @@
     margin: 0 20px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, .1);
     color: #222;
+
+    @media (max-width: 765px) {
+      width: 20px;
+      height: 20px;
+      margin: 0 10px;
+    }
   }
 
   :global(.swiper-button-next:after),
   :global(.swiper-button-prev:after) {
     font-size: 18px;
     font-weight: 700;
+
+    @media (max-width: 765px) {
+      font-size: 12px;
+    }
   }
 
   :global(.swiper-button-disabled) {

@@ -16,7 +16,7 @@ interface ISliderProps {
   title: string;
 }
 
-const Modal = dynamic(() => import('./Modal'), { ssr: false });
+const Modal = dynamic(() => import('./product/Modal'), { ssr: false });
 
 export default function MySlider({ product, title }: ISliderProps) {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
@@ -63,7 +63,12 @@ export default function MySlider({ product, title }: ISliderProps) {
       </Swiper>
 
       {selectedImage && (
-        <Modal selectedImage={selectedImage} closeModal={closeModal} />
+        // <Modal selectedImage={selectedImage} closeModal={closeModal} />
+        <Modal
+          images={slides}
+          selectedImage={selectedImage}
+          closeModal={closeModal}
+        />
       )}
     </div>
   );
