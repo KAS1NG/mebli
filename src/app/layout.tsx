@@ -4,11 +4,11 @@ import Providers from "./providers";
 import Header from "./components/header";
 import Footer from "./components/footer";
 import AnalyticsProvider from "./providers/AnalyticsProvider";
-import "./globals.css";
 import ConsentBanner from "./components/ConsentBanner";
 import Preloader from "./components/Preloader";
 import Script from "next/script";
 import { businessSchema } from "./lib/constants";
+import "./globals.css";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",

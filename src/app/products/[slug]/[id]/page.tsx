@@ -55,17 +55,14 @@ export async function generateMetadata(
     const URL_ITEM = `products/${transliterateAndClear(product.title)}/${product.id}`
 
     return {
-        title: `${product.title} | Купити у Ромнах – Меблі Ромни`,
-        description: `"Купити ${product.title} у Ромнах. Сучасний дизайн, якісні матеріали. Доставка та встановлення меблів по Сумській області.`,
+        title: `${product.title} - Купити у Ромнах | Ціна ${product.price} ₴`,
+        description: `"Купити ${product.title} у Ромнах. ${product.tags[0]} у Ромнах. Доставка, я меблів Сумська область.`,
         keywords: [
             product.title,
             `купити ${product.title} Ромни`,
             "меблі Ромни",
         ],
-
-        alternates: {
-            canonical: `https://mebliromny.com.ua/${URL_ITEM}`,
-        },
+        alternates: { canonical: `https://mebliromny.com.ua/${URL_ITEM}`, },
         openGraph: {
             type: "article",
             title: product.title,
@@ -121,13 +118,13 @@ export default async function ProductPage({ params }: ProductPageProps) {
         "@context": "https://schema.org",
         "@type": "Product",
         name: product.title,
-        image: product.images?.[0],
+        image: product.images,
         description: product.description,
         sku: `SHF-${product.id}`,
         brand: { "@type": "Brand", name: "Mebli Romny" },
         offers: {
             "@type": "Offer",
-            url: `products/${transliterateAndClear(product.title)}/${product.id}`,
+            url: `https://mebliromny.com.ua/products/${transliterateAndClear(product.title)}/${product.id}`,
             priceCurrency: "UAH",
             price: product.price,
             availability: "https://schema.org/InStock",
@@ -136,7 +133,28 @@ export default async function ProductPage({ params }: ProductPageProps) {
                 name: "Меблі Ромни",
             },
         },
-    };
+        shippingDetails: {
+            "@type": "OfferShippingDetails",
+            shippingDestination: {
+                "@type": "DefinedRegion",
+                addressRegion: "Сумська область"
+            },
+            deliveryTime: {
+                "@type": "ShippingDeliveryTime",
+                handlingTime: { "@type": "QuantitativeValue", minValue: 1, maxValue: 2, unitCode: "d" },
+                transitTime: { "@type": "QuantitativeValue", minValue: 1, maxValue: 5, unitCode: "d" }
+            },
+            shippingRate: { "@type": "MonetaryAmount", value: 0, currency: "UAH" }
+        },
+        hasMerchantReturnPolicy: {
+            "@type": "MerchantReturnPolicy",
+            applicableCountry: "UA",
+            returnPolicyCategory: "https://schema.org/MerchantReturnFiniteReturnWindow",
+            returnPolicyDays: 14,
+            returnMethod: "https://schema.org/ReturnByMail",
+            returnFees: "https://schema.org/FreeReturn"
+        }
+    }
 
     // 🔗 Перевірка slug для SEO
     const cleanSlug = transliterateAndClear(product.title);

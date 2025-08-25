@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import '@/app/styles/footer.scss'
+import Script from 'next/script';
 
 const Footer = () => {
   return (
@@ -36,10 +37,27 @@ const Footer = () => {
           &copy; {new Date().getFullYear()} Mebli Romny. All rights reserved.
         </p>
         <div className="footer__socials">
-          <Link href="https://facebook.com" target="_blank" rel="noopener noreferrer">Facebook</Link>
-          <Link href="https://instagram.com" target="_blank" rel="noopener noreferrer">Instagram</Link>
+          <Link href="https://www.facebook.com/share/1EVjeSnw7c/" target="_blank" rel="noopener noreferrer">Facebook</Link>
+          <Link href="https://www.instagram.com/manuf4cture_p" target="_blank" rel="noopener noreferrer">Instagram</Link>
         </div>
       </div>
+
+      <Script id="ld-local" type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FurnitureStore",
+            name: "Mebli Romny",
+            url: "https://mebliromny.com.ua",
+            telephone: "+380503073436",
+            address: { "@type": "PostalAddress", addressCountry: "UA", addressLocality: "Ромни", streetAddress: "1-й провулок Свободи, 10" },
+            areaServed: "Сумська область",
+            openingHours: "Mo-Fr 09:00-18:00",
+            sameAs: ["https://www.facebook.com/share/1EVjeSnw7c/", "https://www.instagram.com/manuf4cture_p"]
+          })
+        }}
+      />
+
     </footer>
   );
 };
