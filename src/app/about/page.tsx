@@ -2,7 +2,7 @@
 "use client";
 
 import React from "react";
-import "../styles/About.scss";
+import "../styles/about.scss";
 
 export default function About() {
   return (
