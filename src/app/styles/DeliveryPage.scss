@@ -1,4 +1,4 @@
-.contacts {
+.delivery {
   padding: 4rem 1rem;
   background: #fafafa;
   font-family: "Inter", sans-serif;
@@ -50,68 +50,10 @@
       color: #222;
     }
 
-    p, ul {
+    p {
       font-size: 1rem;
       line-height: 1.6;
       color: #444;
-    }
-
-    ul {
-      padding-left: 1.2rem;
-      list-style: disc;
-
-      li {
-        margin-bottom: 0.4rem;
-
-        a {
-          color: #c19a6b;
-          text-decoration: none;
-          transition: color 0.3s ease;
-
-          &:hover {
-            color: #8a6848;
-          }
-        }
-      }
-    }
-  }
-
-  &__form {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-
-    input,
-    textarea {
-      padding: 0.75rem 1rem;
-      border: 1px solid #ddd;
-      border-radius: 0.5rem;
-      font-size: 1rem;
-      transition: border-color 0.3s ease;
-
-      &:focus {
-        outline: none;
-        border-color: #c19a6b;
-      }
-    }
-
-    button {
-      align-self: flex-start;
-      padding: 0.75rem 1.5rem;
-      font-size: 1rem;
-      font-weight: 500;
-      background: #c19a6b;
-      color: #fff;
-      border: none;
-      border-radius: 0.5rem;
-      cursor: pointer;
-      transition: all 0.3s ease;
-
-      &:hover {
-        background: #a87f56;
-        transform: translateY(-2px);
-        box-shadow: 0 4px 10px rgba(193, 154, 107, 0.3);
-      }
     }
   }
 
@@ -122,7 +64,5 @@
     border-radius: 0.5rem;
     font-size: 0.95rem;
     color: #333;
-    margin-top: 2rem;
-    text-align: center;
   }
 }

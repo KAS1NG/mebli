@@ -9,13 +9,16 @@ const DeliveryInfo: React.FC = () => {
         <section className={styles.card}>
             <ul className={styles.list}>
                 <li><CircleCheckBig color='green' className={styles.icon} /><span className={styles.available}>В наявності </span></li>
-                <li><MapPin className={styles.icon} /> Доставка по <strong>Сумській області</strong></li>
+                <li><MapPin className={styles.icon} />
+                    <span>Доставка по <strong>Сумській області</strong>
+                        <Link href={"/delivery"} className={styles.returnPolicy} >Про доставку</Link>
+                    </span>
+                </li>
                 <li><Truck className={styles.icon} /> Відправлення з <strong>Ромнів</strong></li>
                 <li>
                     <RotateCcw className={styles.icon} />
                     <span>Повернення протягом 14 днів* <Link href={"/return-policy"} className={styles.returnPolicy} >Політика повернення</Link></span>
                 </li>
-                <li><Link href={"/return-policy"} className={styles.returnPolicy} >Політика повернення</Link></li>
                 <li><Phone className={styles.icon} /> Уточнити <strong>
                     <a href="tel:+380503073436" className={styles.phone}>
                         +38 050 307 34 36

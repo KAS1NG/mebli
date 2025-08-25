@@ -1,73 +1,60 @@
-'use client'
-import React, { useState } from 'react';
-import '@/app/styles/contact.scss'
+// app/contacts/page.tsx
+"use client";
 
-const Contact: React.FC = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: ''
-  });
+import React from "react";
+import "../styles/contact.scss";
 
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Обробка відправлення форми (API, email і т.д.)
-  };
-
+export default function ContactsPage() {
   return (
-      <main className="contact">
-        <section className="contact__hero">
-          <h1 className="contact__title">Напишіть Нам</h1>
-          <p className="contact__description">
-          Ми будемо раді почути від вас! Не соромтеся зв&apos;язатися з нами, якщо у вас виникли запитання щодо наших продуктів, вам потрібна допомога чи просто хочете залишити відгук.
-          </p>
-        </section>
-        <section className="contact__form-section">
-          <h2 className="contact__heading">Зв&apos;яжіться з нами</h2>
-          <form className="contact__form" onSubmit={handleSubmit}>
-            <div className="contact__form-group">
-              <label htmlFor="name">Ім&apos;я</label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                value={formData.name}
-                onChange={handleInputChange}
-                required
-              />
-            </div>
-            <div className="contact__form-group">
-              <label htmlFor="email">Емайл</label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                value={formData.email}
-                onChange={handleInputChange}
-                required
-              />
-            </div>
-            <div className="contact__form-group">
-              <label htmlFor="message">Повідомлення</label>
-              <textarea
-                id="message"
-                name="message"
-                value={formData.message}
-                onChange={handleInputChange}
-                required
-              />
-            </div>
-            <button type="submit" className="contact__submit">Відправити Повідомлення</button>
-          </form>
-        </section>
-      </main>
-  );
-};
+    <section className="contacts">
+      <div className="container">
+        <h1 className="contacts__title">Контакти</h1>
+        <p className="contacts__intro">
+          Зв’яжіться з нами будь-яким зручним способом.
+          Ми завжди готові допомогти з вибором меблів, оформленням замовлення чи консультацією.
+        </p>
 
-export default Contact;
+        <div className="contacts__block">
+          <h2>Наші телефони</h2>
+          <ul>
+            <li><a href="tel:+380501234567">+38 (050) 307-34-36</a></li>
+            <li><a href="tel:+380971234567">+38 (096) 811-99-76</a></li>
+          </ul>
+        </div>
+
+        <div className="contacts__block">
+          <h2>Електронна пошта</h2>
+          <p>
+            Для запитань та співпраці пишіть на адресу:
+            <a href="mailto:info@romen-mebli.com">mebelshuk@gmail.com</a>
+          </p>
+        </div>
+
+        <div className="contacts__block">
+          <h2>Адреса магазину</h2>
+          <p>
+            м. Ромни, 1-й провулок Свободи, 10
+            (пн–пт: 9:00–18:00, сб: 10:00–15:00)
+          </p>
+        </div>
+
+        <div className="contacts__block">
+          <h2>Форма зворотного зв’язку</h2>
+          <form className="contacts__form">
+            <input type="text" placeholder="Ваше ім’я" required />
+            <input type="email" placeholder="Ваш email" required />
+            <textarea placeholder="Ваше повідомлення" rows={4} required></textarea>
+            <button type="submit">Надіслати</button>
+          </form>
+        </div>
+
+        <div className="contacts__note">
+          <p>
+            Ми відповідаємо на всі повідомлення протягом <strong>1 робочого дня</strong>.
+            Дякуємо, що обираєте Роменський меблевий комбінат!
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+}
