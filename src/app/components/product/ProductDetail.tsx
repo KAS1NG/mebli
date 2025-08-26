@@ -70,6 +70,7 @@ import { getServerSession } from 'next-auth/next';
 import authOptions from '@/app/utils/authOptions';
 import { IPost, IGetProperty, IPreviewPost } from '../../types/post';
 import { stringToArray } from '../../utils/stringToArr';
+import '@/app/styles/productDetail.scss';
 
 // Динамічні клієнтські компоненти
 const MySlider = dynamic(() => import('@/app/components/slider'), { ssr: false });
