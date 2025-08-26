@@ -72,44 +72,19 @@ a {
   color: #ffffff;
 }
 
-.toast-message {
-  position: fixed;
-  bottom: 20px;
-  left: 20px;
-  background-color: #16a34a;
-  /* зелений */
-  color: white;
-  padding: 12px 16px;
-  border-radius: 8px;
-  font-weight: bold;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  opacity: 1;
-  animation: fadeInOut 3s forwards;
-  z-index: 99;
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap; /* щоб текст не переносився */
+  border: 0;
 }
 
-@keyframes fadeInOut {
-  0% {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-
-  10% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  90% {
-    opacity: 1;
-  }
-
-  100% {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-}
-
-::view-transition-old(post-image-*) {
+/* ::view-transition-old(post-image-*) {
   animation: fade-out 0.5s ease forwards;
 }
 
@@ -125,4 +100,4 @@ a {
 @keyframes fade-in {
   from { opacity: 0; }
   to { opacity: 1; }
-}
+} */

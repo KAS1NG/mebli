@@ -1,0 +1,70 @@
+/* Стилі для кнопок */
+.actions {
+    display: flex;
+    justify-content: start;
+    gap: 20px;
+}
+
+.buttons {
+    margin-top: 30px;
+    display: flex;
+    gap: 20px;
+    font-size: 12px;
+
+    @media (max-width: 768px) {
+        gap: 15px;
+        font-size: 1px;
+    }
+
+    @media (max-width: 480px) {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+
+    position: relative;
+    padding: 10px 28px;
+    border: 1.5px solid black;
+    background: transparent;
+    color: black;
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    overflow: hidden;
+    transition: color 0.4s ease;
+
+    .btn__contant {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+    }
+
+    // Ефект заливки
+    &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: #baa239;
+        z-index: 0;
+        transition: left 0.4s ease;
+    }
+
+    &:hover {
+        color: white;
+
+        &::before {
+            left: 0;
+        }
+    }
+
+    // Щоб текст був поверх ефекту
+    span {
+        position: relative;
+        z-index: 1;
+    }
+}

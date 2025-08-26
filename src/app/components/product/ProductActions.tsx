@@ -1,99 +1,98 @@
-'use client';
+// 'use client';
 
-import React, { memo, useCallback, useMemo, useState } from 'react';
-import { removePost } from '../../actions/removePost';
-import { useRouter } from 'next/navigation';
-import clsx from 'clsx';
-import { ShoppingCart } from 'lucide-react';
+// import React, { memo, useCallback, useMemo, useState } from 'react';
+// import { removePost } from '../../actions/removePost';
+// import { useRouter } from 'next/navigation';
+// import clsx from 'clsx';
+// import { ShoppingCart } from 'lucide-react';
+// import dynamic from 'next/dynamic';
 
-interface ProductActionsProps {
-  productId: number;
-  isAdmin: boolean;
-  loadingAction: null | 'add' | 'remove';
-  onAdd: () => void;
-  onRemove: () => void;
-}
+// const CartToast = dynamic(() => import('../../components/CartToast'), { ssr: false });
 
-const ProductActions = memo(function ProductActions({
-  productId,
-  isAdmin,
-  loadingAction,
-  onAdd,
-  // onRemove,
-}: ProductActionsProps) {
-  const router = useRouter();
+// interface ProductActionsProps {
+//   productId: number;
+//   isAdmin: boolean;
+//   loadingAction: null | 'add' | 'remove';
+//   onAdd: () => void;
+//   onRemove: () => void;
+// }
 
-  const [showToast] = useState(false);
+// const ProductActions = memo(function ProductActions({
+//   productId,
+//   isAdmin,
+//   loadingAction,
+//   onAdd,
+//   // onRemove,
+// }: ProductActionsProps) {
+//   const router = useRouter();
 
-  // Функції обробники обгортаємо useCallback — щоб не створювати заново
-  const handleDelete = useCallback(() => {
-    removePost(productId);
-  }, [productId]);
+//   const [showToast] = useState(false);
 
-  const handleEdit = useCallback(() => {
-    router.push(`/admin/product/update/${productId}`);
-  }, [productId, router]);
+//   // Функції обробники обгортаємо useCallback — щоб не створювати заново
+//   const handleDelete = useCallback(() => {
+//     removePost(productId);
+//   }, [productId]);
 
-  // Опціонально мемоізуємо класи, якщо хочеш
-  const addBtnClass = useMemo(
-    () => clsx('product-page__btn', 'product-page__btn--add-to-cart'),
-    []
-  );
-  // const removeBtnClass = useMemo(
-  //   () => clsx('product-page__btn', 'product-page__btn--remove-from-cart'),
-  //   []
-  // );
-  const deleteBtnClass = useMemo(
-    () => clsx('product-page__btn', 'product-page__btn--delete-btn'),
-    []
-  );
-  const editBtnClass = useMemo(
-    () => clsx('product-page__btn', 'product-page__btn--view-3d'),
-    []
-  );
+//   const handleEdit = useCallback(() => {
+//     router.push(`/admin/product/update/${productId}`);
+//   }, [productId, router]);
 
-  return (
-    <div className="product-page__buttons">
-      <button
-        className={addBtnClass}
-        onClick={onAdd}
-        disabled={loadingAction === 'add'}
-        aria-label="Додати товар до кошика">
-        {loadingAction === 'add' ? 'Завантаження...' :
-          <span className='btn__contant'>
-            <span>Додати в кошик</span>
-            <ShoppingCart size={16} />
-          </span>}
-      </button>
+//   // Опціонально мемоізуємо класи, якщо хочеш
+//   const addBtnClass = useMemo(
+//     () => clsx('product-page__btn', 'product-page__btn--add-to-cart'),
+//     []
+//   );
+//   // const removeBtnClass = useMemo(
+//   //   () => clsx('product-page__btn', 'product-page__btn--remove-from-cart'),
+//   //   []
+//   // );
+//   const deleteBtnClass = useMemo(
+//     () => clsx('product-page__btn', 'product-page__btn--delete-btn'),
+//     []
+//   );
+//   const editBtnClass = useMemo(
+//     () => clsx('product-page__btn', 'product-page__btn--view-3d'),
+//     []
+//   );
 
-      {isAdmin && (
-        <>
-          <button
-            className={deleteBtnClass}
-            onClick={handleDelete}
-            aria-label="Видалити товар"
-          >
-            🗑 Видалити
-          </button>
+//   return (
+//     <div className="product-page__buttons">
+//       <button
+//         className={addBtnClass}
+//         onClick={onAdd}
+//         disabled={loadingAction === 'add'}
+//         aria-label="Додати товар до кошика">
+//         {loadingAction === 'add' ? 'Завантаження...' :
+//           <span className='btn__contant'>
+//             <span>Додати в кошик</span>
+//             <ShoppingCart size={16} />
+//           </span>}
+//       </button>
 
-          <button
-            className={editBtnClass}
-            onClick={handleEdit}
-            aria-label="Редагувати товар"
-          >
-            ✏ Редагувати
-          </button>
-        </>
-      )}
-      {showToast && (
-        <div className="toast-message">
-          Товар додано!
-        </div>
-      )}
-    </div>
-  );
-});
+//       {isAdmin && (
+//         <>
+//           <button
+//             className={deleteBtnClass}
+//             onClick={handleDelete}
+//             aria-label="Видалити товар"
+//           >
+//             🗑 Видалити
+//           </button>
 
-ProductActions.displayName = 'ProductActions';
+//           <button
+//             className={editBtnClass}
+//             onClick={handleEdit}
+//             aria-label="Редагувати товар"
+//           >
+//             ✏ Редагувати
+//           </button>
+//         </>
+//       )}
+//       <CartToast show={showToast} msg="Товар додано" />
+//     </div>
+//   );
+// });
 
-export default ProductActions;
+// ProductActions.displayName = 'ProductActions';
+
+// export default ProductActions;

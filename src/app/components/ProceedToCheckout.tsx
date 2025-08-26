@@ -6,6 +6,9 @@ import { makeOrder } from '../actions/checkout';
 import { useRouter } from 'next/navigation';
 import { clearCart } from '../utils/CartTest';
 import '@/app/styles/checkout.scss'
+import dynamic from 'next/dynamic';
+
+const CartToast = dynamic(() => import('../components/CartToast'), { ssr: false });
 
 const ProceedToCheckout = ({ products }: { products: IPost[] }) => {
 
@@ -28,7 +31,7 @@ const ProceedToCheckout = ({ products }: { products: IPost[] }) => {
       formData.append("postsID", `${item.id}`)
     ))
     formData.append("orderType", "True")
-    
+
     await makeOrder(formData);
     // очищення cookie
     confirmOrder()
@@ -80,12 +83,7 @@ const ProceedToCheckout = ({ products }: { products: IPost[] }) => {
           Підтвердити замовлення
         </button>
       </form>
-
-       {showToast && (
-        <div className="toast-message">
-          Дякуємо за замовлення!
-        </div>
-      )}
+      <CartToast show={showToast} msg="Дякуємо за замовлення" />
     </div>
   );
 };
