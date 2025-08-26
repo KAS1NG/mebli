@@ -25,15 +25,6 @@ const ProductActions = memo(function ProductActions({
 
   const [showToast] = useState(false);
 
-  // const confirmOrder = () => {
-  //   setShowToast(true);
-
-  //   // Автоматично ховаємо через 3 сек
-  //   setTimeout(() => {
-  //     setShowToast(false);
-  //   }, 3000);
-  // };
-
   // Функції обробники обгортаємо useCallback — щоб не створювати заново
   const handleDelete = useCallback(() => {
     removePost(productId);

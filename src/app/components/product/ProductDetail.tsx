@@ -6,7 +6,6 @@ import { useSession } from 'next-auth/react';
 import { IPost, IGetProperty, IPreviewPost } from '../../types/post';
 import { stringToArray } from '../../utils/stringToArr';
 import { useCartActions } from '@/app/hooks/useCartActions';
-import DeliveryInfo from './DeliveryInfo';
 
 const ProductActions = dynamic(() => import('./ProductActions'), { ssr: false });
 const CartToast = dynamic(() => import('../../components/CartToast'), { ssr: false });
@@ -14,6 +13,7 @@ const AddProductProperties = dynamic(() => import('../AddProductProperties'), { 
 const ProductProperties = dynamic(() => import('./ProductProperties'), { ssr: false });
 const ProductTags = dynamic(() => import('./ProductTags'), { ssr: false });
 const ProductPage = dynamic(() => import('./ProductPage'), { ssr: false });
+const DeliveryInfo = dynamic(() => import('./DeliveryInfo'), { ssr: false });
 
 interface ProductDetailProps {
     product: IPost;
@@ -37,7 +37,7 @@ export default function ProductDetail({ product, productProperty, invoices }: Pr
                 <section className="product-page__info">
                     <h1 className="product-page__title">{product.title}</h1>
                     <p className="product-page__description">{product.description}</p>
-                    <p className="product-page__price">Ціна: {product.price} ₴</p>
+                    <p className="product-page__price">Ціна: ₴ {product.price} грн</p>
 
                     <ProductProperties properties={productProperty} isAdmin={isAdmin} />
                     <ProductTags tags={tagsArray} />

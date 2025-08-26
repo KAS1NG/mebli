@@ -1,4 +1,5 @@
 'use client';
+
 import React, { memo, useCallback } from 'react';
 import { IGetProperty } from '../../types/post';
 import { removeProperty } from '../../actions/removeProperty';

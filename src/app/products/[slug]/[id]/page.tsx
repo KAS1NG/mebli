@@ -10,9 +10,8 @@ import {
 
 import { transliterateAndClear } from "@/app/utils/clearUrlString";
 import ProductDetail from "@/app/components/product/ProductDetail";
-import "@/app/styles/productDetail.scss";
-import Script from "next/script";
 import { stringToArray } from "@/app/utils/stringToArr";
+import Script from "next/script";
 
 interface ProductPageProps {
     params: {

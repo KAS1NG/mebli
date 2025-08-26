@@ -6,10 +6,10 @@ import { IPreviewPost } from "@/app/types/post";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import styles from "../../styles/product/ProductPage.module.scss";
 import Link from "next/link";
 import Image from 'next/image';
 import { transliterateAndClear } from "@/app/utils/clearUrlString";
+import styles from "../../styles/product/ProductPage.module.scss";
 
 interface IProductPage {
     invoices: IPreviewPost[]

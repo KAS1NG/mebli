@@ -16,7 +16,8 @@ interface ISliderProps {
   title: string;
 }
 
-const Modal = dynamic(() => import('./product/Modal'), { ssr: false });
+//Dynamic imports
+const Modal = dynamic(() => import('./product/Modal'), { ssr: false })
 
 export default function MySlider({ product, title }: ISliderProps) {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
@@ -53,9 +54,9 @@ export default function MySlider({ product, title }: ISliderProps) {
                   ? { viewTransitionName: `post-image-${product.id}-0` }
                   : {}
               }
+              priority={index === 0}
               onClick={() => openModal(image)}
               onKeyDown={(e) => handleKeyPress(e, image)}
-              role="button"
               tabIndex={0}
             />
           </SwiperSlide>
@@ -63,7 +64,6 @@ export default function MySlider({ product, title }: ISliderProps) {
       </Swiper>
 
       {selectedImage && (
-        // <Modal selectedImage={selectedImage} closeModal={closeModal} />
         <Modal
           images={slides}
           selectedImage={selectedImage}
