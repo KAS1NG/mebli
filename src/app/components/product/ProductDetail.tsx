@@ -70,10 +70,10 @@ import { getServerSession } from 'next-auth/next';
 import authOptions from '@/app/utils/authOptions';
 import { IPost, IGetProperty, IPreviewPost } from '../../types/post';
 import { stringToArray } from '../../utils/stringToArr';
+import MySlider from '@/app/components/slider'
 import '@/app/styles/productDetail.scss';
 
 // Динамічні клієнтські компоненти
-const MySlider = dynamic(() => import('@/app/components/slider'), { ssr: false });
 const ProductActionsWrapper = dynamic(() => import('./ProductActionsWrapper'), { ssr: false });
 const AddProductProperties = dynamic(() => import('../AddProductProperties'), { ssr: false });
 const ProductProperties = dynamic(() => import('./ProductProperties'), { ssr: false });

@@ -49,6 +49,7 @@ export default function MySlider({ product, title }: ISliderProps) {
               height={500}
               sizes="(max-width: 768px) 100vw, 500px"
               className="product-page__image cursor-pointer"
+              quality={index === 0 ? 100 : undefined}
               style={
                 index === 0
                   ? { viewTransitionName: `post-image-${product.id}-0` }
