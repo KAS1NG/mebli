@@ -1,320 +1,146 @@
-.product_container {
-  width: 100vw;
-  margin: 0 auto;
-  background-color: #f9f9f9;
-}
+// .product_container {
+//   width: 100vw;
+//   margin: 0 auto;
+//   background-color: #f9f9f9;
+// }
 
-.product-page {
-  display: flex;
-  justify-content: space-between;
-  gap: 20px;
-  padding: 40px;
-  width: 100%;
-  margin: 0 auto;
+// .product-page {
+//   display: flex;
+//   justify-content: space-between;
+//   gap: 20px;
+//   padding: 40px;
+//   width: 100%;
+//   margin: 0 auto;
 
-  @media (max-width: 768px) {
-    padding: 20px;
-    gap: 15px;
-    flex-direction: column;
-  }
+//   @media (max-width: 768px) {
+//     padding: 20px;
+//     gap: 15px;
+//     flex-direction: column;
+//   }
 
-  @media (max-width: 480px) {
-    padding: 10px;
-    gap: 10px;
-  }
+//   @media (max-width: 480px) {
+//     padding: 10px;
+//     gap: 10px;
+//   }
 
-  /* Галерея зображень */
-  .product-page__gallery {
-    max-width: 50%;
-    margin: 0 auto;
+//   /* Інформація про продукт */
+//   .product-page__info {
+//     padding: 20px;
+//     width: 50%;
+//     background-color: #f9f9f9;
+//     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 
-    /* Слайди */
-    .swiper-slide {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 100%;
-      height: auto;
-    }
+//     .product-page__title {
+//       font-size: 32px;
+//       margin-bottom: 10px;
+//       color: #333;
 
-    .product-page__image {
-      width: 100%;
-      height: auto;
-      object-fit: cover;
-      max-width: 50vw;
-      cursor: pointer;
-      outline: none;
-      user-select: none;
+//       @media (max-width: 768px) {
+//         font-size: 28px;
+//       }
 
-      @media (max-width: 768px) {
-        max-width: 100%;
-      }
+//       @media (max-width: 480px) {
+//         font-size: 24px;
+//       }
+//     }
 
-      @media (max-width: 480px) {
-        max-width: 100%;
-        object-fit: contain;
-      }
-    }
+//     .product-page__description {
+//       font-size: 18px;
+//       color: #666;
+//       margin-bottom: 20px;
 
-    // Стилі стрілок Swiper
-    .swiper {
-      position: relative;
+//       @media (max-width: 768px) {
+//         font-size: 16px;
+//       }
 
-      .swiper-button-prev,
-      .swiper-button-next {
-        position: absolute;
-        top: 50%;
-        margin: 0 12px;
-        transform: translateY(-50%);
-        z-index: 10;
+//       @media (max-width: 480px) {
+//         font-size: 14px;
+//       }
+//     }
 
-        width: 44px;
-        height: 44px;
-        background-color: rgba(0, 0, 0, 0.5);
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+//     .product-page__price {
+//       font-size: 24px;
+//       font-weight: bold;
+//       margin-bottom: 20px;
+//       color: #474747;
 
-        color: #fff;
-        font-size: 20px;
-        cursor: pointer;
-        transition: background-color 0.3s ease, transform 0.3s ease;
+//       @media (max-width: 768px) {
+//         font-size: 22px;
+//       }
 
-        &:hover {
-          background-color: rgba(0, 0, 0, 0.8);
-          transform: translateY(-50%) scale(1.1);
-        }
+//       @media (max-width: 480px) {
+//         font-size: 20px;
+//       }
+//     }
 
-        &::after {
-          font-size: 16px; // Розмір іконки стрілки
-          font-weight: bold;
-        }
-      }
+//     @media (max-width: 768px) {
+//       width: 100%;
+//     }
+//   }
 
-      .swiper-button-prev {
-        left: 10px;
-      }
+//   /* Стилі для кнопок */
+//   &__buttons {
+//     margin-top: 30px;
+//     display: flex;
+//     gap: 20px;
+//     font-size: 12px;
 
-      .swiper-button-next {
-        right: 10px;
-      }
+//     @media (max-width: 768px) {
+//       gap: 15px;
+//       font-size: 1px;
+//     }
 
-      // Адаптив
-      @media (max-width: 768px) {
+//     @media (max-width: 480px) {
+//       flex-direction: column;
+//       gap: 10px;
+//     }
 
-        .swiper-button-prev,
-        .swiper-button-next {
-          width: 36px;
-          height: 36px;
-          font-size: 16px;
-          margin: 0;
+//     .product-page__btn {
+//       position: relative;
+//       padding: 10px 28px;
+//       border: 1.5px solid black;
+//       background: transparent;
+//       color: black;
+//       font-size: 15px;
+//       font-weight: 500;
+//       letter-spacing: 0.5px;
+//       cursor: pointer;
+//       overflow: hidden;
+//       transition: color 0.4s ease;
 
-          &::after {
-            font-size: 14px;
-          }
-        }
-      }
-    }
+//       .btn__contant {
+//         display: flex;
+//         justify-content: center;
+//         align-items: center;
+//         gap: 5px;
+//       }
 
-    /* Пагінація */
-    .swiper-pagination-bullet {
-      background-color: #000;
-      width: 12px;
-      height: 12px;
-      margin: 0 5px;
+//       // Ефект заливки
+//       &::before {
+//         content: "";
+//         position: absolute;
+//         top: 0;
+//         left: -100%;
+//         width: 100%;
+//         height: 100%;
+//         background: #baa239;
+//         z-index: 0;
+//         transition: left 0.4s ease;
+//       }
 
-      @media (max-width: 480px) {
-        width: 10px;
-        height: 10px;
-      }
-    }
+//       &:hover {
+//         color: white;
 
-    .swiper-pagination-bullet-active {
-      background-color: #343435;
-    }
+//         &::before {
+//           left: 0;
+//         }
+//       }
 
-    @media (max-width: 768px) {
-      max-width: 100%;
-    }
-  }
-
-  /* Інформація про продукт */
-  .product-page__info {
-    padding: 20px;
-    width: 50%;
-    background-color: #f9f9f9;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-
-    .product-page__title {
-      font-size: 32px;
-      margin-bottom: 10px;
-      color: #333;
-
-      @media (max-width: 768px) {
-        font-size: 28px;
-      }
-
-      @media (max-width: 480px) {
-        font-size: 24px;
-      }
-    }
-
-    .product-page__description {
-      font-size: 18px;
-      color: #666;
-      margin-bottom: 20px;
-
-      @media (max-width: 768px) {
-        font-size: 16px;
-      }
-
-      @media (max-width: 480px) {
-        font-size: 14px;
-      }
-    }
-
-    .product-page__price {
-      font-size: 24px;
-      font-weight: bold;
-      margin-bottom: 20px;
-      color: #474747;
-
-      @media (max-width: 768px) {
-        font-size: 22px;
-      }
-
-      @media (max-width: 480px) {
-        font-size: 20px;
-      }
-    }
-
-    .product-page__details {
-      font-size: 16px;
-      color: #444;
-
-      p {
-        margin-bottom: 8px;
-
-        @media (max-width: 768px) {
-          font-size: 14px;
-        }
-
-        @media (max-width: 480px) {
-          font-size: 12px;
-        }
-      }
-    }
-
-    @media (max-width: 768px) {
-      width: 100%;
-    }
-  }
-
-  /* Теги продукту */
-  .product-page__tags {
-    margin-top: 20px;
-
-    .product-page__tag {
-      display: inline-block;
-      background-color: #e0e0e0;
-      color: #333;
-      padding: 5px 10px;
-      border-radius: 5px;
-      margin-right: 10px;
-      font-size: 14px;
-
-      @media (max-width: 768px) {
-        margin-top: 5px;
-      }
-
-      @media (max-width: 480px) {
-        font-size: 12px;
-        margin-top: 5px;
-      }
-    }
-  }
-
-  /* Стилі для кнопок */
-  &__buttons {
-    margin-top: 30px;
-    display: flex;
-    gap: 20px;
-    font-size: 12px;
-
-    @media (max-width: 768px) {
-      gap: 15px;
-      font-size: 1px;
-    }
-
-    @media (max-width: 480px) {
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .product-page__btn {
-      position: relative;
-      padding: 10px 28px;
-      border: 1.5px solid black;
-      background: transparent;
-      color: black;
-      font-size: 15px;
-      font-weight: 500;
-      letter-spacing: 0.5px;
-      cursor: pointer;
-      overflow: hidden;
-      transition: color 0.4s ease;
-
-      .btn__contant {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 5px;
-      }
-
-      // Ефект заливки
-      &::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: -100%;
-        width: 100%;
-        height: 100%;
-        background: #baa239;
-        z-index: 0;
-        transition: left 0.4s ease;
-      }
-
-      &:hover {
-        color: white;
-
-        &::before {
-          left: 0;
-        }
-      }
-
-      // Щоб текст був поверх ефекту
-      span {
-        position: relative;
-        z-index: 1;
-      }
-    }
-  }
-}
-
-.productLoading {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-  padding: 20px;
-
-  @media (max-width: 768px) {
-    padding: 15px;
-  }
-
-  @media (max-width: 480px) {
-    padding: 10px;
-  }
-}
+//       // Щоб текст був поверх ефекту
+//       span {
+//         position: relative;
+//         z-index: 1;
+//       }
+//     }
+//   }
+// }

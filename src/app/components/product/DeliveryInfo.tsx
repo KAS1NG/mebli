@@ -29,8 +29,8 @@ const DeliveryInfo = () => {
                     aria-hidden="true"
                     focusable="false"
                 />
-                <span>Доставка по <strong>Сумській області</strong>
-                    <Link href={"/delivery"} className={styles.returnPolicy} >Про доставку</Link>
+                <span>Доставка по <strong>Сумській області </strong>
+                    <Link href={"/delivery"} className={styles.returnPolicy}> Про доставку</Link>
                 </span>
             </li>
             <li>

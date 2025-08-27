@@ -3,7 +3,8 @@
 import { useRef } from 'react';
 import { addProductProperty } from '../actions/addProductProperty';
 import CustomSubmitBtn from '../utils/CustomSubmitBtn';
-import '@/app/styles/AddProductProperties.scss'
+// import '@/app/styles/AddProductProperties.scss'
+import style from '../styles/product/AddProductProperties.module.scss'
 
 const AddProductProperties = ({ productId }: { productId: number }) => {
   // Створюємо реф для форми
@@ -27,25 +28,25 @@ const AddProductProperties = ({ productId }: { productId: number }) => {
   }
 
   return (
-    <div className="add-properties">
+    <div className={style.addProperties}>
       <h2>Додати характеристики товару</h2>
-      {/* Форма для додавання нової властивості */}
-      <form ref={formRef} action={credentialsAction} className="add-properties__form">
+
+      <form ref={formRef} action={credentialsAction} className={style.form}>
         <input
           type="text"
           id='text'
           name='text'
           placeholder="Enter property"
-          className="add-properties__input"
+          className={style.input}
         />
         <input
           type="text"
           id='description'
           name='description'
           placeholder="Enter description"
-          className="add-properties__input"
+          className={style.input}
         />
-        <CustomSubmitBtn text="Add" classN="add-properties__btn" />
+        <CustomSubmitBtn text="Add" classN={style.btn} />
       </form>
     </div>
   );

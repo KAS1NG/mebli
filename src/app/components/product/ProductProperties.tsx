@@ -3,6 +3,7 @@
 import React, { memo, useCallback } from 'react';
 import { IGetProperty } from '../../types/post';
 import { removeProperty } from '../../actions/removeProperty';
+import style from '../../styles/product/ProductProperties.module.scss'
 
 interface ProductPropertiesProps {
   properties: IGetProperty[];
@@ -17,12 +18,11 @@ const ProductProperties = memo(function ProductProperties({ properties, isAdmin 
     },
     []
   );
-  
+
   if (!properties?.length) return null;
 
-
   return (
-    <div className="product-page__details">
+    <div className={style.details}>
       {properties.map((item) => (
         <p key={item.id}>
           <strong>{item.name}:</strong> {item.text}
