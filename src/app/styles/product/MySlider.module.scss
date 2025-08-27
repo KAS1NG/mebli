@@ -15,14 +15,37 @@
   height: auto;
 }
 
+// .productImage {
+//   min-height: 500px;
+//   width: 100%;
+//   height: auto;
+//   object-fit: cover;
+//   max-width: 50vw;
+//   cursor: pointer;
+//   outline: none;
+//   user-select: none;
+
+//   @media (max-width: 768px) {
+//     max-width: 100%;
+//   }
+
+//   @media (max-width: 480px) {
+//     max-width: 100%;
+//     object-fit: contain;
+//   }
+// }
+
 .productImage {
   width: 100%;
-  height: auto;
+  min-height: 500px;
   object-fit: cover;
-  max-width: 50vw;
   cursor: pointer;
   outline: none;
   user-select: none;
+  border-radius: 8px; // трішки скруглень для естетики (можеш прибрати)
+
+  max-width: 50vw; // для десктопа
+  height: auto; // лишаємо для безпечного фолу-бека
 
   @media (max-width: 768px) {
     max-width: 100%;
@@ -30,7 +53,8 @@
 
   @media (max-width: 480px) {
     max-width: 100%;
-    object-fit: contain;
+    object-fit: contain; // 👌 щоб не різало картинки
+    aspect-ratio: auto;  // дозволяємо зберігати оригінальні пропорції
   }
 }
 

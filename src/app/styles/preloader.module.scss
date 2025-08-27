@@ -2,7 +2,7 @@
 $bg-color: #111;
 $progress-color: #4cafef;
 $text-color: #fff;
-$transition-time: 0.3s;
+$transition-time: 0.4s;
 
 .preloader {
   position: fixed;
@@ -12,15 +12,17 @@ $transition-time: 0.3s;
   justify-content: center;
   align-items: center;
   z-index: 9999;
-  opacity: 0;
-  transition: opacity $transition-time ease;
 
-  &.active {
-    opacity: 1; // fade-in
-  }
+  // початково видно
+  opacity: 1;
+  visibility: visible;
+  pointer-events: all;
+  transition: opacity $transition-time ease, visibility $transition-time ease;
 
   &.hidden {
     opacity: 0; // fade-out
+    visibility: hidden; // щоб не заважав, але не викликав CLS
+    pointer-events: none;
   }
 
   .loaderBox {
@@ -36,6 +38,7 @@ $transition-time: 0.3s;
 
       .progressFill {
         height: 100%;
+        width: 0%; // завжди задаємо початкову ширину
         background: $progress-color;
         transition: width $transition-time ease;
       }
@@ -44,6 +47,7 @@ $transition-time: 0.3s;
     .percent {
       font-size: 1.2rem;
       color: $text-color;
+      transition: opacity $transition-time ease;
     }
   }
 }

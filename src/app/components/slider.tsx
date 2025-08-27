@@ -46,11 +46,11 @@ export default function MySlider({ product, title }: ISliderProps) {
             <Image
               src={image}
               alt={`${title} — зображення ${index + 1}`}
-              width={500}
-              height={500}
-              sizes="(max-width: 768px) 100vw, 500px"
+              width={400}
+              height={400}
+              sizes="(max-width: 480px) 100vw, (max-width: 768px) 50vw, 400px"
               className={style.productImage}
-              quality={index === 0 ? 100 : undefined}
+              quality={index === 0 ? 90 : 75}
               style={
                 index === 0
                   ? { viewTransitionName: `post-image-${product.id}-0` }
@@ -59,6 +59,8 @@ export default function MySlider({ product, title }: ISliderProps) {
               onClick={() => openModal(image)}
               onKeyDown={(e) => handleKeyPress(e, image)}
               tabIndex={0}
+              priority={index === 0}      // 👈 робимо головне зображення пріоритетним
+              loading={index === 0 ? undefined : "lazy"} // 👈 лише інші картинки lazy
             />
           </SwiperSlide>
         ))}

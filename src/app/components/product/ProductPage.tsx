@@ -74,15 +74,18 @@ export default function ProductPage({ invoices, currentProductId }: IProductPage
                                     href={`/products/${transliterateAndClear(p.title)}/${p.id}`}
                                     prefetch={false}>
                                     <div className={styles.card}>
-                                        <Image
-                                            src={p.thumbnail}
-                                            alt={p.title}
-                                            width={320}      // можна підлаштувати під дизайн
-                                            height={280}     // зберігаємо пропорції
-                                            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                                            priority={false} // true — якщо картка завжди на екрані при рендері
-                                            loading="lazy"
-                                        />
+                                        <div className={styles.imageWrapper}>
+                                            <Image
+                                                src={p.thumbnail}
+                                                alt={p.title}
+                                                fill
+                                                sizes="(max-width: 480px) 100vw, (max-width: 768px) 50vw, 320px"
+                                                className="object-cover rounded-lg"
+                                                quality={60}
+                                                priority={false} // true — якщо картка завжди на екрані при рендері
+                                                loading="lazy"
+                                            />
+                                        </div>
                                         <p className={styles.name}>{p.title}</p>
                                         <p className={styles.price}>{p.price} ₴</p>
                                     </div>
