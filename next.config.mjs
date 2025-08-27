@@ -1,9 +1,6 @@
 // next.config.mjs
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  experimental: {
-    optimizeCss: true, // зменшує кількість CSS-чанків
-  },
   images: {
     remotePatterns: [
       {
