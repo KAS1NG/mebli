@@ -55,8 +55,7 @@ const DeliveryInfo = () => {
                     aria-hidden="true"
                     focusable="false"
                 />
-                <span>Уточнити
-                    <strong>
+                <span>Уточнити <strong>
                         <a href="tel:+380503073436" className={styles.phone}>
                             +38 050 307 34 36
                         </a>
