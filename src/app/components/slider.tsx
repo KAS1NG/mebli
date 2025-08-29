@@ -50,7 +50,7 @@ export default function MySlider({ product, title }: ISliderProps) {
               height={400}
               sizes="(max-width: 480px) 100vw, (max-width: 768px) 50vw, 400px"
               className={style.productImage}
-              quality={index === 0 ? 90 : 75}
+              quality={index === 0 ? 100 : 90}
               style={
                 index === 0
                   ? { viewTransitionName: `post-image-${product.id}-0` }

@@ -1,14 +1,13 @@
 'use client'
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { signOut, useSession } from 'next-auth/react';
 import Image from 'next/image';
 import logoPic from '@/app/public/logo.svg'
-import { fetchCart } from '../actions/fetchCart';
-
-import styles from '../styles/Header.module.scss';
 import { usePathname } from 'next/navigation';
-
+import styles from '../styles/Header.module.scss';
+import CartHoverModal from './cart/CartHoverModal';
+import { useCart } from '../context/CartContext';
 
 const Header = () => {
   const { data: session } = useSession();
@@ -18,15 +17,7 @@ const Header = () => {
   const isAdmin = user?.role === 'ROLE_ADMIN';
   const [menuOpen, setMenuOpen] = useState(false);
 
-  useEffect(() => {
-    const doIt = async () => {
-      const products = await fetchCart();
-      // setSOmething(products)
-      return products
-    }
-
-    doIt()
-  }, [])
+  const { cartItems } = useCart();
 
   const router = usePathname();
 
@@ -37,6 +28,7 @@ const Header = () => {
     { name: 'Ліжка', mainUrl: '/products/lizhka', href: '/products/lizhka?page=1&query=ліжко' },
     { name: 'Шафи', mainUrl: '/products/shafi', href: '/products/shafi?page=1&query=шафа' },
     { name: 'Столи', mainUrl: '/products/stoly', href: '/products/stoly?page=1&query=стіл' },
+    { name: 'Матраци', mainUrl: '/products/matrats', href: '/products/matrats?page=1&query=матрац' },
   ];
 
   return (
@@ -80,7 +72,9 @@ const Header = () => {
           </button>
           <Link href="/cart" className={styles.cart}>
             <svg width="20" height="20" viewBox="0 0 24 24"><path d="..." /></svg>
-            <span>Кошик</span>
+            {/* <span>{cartCount} 🛒 Кошик</span> */}
+            <CartHoverModal products={cartItems} />
+
           </Link>
         </div>
       </div>

@@ -4,6 +4,7 @@ import { IPost } from '../../types/post';
 import { removeCartItem } from '../../actions/removeCartItem';
 import { removeFromCart } from '../../utils/CartTest';
 import styles from '../../styles/cart/cartItem.module.scss';
+import { useCart } from '@/app/context/CartContext';
 
 interface CartItemProps {
   item: IPost
@@ -11,10 +12,11 @@ interface CartItemProps {
 
 const CartItem = ({ item }: CartItemProps) => {
   const [isLoading, setIsLoading] = useState(false)
+  const { removeProductFromCart } = useCart();
 
   const handleRemove = async () => {
     setIsLoading(true)
-
+    removeProductFromCart(item.id.toString())
     await removeCartItem(item.id)
     removeFromCart(item.id)
     setIsLoading(false)
@@ -52,9 +54,7 @@ const CartItem = ({ item }: CartItemProps) => {
             className={styles.removeBtn}
             disabled={isLoading}
           >
-            <div>
-              {isLoading ? 'Loading...' : "Видалити"}
-            </div>
+            {isLoading ? 'Loading...' : "Видалити"}
           </button>
         </div>
       </div>

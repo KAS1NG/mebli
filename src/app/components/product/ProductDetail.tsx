@@ -48,7 +48,7 @@ export default async function ProductDetailServer({
           {isAdmin && <AddProductProperties productId={product.id} />}
 
           {/* Клієнтський компонент для дії з кошиком */}
-          <ProductActionsWrapper productId={product.id} user={user} />
+          <ProductActionsWrapper product={product} user={user} />
 
           <DeliveryInfo />
 

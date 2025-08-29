@@ -1,21 +1,31 @@
 'use client'
 
-import { IPost } from "../../types/post"
 import CartItem from "./cartItem"
 import Link from "next/link";
 import styles from '../../styles/cart/userCart.module.scss'
+import { useCart } from "@/app/context/CartContext";
+import EmptyCart from "./EmptyCart";
 
-interface IUserCart {
-    products: IPost[]
-    total: string
-}
+// interface IUserCart {
+//     products: IPost[]
+//     total: string
+// }
 
-function UserCart({ products, total }: IUserCart) {
+// function UserCart({ products, total }: IUserCart) {
+function UserCart() {
+    const { cartItems } = useCart();
+
+    if (!cartItems || cartItems.length === 0) {
+        return <EmptyCart />;
+    }
+
+    const total = cartItems.reduce((acc, item) => acc + item.price, 0).toFixed(2);
+
     return (
         <main className={styles.cart}>
             <h1 className={styles.title}>Корзина покупця</h1>
             <section className={styles.items}>
-                {products.map((item, id) => (
+                {cartItems.map((item, id) => (
                     <CartItem key={id} item={item} />
                 ))}
             </section>

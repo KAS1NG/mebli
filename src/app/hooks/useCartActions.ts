@@ -3,6 +3,7 @@
 import { useState, useCallback, useEffect, useRef } from 'react';
 import { addToCart } from '../actions/addToCart';
 import { addToCartTest } from '../utils/CartTest';
+import { IPost } from '../types/post';
 
 interface ToastState {
   show: boolean;
@@ -16,6 +17,7 @@ interface User {
   role?: string;
   [key: string]: unknown;
 }
+
 
 export function useCartActions(user?: User) {
   const [loadingAction, setLoadingAction] = useState<LoadingAction>(null);
@@ -47,14 +49,14 @@ export function useCartActions(user?: User) {
   }, []);
 
   const handleAddToCart = useCallback(
-    async (productId: number) => {
+    async (product: IPost) => {
       try {
         setLoadingAction('add');
 
         if (!user) {
-          addToCartTest(productId);
+          addToCartTest(product.id);
         } else {
-          await addToCart({ itemId: productId });
+          await addToCart({ itemId: product.id });
         }
 
         showToast('Товар додано до кошика!');

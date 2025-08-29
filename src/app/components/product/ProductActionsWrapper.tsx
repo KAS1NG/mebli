@@ -5,38 +5,61 @@ import { removePost } from '@/app/actions/removePost';
 import { useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import style from '../../styles/product/ProductActionsWrapper.module.scss'
+import { IPost } from '@/app/types/post';
+import { useCart } from '@/app/context/CartContext';
+import { addToCart } from '@/app/actions/addToCart';
+import { addToCartTest } from '@/app/utils/CartTest';
 
 interface User {
-  // вкажи типи user відповідно до свого проєкту
-  role?: string;
-  [key: string]: unknown;
+    // вкажи типи user відповідно до свого проєкту
+    role?: string;
+    [key: string]: unknown;
 }
 
 interface Props {
-    productId: number;
+    product: IPost;
     user?: User;
 }
 
-export default function ProductActionsWrapper({ productId, user }: Props) {
-    const { loadingAction, handleAddToCart, toast } = useCartActions(user);
+export default function ProductActionsWrapper({ product, user }: Props) {
+    // const { loadingAction, handleAddToCart, toast } = useCartActions(user);
+    const { loadingAction, toast } = useCartActions(user);
+    const { addProduct } = useCart();
+
+
+    const handleAddToCart = async (product: IPost) => {
+        try {
+            if (!user) {
+                addToCartTest(product.id);
+            } else {
+                await addToCart({ itemId: product.id });
+            }
+            addProduct(product)
+
+            // showToast('Товар додано до кошика!');
+        } catch (error) {
+            console.error(error);
+            // showToast('Сталася помилка при додаванні');
+        }
+    }
 
     const router = useRouter();
 
     const isAdmin = user?.role === 'ROLE_ADMIN';
 
     const handleDelete = useCallback(() => {
-        removePost(productId);
-    }, [productId]);
+        removePost(product.id);
+    }, [product]);
 
     const handleEdit = useCallback(() => {
-        router.push(`/admin/product/update/${productId}`);
-    }, [productId, router]);
+        router.push(`/admin/product/update/${product.id}`);
+    }, [product, router]);
 
     return (
         <div className={style.actions}>
             <button
                 disabled={loadingAction === 'add'}
-                onClick={() => handleAddToCart(productId)}
+                onClick={() => handleAddToCart(product)}
                 className={style.buttons}
             >
                 <span>Додати до кошика</span>

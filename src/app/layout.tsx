@@ -9,6 +9,7 @@ import Preloader from "./components/Preloader";
 import Script from "next/script";
 import { businessSchema } from "./lib/constants";
 import "./globals.css";
+import { CartProvider } from "./context/CartContext";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -78,6 +79,7 @@ export default function RootLayout({
     <html lang="uk">
       <body className={`${geistSans.variable} ${geistMono.variable} ${Geometria.variable}`}>
         <Preloader />
+        <CartProvider>
         <Providers>
           <div className="heightContainer">
             <Header />
@@ -85,6 +87,7 @@ export default function RootLayout({
             <Footer />
           </div>
         </Providers>
+        </CartProvider>
         <ConsentBanner />
         <AnalyticsProvider />
         <Script
