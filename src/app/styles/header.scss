@@ -1,11 +1,13 @@
 .header {
-  background-color: #f9f9f9;
+  // background-color: #f9f9f9;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
 
   &__container {
+    position: relative;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    position: relative;
     padding: 20px 40px;
 
     @media (max-width: 768px) {
@@ -51,6 +53,10 @@
   }
 
   &__nav {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+
     ul {
       list-style: none;
       display: flex;
@@ -60,11 +66,22 @@
     }
 
     .header__item {
+      position: relative;
       font-size: 18px;
       text-decoration: none;
       color: #333;
-      // font-size: 18px;
       cursor: pointer;
+
+      &::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: -5px;
+        width: 0;
+        height: 2px;
+        background: #000;
+        transition: width 0.3s ease;
+      }
 
       @media (max-width: 1040px) {
         font-size: 15px;

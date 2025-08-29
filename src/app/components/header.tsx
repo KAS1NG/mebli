@@ -4,10 +4,11 @@ import { useEffect, useState } from 'react';
 import { signOut, useSession } from 'next-auth/react';
 import Image from 'next/image';
 import logoPic from '@/app/public/logo.svg'
-import CategoryDropdown from './CategoryDropdown';
-import { categories } from '../utils/categoriesData';
 import { fetchCart } from '../actions/fetchCart';
-import '@/app/styles/header.scss'
+
+import styles from '../styles/Header.module.scss';
+import { usePathname } from 'next/navigation';
+
 
 const Header = () => {
   const { data: session } = useSession();
@@ -17,9 +18,7 @@ const Header = () => {
   const isAdmin = user?.role === 'ROLE_ADMIN';
   const [menuOpen, setMenuOpen] = useState(false);
 
-  // const [SOmething, setSOmething] = useState<IPost[]>()
-
-  useEffect( () => {
+  useEffect(() => {
     const doIt = async () => {
       const products = await fetchCart();
       // setSOmething(products)
@@ -28,75 +27,76 @@ const Header = () => {
 
     doIt()
   }, [])
-  
-  const toggleMenu = () => {
-    setMenuOpen(!menuOpen);
-  };
+
+  const router = usePathname();
+
+  const categories = [
+    { name: 'Дивани', mainUrl: '/products/divany', href: '/products/divany?page=1&query=диван' },
+    { name: 'Крісла', mainUrl: '/products/krisla', href: '/products/krisla?page=1&query=крісло' },
+    { name: 'Стільці', mainUrl: '/products/stilci', href: '/products/stilci?page=1&query=стілець' },
+    { name: 'Ліжка', mainUrl: '/products/lizhka', href: '/products/lizhka?page=1&query=ліжко' },
+    { name: 'Шафи', mainUrl: '/products/shafi', href: '/products/shafi?page=1&query=шафа' },
+    { name: 'Столи', mainUrl: '/products/stoly', href: '/products/stoly?page=1&query=стіл' },
+  ];
 
   return (
-    <header className='header'>
-      <div className="header__container">
-        <Link href="/" className="header__logo">
-          <div className='logo__container'>
+    <header className={`${styles.header} ${menuOpen ? styles.open : ''}`}>
+      <div className={styles.container}>
+        <div className={styles.left}>
+          <Link href="/" className={styles.logo__container}>
             <Image
               src={logoPic}
               width={40}
               height={40}
-              alt="Picture of the author"
+              alt="Меблі Ромни"
+              className={styles.logo}
             />
-            <h1>
-              Меблі Ромни
-            </h1>
-          </div>
-        </Link>
-
-        {/* Іконка гамбургер */}
-        <div className={`header__hamburger ${menuOpen ? 'open' : ''}`} onClick={toggleMenu}>
-          <span></span>
-          <span></span>
-          <span></span>
+            <span className={styles.brand}>Меблі Ромни</span>
+          </Link>
         </div>
 
-        {/* Навігаційне меню */}
-        <nav className={`header__nav ${menuOpen ? 'active' : ''}`}>
-          <ul className="header__menu">
-            <li className="header__item">
-              <CategoryDropdown categories={categories} />
-            </li>
-            <li className="header__item">
-              <Link href="/about">Про нас</Link>
-            </li>
-            <li className="header__item">
-              <Link href="/contact">Контакти</Link>
-            </li>
-            {accessToken && (
-              <li className="header__item">
-                <a>{user?.name}</a>
-              </li>
-            )}
-            {accessToken ? (
-              <li className="header__item">
-                <div onClick={() => signOut()}>Вийти</div>
-              </li>
-            ) : (
-              <li className="header__item">
-                <Link href="/auth/login">Вхід</Link>
-              </li>
-            )}
-            {isAdmin && (
-              <li className="header__item">
-                <Link href="/admin/product/create">Створити</Link>
-              </li>
-            )}
-          </ul>
+        <nav className={`${styles.nav} ${menuOpen ? styles.active : ''}`}>
+          <Link href="/about">Про нас</Link>
+          <Link href="/contact">Контакти</Link>
+          {accessToken ? (
+            <Link href="#" onClick={() => signOut()}>Вийти</Link>
+          ) : (
+            <Link href="/auth/login">Вхід</Link>
+          )}
+          {isAdmin && (
+            <Link href="/admin/product/create">Створити</Link>
+          )}
         </nav>
-        <Link href="/cart">
-          <div className="header__cart">
-            {/* <span className='cart__count'>{SOmething && SOmething.length != 0 && SOmething.length}0</span> */}
-            🛒 Корзина
-          </div>
-        </Link>
+
+        <div className={styles.right}>
+          <button
+            className={styles.burger}
+            aria-label="Відкрити меню"
+            onClick={() => setMenuOpen(!menuOpen)}
+          >
+            <span />
+            <span />
+            <span />
+          </button>
+          <Link href="/cart" className={styles.cart}>
+            <svg width="20" height="20" viewBox="0 0 24 24"><path d="..." /></svg>
+            <span>Кошик</span>
+          </Link>
+        </div>
       </div>
+      <div className={styles['categories-wrapper']}>
+        <div className={styles.categories}>
+          {categories.map((cat) => (
+            <Link
+              key={cat.href}
+              href={cat.href}
+              className={`${styles.category} ${router === cat.mainUrl ? styles.active : ''}`}>
+              {cat.name}
+            </Link>
+          ))}
+        </div>
+      </div>
+
     </header>
   );
 };
