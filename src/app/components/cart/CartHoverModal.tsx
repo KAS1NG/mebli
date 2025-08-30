@@ -58,7 +58,7 @@ export default function CartHoverModal({ products }: { products: IPost[] }) {
                 className={styles.iconBtn}
                 onClick={() => setIsOpen((prev) => !prev)}
             >
-                <span className={styles.cartIcon}>{products.length} 🛒 Кошик</span>
+                <span className={styles.cartIcon}>{products.length !== 0 && products.length} 🛒 Кошик</span>
             </button>
 
             <AnimatePresence>
