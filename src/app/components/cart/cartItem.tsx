@@ -1,7 +1,5 @@
 import Image from 'next/image'
-import { useState } from 'react';
 import { IPreviewPost } from '../../types/post';
-import { removeCartItem } from '../../actions/removeCartItem';
 import { removeFromCart } from '../../utils/CartTest';
 import styles from '../../styles/cart/cartItem.module.scss';
 import { useCart } from '@/app/context/CartContext';
@@ -11,15 +9,11 @@ interface CartItemProps {
 }
 
 const CartItem = ({ item }: CartItemProps) => {
-  const [isLoading, setIsLoading] = useState(false)
   const { removeProductFromCart } = useCart();
 
-  const handleRemove = async () => {
-    setIsLoading(true)
+  const handleRemove = () => {
     removeProductFromCart(item.id.toString())
-    await removeCartItem(item.id)
     removeFromCart(item.id)
-    setIsLoading(false)
   }
 
   return (
@@ -46,15 +40,14 @@ const CartItem = ({ item }: CartItemProps) => {
             type="number"
             id={`quantity-${item.id}`}
             min="1"
-            defaultValue={1}
+            defaultValue={item.qty}
             className={styles.quantity}
           />
           <button
             onClick={handleRemove}
             className={styles.removeBtn}
-            disabled={isLoading}
           >
-            {isLoading ? 'Loading...' : "Видалити"}
+            {"Видалити"}
           </button>
         </div>
       </div>

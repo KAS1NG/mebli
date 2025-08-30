@@ -8,10 +8,16 @@ export const fetchCart = async () => {
     const cartCookie = cookieStore.get('cart_ids');
 
     if (!cartCookie?.value) {
-        return null
+        return []; // повертаємо порожній масив замість null
     }
 
-    const ids = JSON.parse(cartCookie.value)
+    let ids: number[] = [];
+    try {
+        ids = JSON.parse(cartCookie.value);
+    } catch (error) {
+        console.error('Invalid cart_ids cookie:', error);
+        return []; // некоректні дані — повертаємо порожній масив
+    }
 
     try {
         const response = await fetch(`${SERVER_URL}/cart/byIds`, {
@@ -20,12 +26,14 @@ export const fetchCart = async () => {
                 "Content-Type": "application/json"
             },
             next: { tags: ['cart'] },
-            body: JSON.stringify({ "ids": ids })
+            body: JSON.stringify({ ids })
         });
 
-        return await handleResponse(response);
+        const data = await handleResponse(response);
+        // Перевіряємо, чи data — масив
+        return Array.isArray(data) ? data : [];
     } catch (error) {
         console.error('Failed to fetch post:', error);
-        throw error;
+        return []; // у разі помилки повертаємо порожній масив
     }
-}
+};

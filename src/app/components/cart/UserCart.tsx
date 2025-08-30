@@ -5,13 +5,8 @@ import Link from "next/link";
 import styles from '../../styles/cart/userCart.module.scss'
 import { useCart } from "@/app/context/CartContext";
 import EmptyCart from "./EmptyCart";
+import { IPreviewPost } from "@/app/types/post";
 
-// interface IUserCart {
-//     products: IPost[]
-//     total: string
-// }
-
-// function UserCart({ products, total }: IUserCart) {
 function UserCart() {
     const { cartItems } = useCart();
 
@@ -21,11 +16,21 @@ function UserCart() {
 
     const total = cartItems.reduce((acc, item) => acc + item.price, 0).toFixed(2);
 
+    const groupedProducts: IPreviewPost[] = cartItems.reduce((acc: IPreviewPost[], item) => {
+        const existingItem = acc.find((p) => p.id === item.id);
+        if (existingItem) {
+            existingItem.qty = (existingItem.qty || 1) + (item.qty || 1);
+        } else {
+            acc.push({ ...item, qty: item.qty || 1 });
+        }
+        return acc;
+    }, []);
+
     return (
         <main className={styles.cart}>
             <h1 className={styles.title}>Корзина покупця</h1>
             <section className={styles.items}>
-                {cartItems.map((item, id) => (
+                {groupedProducts.map((item, id) => (
                     <CartItem key={id} item={item} />
                 ))}
             </section>
