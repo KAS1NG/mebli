@@ -1,24 +1,12 @@
 "use client";
 import React, { createContext, useContext, useState, ReactNode, useEffect } from "react";
 import Cookies from "js-cookie";
-import { IPost } from "../types/post";
+import { IPreviewPost } from "../types/post";
 import { fetchCart } from "../actions/fetchCart";
 
-type Product = {
-    id: number,
-    title: string,
-    description: string,
-    price: number,
-    createdAt: string,
-    updatedAt: string,
-    views: number,
-    tags: string,
-    images: string[]
-};
-
 type CartContextType = {
-    cartItems: Product[];
-    addProduct: (product: Product) => void;
+    cartItems: IPreviewPost[];
+    addProduct: (product: IPreviewPost) => void;
     removeProductFromCart: (id: string) => void;
     clearCart: () => void;
 };
@@ -26,22 +14,14 @@ type CartContextType = {
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
 export const CartProvider = ({ children }: { children: ReactNode }) => {
-    const [cartItems, setCartItems] = useState<Product[]>([]);
+    const [cartItems, setCartItems] = useState<IPreviewPost[]>([]);
 
     // ✅ завантажуємо з кукі при першому рендері
     useEffect(() => {
-        const savedCart = Cookies.get("cart_ids");
-        if (savedCart) {
-            try {
-                async function f1() {
-                    const products: IPost[] = await fetchCart();
-                    setCartItems(products);
-                }
-                f1()
-            } catch (e) {
-                console.error("Помилка читання кошика з кукі", e);
-            }
-        }
+        (async () => {
+            const products: IPreviewPost[] = await fetchCart();
+            setCartItems(products);
+        })();
     }, []);
 
     // ✅ оновлюємо кукі коли змінюється кошик
@@ -49,7 +29,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
         Cookies.set("cart", JSON.stringify(cartItems), { expires: 7 }); // 7 днів збереження
     }, [cartItems]);
 
-    const addProduct = (product: Product) => {
+    const addProduct = (product: IPreviewPost) => {
         setCartItems((prev) => [...prev, product]);
     };
 

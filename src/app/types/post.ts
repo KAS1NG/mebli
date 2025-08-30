@@ -14,7 +14,8 @@ export interface IPreviewPost {
     id: number,
     title: string,
     price: number,
-    thumbnail: string
+    thumbnail: string,
+    qty?: number;
 }
 
 export type Post = {

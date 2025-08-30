@@ -7,7 +7,6 @@ import { useRouter } from 'next/navigation';
 import style from '../../styles/product/ProductActionsWrapper.module.scss'
 import { IPost } from '@/app/types/post';
 import { useCart } from '@/app/context/CartContext';
-import { addToCart } from '@/app/actions/addToCart';
 import { addToCartTest } from '@/app/utils/CartTest';
 
 interface User {
@@ -27,20 +26,15 @@ export default function ProductActionsWrapper({ product, user }: Props) {
     const { addProduct } = useCart();
 
 
-    const handleAddToCart = async (product: IPost) => {
-        try {
-            if (!user) {
-                addToCartTest(product.id);
-            } else {
-                await addToCart({ itemId: product.id });
-            }
-            addProduct(product)
-
-            // showToast('Товар додано до кошика!');
-        } catch (error) {
-            console.error(error);
-            // showToast('Сталася помилка при додаванні');
-        }
+    const handleAddToCart = (product: IPost) => {
+        addToCartTest(product.id);
+        addProduct({
+            id: product.id,
+            title: product.title,
+            price: product.price,
+            thumbnail: product.images[0]
+        })
+        // showToast('Товар додано до кошика!');
     }
 
     const router = useRouter();

@@ -1,13 +1,13 @@
 import Image from 'next/image'
 import { useState } from 'react';
-import { IPost } from '../../types/post';
+import { IPreviewPost } from '../../types/post';
 import { removeCartItem } from '../../actions/removeCartItem';
 import { removeFromCart } from '../../utils/CartTest';
 import styles from '../../styles/cart/cartItem.module.scss';
 import { useCart } from '@/app/context/CartContext';
 
 interface CartItemProps {
-  item: IPost
+  item: IPreviewPost
 }
 
 const CartItem = ({ item }: CartItemProps) => {
@@ -26,7 +26,7 @@ const CartItem = ({ item }: CartItemProps) => {
     <div className={styles.item}>
       <div className={styles.image}>
         <Image
-          src={item.images[0]}
+          src={item.thumbnail}
           alt={item.title}
           layout="responsive"     // The image will scale responsively based on the container width 
           width={400}
