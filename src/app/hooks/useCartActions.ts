@@ -70,27 +70,27 @@ export function useCartActions(user?: User) {
     [user, showToast]
   );
 
-  const handleRemoveFromCart = useCallback(
-    async (productId: number) => {
-      console.log(productId)
-      try {
-        setLoadingAction('remove');
-        // TODO: Виклик API для видалення з кошика
-        showToast('Товар видалено з кошика');
-      } catch (error) {
-        console.error(error);
-        showToast('Сталася помилка при видаленні');
-      } finally {
-        setLoadingAction(null);
-      }
-    },
-    [showToast]
-  );
+  // const handleRemoveFromCart = useCallback(
+  //   async (productId: number) => {
+  //     try {
+  //       setLoadingAction('remove');
+  //       // TODO: Виклик API для видалення з кошика
+  //       showToast('Товар видалено з кошика');
+  //     } catch (error) {
+  //       console.error(error);
+  //       showToast('Сталася помилка при видаленні');
+  //     } finally {
+  //       setLoadingAction(null);
+  //     }
+  //   },
+  //   [showToast]
+  // );
 
   return {
     loadingAction,
     toast,
     handleAddToCart,
-    handleRemoveFromCart,
+    // handleRemoveFromCart,
+    showToast
   };
 }

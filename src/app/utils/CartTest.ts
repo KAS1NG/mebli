@@ -2,7 +2,7 @@
 import Cookies from 'js-cookie';
 import { revalidateCart } from '../actions/revalidateCart';
 
-const CART_COOKIE_NAME = 'cart_ids';
+export const CART_COOKIE_NAME = 'cart_ids';
 
 export function getCartIds(): number[] {
   const raw = Cookies.get(CART_COOKIE_NAME);

@@ -7,10 +7,8 @@ import { useRouter } from 'next/navigation';
 import style from '../../styles/product/ProductActionsWrapper.module.scss'
 import { IPost } from '@/app/types/post';
 import { useCart } from '@/app/context/CartContext';
-import { addToCartTest } from '@/app/utils/CartTest';
 
 interface User {
-    // вкажи типи user відповідно до свого проєкту
     role?: string;
     [key: string]: unknown;
 }
@@ -21,20 +19,18 @@ interface Props {
 }
 
 export default function ProductActionsWrapper({ product, user }: Props) {
-    // const { loadingAction, handleAddToCart, toast } = useCartActions(user);
-    const { loadingAction, toast } = useCartActions(user);
+    const { showToast, toast } = useCartActions(user);
+
     const { addProduct } = useCart();
 
-
     const handleAddToCart = (product: IPost) => {
-        addToCartTest(product.id);
         addProduct({
             id: product.id,
             title: product.title,
             price: product.price,
             thumbnail: product.images[0]
         })
-        // showToast('Товар додано до кошика!');
+        showToast('Товар додано до кошика!');
     }
 
     const router = useRouter();
@@ -52,7 +48,7 @@ export default function ProductActionsWrapper({ product, user }: Props) {
     return (
         <div className={style.actions}>
             <button
-                disabled={loadingAction === 'add'}
+                // disabled={loadingAction === 'add'}
                 onClick={() => handleAddToCart(product)}
                 className={style.buttons}
             >
@@ -78,7 +74,6 @@ export default function ProductActionsWrapper({ product, user }: Props) {
                     </button>
                 </>
             )}
-
             <CartToast show={toast.show} msg={toast.message} />
         </div>
     );
