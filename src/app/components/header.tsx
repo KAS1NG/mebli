@@ -71,10 +71,7 @@ const Header = () => {
             <span />
           </button>
           <Link href="/cart" className={styles.cart}>
-            <svg width="20" height="20" viewBox="0 0 24 24"><path d="..." /></svg>
-            {/* <span>{cartCount} 🛒 Кошик</span> */}
             <CartHoverModal products={cartItems} />
-
           </Link>
         </div>
       </div>

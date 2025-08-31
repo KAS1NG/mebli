@@ -27,11 +27,10 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           <Image
             src={product.thumbnail}
             alt={`Image of ${product.title}`}
-            layout="fill"
-            objectFit="cover"
+            fill
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            className="product-card__image"
-            priority={true}
+            className="product-card__image object-cover"
+            priority
           />
         </div>
         <figcaption className="product-card__caption">

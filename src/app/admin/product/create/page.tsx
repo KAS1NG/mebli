@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
@@ -13,16 +13,25 @@ export default function LoginForm() {
 
   const router = useRouter()
 
-  const { data: session } = useSession()
-  const { accessToken } = session || {}
+  const { data: session, status: sessionStatus } = useSession();
+  const { accessToken } = session || {};
 
   const [loading, setLoading] = useState(false)
   const [errors, setErrors] = useState<Record<string, string>>({})
   const [selectedFiles, setSelectedFiles] = useState<File[]>([])
 
+  useEffect(() => {
+    if (sessionStatus === "unauthenticated") {
+      router.push("/auth/login");
+    }
+  }, [sessionStatus, router]);
+
+  if (sessionStatus === "loading") {
+    return <p>Loading...</p>; // поки чекає дані про сесію
+  }
+
   if (!accessToken) {
-    router.push('/auth/login'); // Redirect to login if not authenticated
-    return null;
+    return null; // нічого не рендеримо, поки не відбудеться редірект
   }
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
