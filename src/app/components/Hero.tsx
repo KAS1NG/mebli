@@ -9,12 +9,10 @@ export default function Hero() {
         <section className={styles.hero}>
             <div className={styles.bgWrapper}>
                 <picture>
-                    {/* Картинка для екранів ≤ 880px */}
                     <source
                         media="(max-width: 880px)"
                         srcSet="https://firebasestorage.googleapis.com/v0/b/sicero2-bfcd2.appspot.com/o/mebli%2FChatGPT%20Image%2021%20%D1%81%D0%B5%D1%80%D0%BF.%202025%20%D1%80.%2C%2018_06_59.png?alt=media"
                     />
-                    {/* Дефолтна картинка для більших екранів */}
                     <Image
                         src="https://res.cloudinary.com/dnwcmqbtm/image/upload/v1756537502/%D1%84%D0%BE%D0%BD_%D0%B3%D0%BE%D0%BB%D0%BE%D0%B2%D0%BD%D0%B0_w2h2ow.jpg"
                         alt="Роменський Меблевий Комбінат"

@@ -1,6 +1,4 @@
 // next.config.mjs
-import withBundleAnalyzer from '@next/bundle-analyzer';
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   experimental: {
@@ -19,8 +17,10 @@ const nextConfig = {
         pathname: '/**',
       },
     ],
-    formats: ['image/webp'],
+    formats: ['image/webp'], // оптимізовані формати
   },
+
+  // Додаткові заголовки для Edge Caching
   async headers() {
     return [
       {
@@ -41,6 +41,7 @@ const nextConfig = {
           },
         ],
       },
+      // Кешування головної сторінки
       {
         source: '/',
         headers: [
@@ -56,7 +57,4 @@ const nextConfig = {
 
 export const metadataBase = new URL(process.env.NEXT_PUBLIC_BASE_URL);
 
-// обгортка bundle analyzer
-export default withBundleAnalyzer({
-  enabled: process.env.ANALYZE === 'true',
-})(nextConfig);
+export default nextConfig;
