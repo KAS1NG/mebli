@@ -1,23 +1,92 @@
-  /* Теги продукту */
-  .tags {
-      margin-top: 20px;
+//   /* Теги продукту */
+//   .tags {
+//       margin-top: 20px;
 
-      .tag {
-          display: inline-block;
-          background-color: #e0e0e0;
-          color: #333;
-          padding: 5px 10px;
-          border-radius: 5px;
-          margin-right: 10px;
-          font-size: 14px;
+//       .tag {
+//           display: inline-block;
+//           background-color: #e0e0e0;
+//           color: #333;
+//           padding: 5px 10px;
+//           border-radius: 5px;
+//           margin-right: 10px;
+//           font-size: 14px;
 
-          @media (max-width: 768px) {
-              margin-top: 5px;
-          }
+//           @media (max-width: 768px) {
+//               margin-top: 5px;
+//           }
 
-          @media (max-width: 480px) {
-              font-size: 12px;
-              margin-top: 5px;
-          }
-      }
+//           @media (max-width: 480px) {
+//               font-size: 12px;
+//               margin-top: 5px;
+//           }
+//       }
+//   }
+
+.tags {
+  --tag-bg: linear-gradient(180deg, #ffffff, #f9fafc);
+  --tag-border: rgba(0, 0, 0, 0.08);
+  --tag-text: #444;
+  --tag-hover-bg: linear-gradient(180deg, #f0f4ff, #e5ecff);
+  --tag-hover-text: #2f5ff3;
+
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.8rem;
+  margin-bottom: 1.8rem;
+  font-size: 0.95rem;
+
+  .label {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: #222;
+    white-space: nowrap;
   }
+
+  .tagList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.45rem 1rem;
+    border-radius: 999px;
+    background: var(--tag-bg);
+    border: 1px solid var(--tag-border);
+    color: var(--tag-text);
+    font-size: 0.85rem;
+    font-weight: 500;
+    line-height: 1.2;
+    text-decoration: none;
+    transition: all 0.25s ease;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+
+    &:hover {
+      background: var(--tag-hover-bg);
+      color: var(--tag-hover-text);
+      border-color: rgba(47, 95, 243, 0.4);
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 4px 10px rgba(47, 95, 243, 0.15);
+    }
+
+    &:active {
+      transform: translateY(0) scale(0.98);
+      box-shadow: 0 2px 6px rgba(47, 95, 243, 0.1);
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .tags {
+    font-size: 0.9rem;
+    .tag {
+      padding: 0.35rem 0.85rem;
+    }
+  }
+}
+
+

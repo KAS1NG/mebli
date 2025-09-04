@@ -5,7 +5,7 @@ import { SERVER_URL } from "../lib/constants";
 
 export const fetchCart = async () => {
     const cookieStore = cookies();
-    const cartCookie = cookieStore.get('cart_ids');
+    const cartCookie = (await cookieStore).get('cart_ids');
 
     if (!cartCookie?.value) {
         return []; // повертаємо порожній масив замість null

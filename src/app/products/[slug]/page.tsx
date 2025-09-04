@@ -3,15 +3,16 @@ import InvoicesTable from "@/app/components/table";
 import PaginationPages from "@/app/utils/generatePagination";
 import '@/app/styles/products.scss'
 
-export default async function CategoryPage({
-    searchParams,
-}: {
-    params: { category: string };
-    searchParams: { page?: string, query?: string };
-}) {
+type Params = { category: string };
+type searchParams = {page?: string,
+     query?: string}
 
-    const query = searchParams?.query || '';
-    const currentPage = Number(searchParams.page) || 1;
+export default async function CategoryPage({ searchParams }: {
+    params: Promise<Params>;
+    searchParams: Promise<searchParams>;
+}) {
+    const query = (await searchParams).query || '';
+    const currentPage = Number((await searchParams).page) || 1;
 
     const totalPages = await fetchPageCount(query);
 

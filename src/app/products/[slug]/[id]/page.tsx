@@ -1,185 +1,134 @@
 import { notFound, redirect } from "next/navigation";
 import type { Metadata, ResolvingMetadata } from "next";
+import Script from "next/script";
 
 import {
-    fetchOnePost,
-    fetchProductProperty,
-    fetchAllPostIds,
-    fetchPosts,
+  fetchOnePost,
+  fetchProductProperty,
+  fetchAllPostIds,
+  fetchPosts,
 } from "@/app/api/post/postService";
 
 import { transliterateAndClear } from "@/app/utils/clearUrlString";
 import ProductDetail from "@/app/components/product/ProductDetail";
 import { stringToArray } from "@/app/utils/stringToArr";
-import Script from "next/script";
 
-interface ProductPageProps {
-    params: {
-        slug: string;
-        id: string;
-    };
-}
+type Params = {
+  slug: string;
+  id: string;
+};
 
 // ======================================================
 // 1️⃣ generateStaticParams — SSG
 // ======================================================
-export async function generateStaticParams(): Promise<
-    ProductPageProps["params"][]
-> {
-    const products = await fetchAllPostIds();
-    return products.map((p) => ({
-        id: p.id.toString(),
-        slug: transliterateAndClear(p.title),
-    }));
+export async function generateStaticParams(): Promise<Params[]> {
+  const products = await fetchAllPostIds();
+  return products.map((p) => ({
+    id: p.id.toString(),
+    slug: transliterateAndClear(p.title),
+  }));
 }
 
 // ======================================================
 // 2️⃣ generateMetadata — SEO + OpenGraph
 // ======================================================
 export async function generateMetadata(
-    { params }: ProductPageProps,
-    parent: ResolvingMetadata
+  { params }: { params: Promise<Params> },
+  parent: ResolvingMetadata
 ): Promise<Metadata> {
-    const { id } = params;
+  const { id } = await params; // ✅ треба await
+  const product = await fetchOnePost(id, { next: { revalidate: 60 } });
+  if (!product?.id) notFound();
 
-    const product = await fetchOnePost(id, {
-        next: { revalidate: 60 },
-    });
+  const previousImages = (await parent).openGraph?.images || [];
+  const img = product.images?.[0];
+  const cleanSlug = transliterateAndClear(product.title);
+  const URL_ITEM = `products/${cleanSlug}/${product.id}`;
 
-    if (!product?.id) notFound();
-
-    const previousImages = (await parent).openGraph?.images || [];
-    const img = product.images?.[0]
-
-    const URL_ITEM = `products/${transliterateAndClear(product.title)}/${product.id}`
-
-    return {
-        title: `${product.title} - Купити у Ромнах | Ціна ${product.price} ₴`,
-        description: `"Купити ${product.title} у Ромнах. ${product.tags[0]} у Ромнах. Доставка, я меблів Сумська область.`,
-        keywords: [
-            product.title,
-            `купити ${product.title} Ромни`,
-            "меблі Ромни",
-        ],
-        alternates: { canonical: `https://mebliromny.com.ua/${URL_ITEM}`, },
-        openGraph: {
-            type: "article",
-            title: product.title,
-            description: product.description ?? undefined,
-            // images: [img, ...previousImages],
-            images: [
-                {
-                    url: img,
-                    width: 1200,
-                    height: 630,
-                    alt: `${product.title} у Ромнах`,
-                },
-                ...previousImages
-            ],
-            url: `https://mebliromny.com.ua/${URL_ITEM}`,
-            siteName: "Меблі Ромни",
-        },
-        twitter: {
-            card: "summary_large_image",
-            title: `${product.title} | Меблі Ромни`,
-            description:
-                `Купити ${product.title} у Ромнах – якісні меблі з доставкою. Виготовлення під замовлення.`,
-            images: [img, ...previousImages],
-        },
-        robots: {
-            index: true,
-            follow: true,
-        },
-    };
+  return {
+    title: `${product.title} – Купити у Ромнах | Ціна ${product.price} ₴`,
+    description: `Купити ${product.title} у Ромнах. ${product.tags[0]} у Ромнах. Доставка, якісні меблі Сумська область.`,
+    alternates: { canonical: `https://mebliromny.com.ua/${URL_ITEM}` },
+    openGraph: {
+      type: "article",
+      title: product.title,
+      description: product.description ?? undefined,
+      images: [
+        { url: img, width: 1200, height: 630, alt: `${product.title} у Ромнах` },
+        ...previousImages,
+      ],
+      url: `https://mebliromny.com.ua/${URL_ITEM}`,
+      siteName: "Меблі Ромни",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${product.title} | Меблі Ромни`,
+      description: `Купити ${product.title} у Ромнах – якісні меблі з доставкою.`,
+      images: [img, ...previousImages],
+    },
+    robots: { index: true, follow: true },
+  };
 }
 
 // ======================================================
 // 3️⃣ ProductPage — серверний компонент
 // ======================================================
-export default async function ProductPage({ params }: ProductPageProps) {
-    const { id, slug } = params;
-    const currentPage = 1
-    const limit = 6
+export default async function ProductPage({
+  params,
+}: {
+  params: Promise<Params>;
+}) {
+  const { id, slug } = await params; // ✅ await обов’язковий
 
-    // 🚀 Паралельні запити — швидше, ніж послідовно
-    const [product, productProperty] = await Promise.all([
-        fetchOnePost(id, { next: { revalidate: 60 } }),
-        fetchProductProperty(id, { next: { revalidate: 60 } }), // ✅ тип IGetProperty[]
-    ]);
+  const [product, productProperty] = await Promise.all([
+    fetchOnePost(id, { next: { revalidate: 60 } }),
+    fetchProductProperty(id, { next: { revalidate: 60 } }),
+  ]);
 
-    if (!product?.id) notFound();
+  if (!product?.id) notFound();
 
-    const tagsArray = stringToArray(product.tags || '');
+  const cleanSlug = transliterateAndClear(product.title);
+  if (slug !== cleanSlug) {
+    redirect(`/products/${cleanSlug}/${product.id}`);
+  }
 
-    // генерація productSchema 
+  const tagsArray = stringToArray(product.tags || "");
+  const invoices = await fetchPosts(tagsArray[0], 1, 6);
 
-    const productSchema = {
-        "@context": "https://schema.org",
-        "@type": "Product",
-        name: product.title,
-        image: product.images,
-        description: product.description,
-        sku: `SHF-${product.id}`,
-        brand: { "@type": "Brand", name: "Mebli Romny" },
-        offers: {
-            "@type": "Offer",
-            url: `https://mebliromny.com.ua/products/${transliterateAndClear(product.title)}/${product.id}`,
-            priceCurrency: "UAH",
-            price: product.price,
-            availability: "https://schema.org/InStock",
-            seller: {
-                "@type": "Organization",
-                name: "Меблі Ромни",
-            },
-        },
-        shippingDetails: {
-            "@type": "OfferShippingDetails",
-            shippingDestination: {
-                "@type": "DefinedRegion",
-                addressRegion: "Сумська область"
-            },
-            deliveryTime: {
-                "@type": "ShippingDeliveryTime",
-                handlingTime: { "@type": "QuantitativeValue", minValue: 1, maxValue: 2, unitCode: "d" },
-                transitTime: { "@type": "QuantitativeValue", minValue: 1, maxValue: 5, unitCode: "d" }
-            },
-            shippingRate: { "@type": "MonetaryAmount", value: 0, currency: "UAH" }
-        },
-        hasMerchantReturnPolicy: {
-            "@type": "MerchantReturnPolicy",
-            applicableCountry: "UA",
-            returnPolicyCategory: "https://schema.org/MerchantReturnFiniteReturnWindow",
-            returnPolicyDays: 14,
-            returnMethod: "https://schema.org/ReturnByMail",
-            returnFees: "https://schema.org/FreeReturn"
-        }
-    }
+  // ✅ schema.org Product JSON-LD
+  const productSchema = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: product.title,
+    image: product.images,
+    description: product.description,
+    sku: `SHF-${product.id}`,
+    brand: { "@type": "Brand", name: "Mebli Romny" },
+    offers: {
+      "@type": "Offer",
+      url: `https://mebliromny.com.ua/products/${cleanSlug}/${product.id}`,
+      priceCurrency: "UAH",
+      price: product.price,
+      availability: "https://schema.org/InStock",
+      seller: { "@type": "Organization", name: "Меблі Ромни" },
+    },
+  };
 
-    // 🔗 Перевірка slug для SEO
-    const cleanSlug = transliterateAndClear(product.title);
-    if (slug !== cleanSlug) {
-        redirect(`/products/${cleanSlug}/${product.id}`);
-    }
-
-    const invoices = await fetchPosts(tagsArray[0], currentPage, limit)
-
-    return (
-        <>
-            <ProductDetail
-                product={product}
-                productProperty={productProperty}
-                invoices={invoices}
-            />
-            <Script
-                id="json-ld-product"
-                type="application/ld+json"
-                strategy="afterInteractive"
-                dangerouslySetInnerHTML={{
-                    __html: JSON.stringify(productSchema),
-                }}
-            />
-        </>
-    );
+  return (
+    <>
+      <ProductDetail
+        product={product}
+        productProperty={productProperty}
+        invoices={invoices}
+      />
+      <Script
+        id="json-ld-product"
+        type="application/ld+json"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }}
+      />
+    </>
+  );
 }
 
 // ======================================================

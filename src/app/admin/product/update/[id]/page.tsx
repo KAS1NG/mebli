@@ -1,25 +1,31 @@
 import { fetchOnePost } from '@/app/api/post/postService';
 import EditPost from '@/app/components/EditPost';
 import { notFound } from 'next/navigation';
-import React from 'react'
+import React from 'react';
 
-async function page({ params }: { params: { id: string } }) {
+type Params = { id: string };
 
-    const {id} = params;
+export default async function Page({ params }: { params: Promise<Params>; }) {
+    const { id } = await params
 
-    const product = await fetchOnePost(id)
+    const product = await fetchOnePost(id);
 
-    // If the product is not found, show the 404 page
-    if (!product || !product.id) {
+    if (!product?.id) {
         notFound();
-        return; // Ensure the function exits after showing the 404 page
     }
 
     return (
         <div>
             <EditPost postItem={product} />
         </div>
-    )
+    );
 }
 
-export default page
+// (необов'язково) якщо є generateMetadata — теж await params
+// import type { Metadata } from 'next';
+// export async function generateMetadata(
+//   { params }: { params: Promise<Params> }
+// ): Promise<Metadata> {
+//   const { id } = await params;
+//   return { title: `Редагування поста ${id}` };
+// }

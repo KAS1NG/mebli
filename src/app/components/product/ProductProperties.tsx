@@ -1,17 +1,69 @@
-'use client';
+// 'use client';
 
-import React, { memo, useCallback } from 'react';
-import { IGetProperty } from '../../types/post';
-import { removeProperty } from '../../actions/removeProperty';
-import style from '../../styles/product/ProductProperties.module.scss'
+// import React, { memo, useCallback } from 'react';
+// import { IGetProperty } from '../../types/post';
+// import { removeProperty } from '../../actions/removeProperty';
+// import style from '../../styles/product/ProductProperties.module.scss'
+
+// interface ProductPropertiesProps {
+//   properties: IGetProperty[];
+//   isAdmin: boolean;
+// }
+
+// const ProductProperties = memo(function ProductProperties({ properties, isAdmin }: ProductPropertiesProps) {
+//   const handleRemove = useCallback(
+//     (id: number) => () => {
+//       removeProperty(id);
+//     },
+//     []
+//   );
+
+//   if (!properties?.length) return null;
+
+//   return (
+//     <div className={style.details}>
+//       {properties.map((item) => (
+//         <p key={item.id}>
+//           <strong>{item.name}:</strong> {item.text}
+//           {isAdmin && (
+//             <button
+//               aria-label={`Видалити властивість ${item.name}`}
+//               onClick={handleRemove(item.id)}
+//             >
+//               ✕
+//             </button>
+//           )}
+//         </p>
+//       ))}
+//     </div>
+//   );
+// });
+
+// ProductProperties.displayName = 'ProductProperties';
+
+// export default ProductProperties;
+
+
+"use client";
+
+import React, { memo, useCallback, useState } from "react";
+import { IGetProperty } from "../../types/post";
+import { removeProperty } from "../../actions/removeProperty";
+import { AnimatePresence, motion } from "framer-motion";
+import { ChevronDown, ChevronUp, X } from "lucide-react";
+import style from "../../styles/product/ProductProperties.module.scss";
 
 interface ProductPropertiesProps {
   properties: IGetProperty[];
   isAdmin: boolean;
 }
 
-const ProductProperties = memo(function ProductProperties({ properties, isAdmin }: ProductPropertiesProps) {
-  // Створюємо функцію, яка повертає обробник видалення для конкретного id
+const ProductProperties = memo(function ProductProperties({
+  properties,
+  isAdmin,
+}: ProductPropertiesProps) {
+  const [isOpen, setIsOpen] = useState(false);
+
   const handleRemove = useCallback(
     (id: number) => () => {
       removeProperty(id);
@@ -22,24 +74,53 @@ const ProductProperties = memo(function ProductProperties({ properties, isAdmin 
   if (!properties?.length) return null;
 
   return (
-    <div className={style.details}>
-      {properties.map((item) => (
-        <p key={item.id}>
-          <strong>{item.name}:</strong> {item.text}
-          {isAdmin && (
-            <button
-              aria-label={`Видалити властивість ${item.name}`}
-              onClick={handleRemove(item.id)}
-            >
-              ✕
-            </button>
-          )}
-        </p>
-      ))}
-    </div>
+    <section className={style.card} aria-labelledby="properties-title">
+      <button
+        className={style.toggleBtn}
+        onClick={() => setIsOpen((prev) => !prev)}
+        aria-expanded={isOpen}
+      >
+        <span id="properties-title">Характеристики</span>
+        {isOpen ? (
+          <ChevronUp size={18} aria-hidden="true" />
+        ) : (
+          <ChevronDown size={18} aria-hidden="true" />
+        )}
+      </button>
+
+      <AnimatePresence initial={false}>
+        {isOpen && (
+          <motion.ul
+            key="properties-list"
+            className={style.list}
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.4, ease: "easeInOut" }}
+          >
+            {properties.map((item) => (
+              <li key={item.id} className={style.item}>
+                <span className={style.name}>{item.name}:</span>
+                <span className={style.value}>{item.text}</span>
+                {isAdmin && (
+                  <button
+                    aria-label={`Видалити властивість ${item.name}`}
+                    className={style.removeBtn}
+                    onClick={handleRemove(item.id)}
+                  >
+                    <X size={16} />
+                  </button>
+                )}
+              </li>
+            ))}
+          </motion.ul>
+        )}
+      </AnimatePresence>
+    </section>
   );
 });
 
-ProductProperties.displayName = 'ProductProperties';
+ProductProperties.displayName = "ProductProperties";
 
 export default ProductProperties;
+

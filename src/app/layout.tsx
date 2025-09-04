@@ -10,6 +10,23 @@ import Script from "next/script";
 import { businessSchema } from "./lib/constants";
 import "./globals.css";
 import { CartProvider } from "./context/CartContext";
+import { Manrope, Raleway } from "next/font/google";
+
+// Основний шрифт (для тексту)
+const manrope = Manrope({
+  subsets: ["latin", "cyrillic"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-manrope",
+  display: "swap",
+});
+
+// Додатковий (для заголовків)
+const raleway = Raleway({
+  subsets: ["latin", "cyrillic"],
+  weight: ["600", "700"],
+  variable: "--font-raleway",
+  display: "swap",
+});
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -77,7 +94,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="uk">
-      <body className={`${geistSans.variable} ${geistMono.variable} ${Geometria.variable}`}>
+      <body className={`${geistSans.variable} ${geistMono.variable} ${Geometria.variable} ${manrope.variable} ${raleway.variable}`}>
         <Preloader />
         <CartProvider>
         <Providers>
