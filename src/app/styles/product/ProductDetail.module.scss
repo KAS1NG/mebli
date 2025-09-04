@@ -179,6 +179,7 @@
 
             .price {
                 font-size: 1.2rem;
+                align-items: center;
             }
 
             .addToCart {
@@ -195,6 +196,10 @@
                 font-size: 1.9rem;
             }
 
+            .price {
+                margin: 0 auto;
+            }
+
             .description {
                 font-size: 0.93rem;
                 margin-bottom: 1.5rem;
@@ -203,6 +208,7 @@
             .priceRow {
                 flex-direction: column;
                 align-items: flex-start;
+                margin-top: 0;
                 gap: 0.8rem;
             }
 
