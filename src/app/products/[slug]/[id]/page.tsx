@@ -93,7 +93,7 @@ export default async function ProductPage({
   }
 
   const tagsArray = stringToArray(product.tags || "");
-  const invoices = await fetchPosts(tagsArray[0], 1, 6);
+  const invoices = await fetchPosts(1, 6, tagsArray[0]);
 
   // ✅ schema.org Product JSON-LD
   const productSchema = {

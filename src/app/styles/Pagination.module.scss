@@ -1,0 +1,59 @@
+// Organic Calm — природна спокійна палітра
+$color-bg: #F5F3EE;        // теплий білий
+$color-border: rgba(0, 0, 0, 0.08);
+
+$color-white: #FFFFFF;
+$color-dark: #2A2A2A;
+$color-lime: #C2D1A1;      // трав’яний пастельний
+$color-aqua: #A3C9C7;      // м’який м’ятно-блакитний
+$color-lavender: #D7C1E0;  // світла лаванда
+
+$transition: all 0.3s ease;
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  padding: 1rem 1.5rem;
+  border-radius: 2rem;
+  // background: $color-bg;
+  // border: 1px solid $color-border;
+  backdrop-filter: blur(14px) saturate(180%);
+
+  &__button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.65rem 1.4rem;
+    border-radius: 999px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+    color: $color-dark;
+    background: linear-gradient(135deg, $color-lime, $color-aqua);
+    text-decoration: none;
+    cursor: pointer;
+    transition: $transition;
+
+    &:hover {
+      filter: brightness(1.05);
+      box-shadow: 0 4px 14px rgba($color-aqua, 0.35);
+    }
+
+    &[aria-disabled="true"] {
+      opacity: 0.4;
+      pointer-events: none;
+    }
+  }
+
+  &__info {
+    padding: 0.5rem 1.2rem;
+    border-radius: 1rem;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: $color-dark;
+    background: rgba($color-white, 0.5);
+    backdrop-filter: blur(6px);
+  }
+}

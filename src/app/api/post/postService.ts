@@ -3,9 +3,9 @@ import { IGetProperty, IPost, IPreviewPost } from "@/app/types/post";
 import { handleResponse } from "@/app/utils/handleResponse"
 
 
-export const fetchPosts = async (query: string, page: number, limit: number): Promise<IPreviewPost[]> => {
+export const fetchPosts = async (page: string | number, limit: string | number, query?: string): Promise<IPreviewPost[]> => {
   try {
-    const response = await fetch(`${SERVER_URL}/posts/preview?page=${page}&limit=${limit}&query=${query}`, {
+    const response = await fetch(`${SERVER_URL}/posts/preview?page=${page}&limit=${limit}&query=${query || ''}`, {
       next: { tags: ['posts'] },
     });
 

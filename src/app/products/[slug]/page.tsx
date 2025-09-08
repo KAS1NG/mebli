@@ -1,28 +1,30 @@
 import { fetchPageCount } from "@/app/actions/fetchPageCount";
 import InvoicesTable from "@/app/components/table";
-import PaginationPages from "@/app/utils/generatePagination";
 import '@/app/styles/products.scss'
+import Pagination from "@/app/utils/generatePagination";
 
-type Params = { category: string };
-type searchParams = {page?: string,
-     query?: string}
+type SearchParams = {
+    page: string
+    query: string
+}
 
-export default async function CategoryPage({ searchParams }: {
-    params: Promise<Params>;
-    searchParams: Promise<searchParams>;
-}) {
-    const query = (await searchParams).query || '';
-    const currentPage = Number((await searchParams).page) || 1;
+export default async function CategoryPage(
+    { searchParams }: PageProps<'/products/[slug]/[id]'> & { searchParams: Promise<SearchParams> }
+) {
+    const { query = '', page = 1 } = await searchParams
 
     const totalPages = await fetchPageCount(query);
+    const currentPage = Number(page)
 
     return (
         <main className="products">
             <section className="products__hero">
                 <InvoicesTable query={query} currentPage={currentPage} />
-                {/* якщо сторінко більше ніж одна то показується пагінація сторінок */}
-                {totalPages > 1 && <PaginationPages totalPages={totalPages} />}
-                {/* Тут робиш фільтрацію + пагінацію */}
+                {totalPages > 1 &&
+                    <Pagination
+                        totalPages={totalPages}
+                        currentPage={currentPage}
+                    />}
             </section>
         </main>
     );

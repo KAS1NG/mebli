@@ -1,55 +1,68 @@
 'use client';
-import { useSearchParams, useRouter } from 'next/navigation';
-import '@/app/styles/pagination.scss';
+import Link from 'next/link';
+import styles from '../styles/Pagination.module.scss';
+import { motion } from 'framer-motion';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface PaginationProps {
   totalPages: number;
+  currentPage: number;
+  query?: string;
+  param?: string;
 }
 
-export default function PaginationPages({ totalPages }: PaginationProps) {
-  const searchParams = useSearchParams();
-  const currentPage = Number(searchParams.get('page')) || 1;
-  const router = useRouter();
+export default function Pagination({
+  totalPages,
+  currentPage,
+  query = '',
+  param = '',
+}: PaginationProps) {
+  const getHref = (pageOffset: number) =>
+    `/products/${param}?page=${currentPage + pageOffset}${query}`;
 
-  // Create URL for a specific page
-  const createPageURL = (pageNumber: number) => {
-    const params = new URLSearchParams(searchParams);
-    params.set('page', pageNumber.toString());
-    return `/products?${params.toString()}`;
-  };
-
-  // Handle page change logic
-  const handlePageChange = (pageNumber: number) => {
-    if (pageNumber < 1 || pageNumber > totalPages) return; // Prevent out-of-bound navigation
-    router.push(createPageURL(pageNumber));
-  };
+  const isFirstPage = currentPage <= 1;
+  const isLastPage = currentPage >= totalPages;
 
   return (
-    <nav aria-label="Pagination Navigation" className="pagination">
-      {/* Previous Button */}
-      <button
-        onClick={() => handlePageChange(currentPage - 1)}
-        disabled={currentPage === 1}
-        aria-label="Go to previous page"
-        className="pagination__button"
-      >
-        Попередня
-      </button>
+    <motion.nav
+      aria-label="Pagination Navigation"
+      className={styles.pagination}
+      initial={{ opacity: 0, scale: 0.95 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.4, ease: 'easeOut' }}
+    >
+      <motion.div whileTap={{ scale: 0.9 }} whileHover={{ scale: 1.1 }}>
+        <Link
+          href={isFirstPage ? '#' : getHref(-1)}
+          aria-label="Go to previous page"
+          className={styles.pagination__button}
+          aria-disabled={isFirstPage}
+          tabIndex={isFirstPage ? -1 : 0}
+        >
+          <ChevronLeft size={20} />
+        </Link>
+      </motion.div>
 
-      {/* Page Info */}
-      <span className="pagination__info">
-        {currentPage} з {totalPages}
-      </span>
-
-      {/* Next Button */}
-      <button
-        onClick={() => handlePageChange(currentPage + 1)}
-        disabled={currentPage === totalPages}
-        aria-label="Go to next page"
-        className="pagination__button"
+      <motion.span
+        className={styles.pagination__info}
+        initial={{ opacity: 0, y: 6 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.2, duration: 0.35 }}
       >
-        Наступна
-      </button>
-    </nav>
+        {currentPage} / {totalPages}
+      </motion.span>
+
+      <motion.div whileTap={{ scale: 0.9 }} whileHover={{ scale: 1.1 }}>
+        <Link
+          href={isLastPage ? '#' : getHref(+1)}
+          aria-label="Go to next page"
+          className={styles.pagination__button}
+          aria-disabled={isLastPage}
+          tabIndex={isLastPage ? -1 : 0}
+        >
+          <ChevronRight size={20} />
+        </Link>
+      </motion.div>
+    </motion.nav>
   );
 }
