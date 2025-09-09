@@ -13,6 +13,7 @@ import CartToast from "../CartToast";
 import { useCallback } from "react";
 import { removePost } from "@/app/actions/removePost";
 import { useRouter } from "next/navigation";
+import AddProductProperties from "../AddProductProperties";
 
 interface User {
     role?: string;
@@ -95,6 +96,7 @@ export default function ProductDetailClient({ product, isAdmin, productProperty,
                 )}
             </div>
             <ProductProperties properties={productProperty} isAdmin={isAdmin} />
+            <AddProductProperties productId={product.id}/>
             <DeliveryInfo />
             <CartToast show={toast.show} msg={toast.message} />
         </motion.section>
