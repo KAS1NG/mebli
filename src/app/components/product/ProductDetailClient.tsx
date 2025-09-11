@@ -14,6 +14,7 @@ import { useCallback } from "react";
 import { removePost } from "@/app/actions/removePost";
 import { useRouter } from "next/navigation";
 import AddProductProperties from "../AddProductProperties";
+import { useSession } from "next-auth/react";
 
 interface User {
     role?: string;
@@ -29,6 +30,9 @@ interface ProductDetailClientProps {
 }
 
 export default function ProductDetailClient({ product, isAdmin, productProperty, tags, user }: ProductDetailClientProps) {
+
+    const { data: session } = useSession();
+    const { accessToken } = session || {};
 
     const { showToast, toast } = useCartActions(user);
 
@@ -95,8 +99,10 @@ export default function ProductDetailClient({ product, isAdmin, productProperty,
                     </>
                 )}
             </div>
-            <ProductProperties properties={productProperty} isAdmin={isAdmin} />
-            <AddProductProperties productId={product.id}/>
+            <ProductProperties properties={productProperty} isAdmin={isAdmin} accessToken={accessToken} />
+            {isAdmin && (
+                <AddProductProperties productId={product.id} accessToken={accessToken} />
+            )}
             <DeliveryInfo />
             <CartToast show={toast.show} msg={toast.message} />
         </motion.section>

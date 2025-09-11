@@ -1,30 +1,39 @@
 'use server'
-import { getServerSession } from "next-auth/next";
 import { defaultHeaders } from "../utils/defaultHeaders";
-import { handleResponse } from "../utils/handleResponse";
 import { revalidateTag } from "next/cache";
-import authOptions from "../utils/authOptions";
 import { SERVER_URL } from "../lib/constants";
 
-export const addProductProperty = async (property: Record<string, string>, itemId: number) => {
-    const session = await getServerSession(authOptions)
 
-    if (!session || session.user.role !== 'ROLE_ADMIN') {
+export async function addProductProperty(
+    id: number,
+    property: { name: string; text: string }[],
+    token?: string,
+) {
+
+    if (!token) {
         console.log('Недостатньо прав')
     } else {
         try {
-            const response = await fetch(`${SERVER_URL}/comments/${itemId}`, {
-                method: 'POST',
-                headers: defaultHeaders(session.accessToken),
+            const response = await fetch(`${SERVER_URL}/comments/group/${id}`, {
+                method: "POST",
+                headers: defaultHeaders(token),
                 body: JSON.stringify(property),
-            });
+            }
+            );
+
+            if (!response.ok) {
+                const errorText = await response.text();
+                throw new Error(
+                    `Помилка: ${response.status} ${response.statusText}. Деталі: ${errorText}`
+                );
+            }
 
             revalidateTag('property')
-            return await handleResponse(response);
+            const data = await response.json();
+            return data;
         } catch (error) {
-            console.error('Failed to add product property:', error);
+            console.error("❌ Помилка при відправці коментарів:", error);
             throw error;
         }
     }
-
-};
+}

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { memo, useCallback, useState } from "react";
+import React, { useState } from "react";
 import { IGetProperty } from "../../types/post";
 import { removeProperty } from "../../actions/removeProperty";
 import { AnimatePresence, motion } from "framer-motion";
@@ -10,20 +10,19 @@ import style from "../../styles/product/ProductProperties.module.scss";
 interface ProductPropertiesProps {
   properties: IGetProperty[];
   isAdmin: boolean;
+  accessToken?: string
 }
 
-const ProductProperties = memo(function ProductProperties({
+function ProductProperties({
   properties,
   isAdmin,
+  accessToken,
 }: ProductPropertiesProps) {
   const [isOpen, setIsOpen] = useState(false);
 
-  const handleRemove = useCallback(
-    (id: number) => () => {
-      removeProperty(id);
-    },
-    []
-  );
+  const handleRemove = (id: number) => {
+    removeProperty(id, accessToken);
+  }
 
   if (!properties?.length) return null;
 
@@ -60,7 +59,7 @@ const ProductProperties = memo(function ProductProperties({
                   <button
                     aria-label={`Видалити властивість ${item.name}`}
                     className={style.removeBtn}
-                    onClick={handleRemove(item.id)}
+                    onClick={() => handleRemove(item.id)}
                   >
                     <X size={16} />
                   </button>
@@ -72,7 +71,7 @@ const ProductProperties = memo(function ProductProperties({
       </AnimatePresence>
     </section>
   );
-});
+}
 
 ProductProperties.displayName = "ProductProperties";
 

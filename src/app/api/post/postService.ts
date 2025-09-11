@@ -38,10 +38,7 @@ async function baseFetch<T>(
   }
 }
 
-export const fetchProductProperty = async (
-  itemId: string,
-  options?: RequestInit
-): Promise<IGetProperty[]> => {
+export const fetchProductProperty = async (itemId: string, options?: RequestInit): Promise<IGetProperty[]> => {
   return baseFetch<IGetProperty[]>(`${SERVER_URL}/comments/byPostId/${itemId}`, {
     method: "GET",
     next: { tags: ["property"], revalidate: 60 },
@@ -49,10 +46,6 @@ export const fetchProductProperty = async (
   });
 };
 
-/**
- * Отримати один пост за ID.
- * Використовує ISR (revalidate: 60).
- */
 export const fetchOnePost = async (
   id: string,
   options?: RequestInit
