@@ -1,118 +1,171 @@
 .gallery {
-  max-width: 50%;
-  margin: 0 auto;
-
-  @media (max-width: 768px) {
-    max-width: 100%;
-  }
-}
-
-.swiperSlide {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   width: 100%;
-  height: auto;
+  @media (min-width: 1024px) {
+    width: 50%; // на десктопі 50%
+  }
 }
 
-// .productImage {
-//   min-height: 500px;
-//   width: 100%;
-//   height: auto;
-//   object-fit: cover;
-//   max-width: 50vw;
-//   cursor: pointer;
-//   outline: none;
-//   user-select: none;
-
-//   @media (max-width: 768px) {
-//     max-width: 100%;
-//   }
-
-//   @media (max-width: 480px) {
-//     max-width: 100%;
-//     object-fit: contain;
-//   }
-// }
-
-.productImage {
+/* === Контейнер слайдера === */
+.swiperWrapper {
   width: 100%;
-  min-height: 500px;
-  object-fit: cover;
-  cursor: pointer;
-  outline: none;
-  user-select: none;
-  border-radius: 8px; // трішки скруглень для естетики (можеш прибрати)
-
-  max-width: 50vw; // для десктопа
-  height: auto; // лишаємо для безпечного фолу-бека
-
-  @media (max-width: 768px) {
-    max-width: 100%;
-  }
-
-  @media (max-width: 480px) {
-    max-width: 100%;
-    object-fit: contain; // 👌 щоб не різало картинки
-    aspect-ratio: auto;  // дозволяємо зберігати оригінальні пропорції
-  }
-}
-
-/* Swiper стилі */
-.gallery :global(.swiper) {
   position: relative;
+  border-radius: 1rem;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 6px 26px rgba(19, 19, 19, 0.06);
 }
 
-.gallery :global(.swiper-button-prev),
-.gallery :global(.swiper-button-next) {
-  position: absolute;
-  top: 50%;
-  margin: 0 12px;
-  transform: translateY(-50%);
-  z-index: 10;
-  width: 44px;
-  height: 44px;
-  background-color: rgba(0, 0, 0, 0.5);
-  border-radius: 50%;
+/* Слайд */
+.swiperWrapper :global(.swiper-slide) {
   display: flex;
-  align-items: center;
   justify-content: center;
-  color: #fff;
-  font-size: 20px;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.3s ease;
+  align-items: center;
+}
 
-  @media (max-width: 480px) {
-    width: 20px;
-    height: 20px;
-    font-size: 12px;
+/* === Фон (розмиття) === */
+.imageBackground {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: inherit;
+    filter: blur(25px) brightness(0.85);
+    transform: scale(1.2);
+    z-index: 0;
   }
 }
 
-.gallery :global(.swiper-button-prev):hover,
-.gallery :global(.swiper-button-next):hover {
-  background-color: rgba(0, 0, 0, 0.8);
-  transform: translateY(-50%) scale(1.1);
+/* === Картинка займає 100% === */
+.productImage {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  border-radius: 1rem;
+  position: relative !important;
+  z-index: 1;
+  transition: transform 0.45s cubic-bezier(.22,.9,.31,1);
 }
 
-.gallery :global(.swiper-button-prev::after),
-.gallery :global(.swiper-button-next::after) {
-  font-size: 16px;
-  font-weight: bold;
-
-  @media (max-width: 480px) {
-    font-size: 10px;
-    font-weight: bold;
-  }
+.imageBackground:hover .productImage {
+  transform: scale(1.03);
 }
 
-.gallery :global(.swiper-pagination-bullet) {
-  background-color: #000;
+/* === Glass arrows === */
+.swiperWrapper :global(.swiper-button-next),
+.swiperWrapper :global(.swiper-button-prev) {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.25) !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  transition: transform 0.25s ease, background 0.25s ease;
+}
+
+.swiperWrapper :global(.swiper-button-next)::after,
+.swiperWrapper :global(.swiper-button-prev)::after {
+  font-size: 18px;
+  color: #111;
+}
+
+.swiperWrapper :global(.swiper-button-next:hover),
+.swiperWrapper :global(.swiper-button-prev:hover) {
+  background: rgba(255, 255, 255, 0.4) !important;
+  transform: scale(1.1);
+}
+
+/* === Преміальна пагінація (Glass pills) === */
+.swiperWrapper :global(.swiper-pagination) {
+  bottom: 20px !important;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.swiperWrapper :global(.swiper-pagination-bullet) {
   width: 10px;
   height: 10px;
-  margin: 0 5px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.25); /* напівпрозорий фон */
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: inset 0 0 3px rgba(255,255,255,0.4),
+              0 2px 6px rgba(0,0,0,0.15);
+  transition: all 0.35s ease;
+  opacity: 1 !important;
 }
 
-.gallery :global(.swiper-pagination-bullet-active) {
-  background-color: #343435;
+/* Активна кулька — витягнута капсула з градієнтом */
+.swiperWrapper :global(.swiper-pagination-bullet-active) {
+  width: 32px;
+  background: #1C2A44;
+  border: 1px solid rgba(255,255,255,0.6);
+  box-shadow: 0 4px 16px rgba(149, 203, 180, 0.35),
+              0 6px 20px rgba(230, 219, 202, 0.25);
+  transform: scale(1.05);
+}
+
+/* === Мобільні стилі === */
+@media (max-width: 768px) {
+  .gallery {
+    width: 100%;
+  }
+
+  .swiperWrapper {
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 18px rgba(19, 19, 19, 0.05);
+  }
+
+  /* Glass arrows */
+  .swiperWrapper :global(.swiper-button-next),
+  .swiperWrapper :global(.swiper-button-prev) {
+    width: 36px;
+    height: 36px;
+    background: rgba(255, 255, 255, 0.2) !important;
+    box-shadow: 0 3px 16px rgba(0, 0, 0, 0.1);
+  }
+
+  .swiperWrapper :global(.swiper-button-next:hover),
+  .swiperWrapper :global(.swiper-button-prev:hover) {
+    background: rgba(255, 255, 255, 0.3) !important;
+    transform: scale(1.08);
+  }
+
+  /* Преміальна пагінація для мобільних */
+  .swiperWrapper :global(.swiper-pagination) {
+    bottom: 16px !important;
+    gap: 8px;
+  }
+
+  .swiperWrapper :global(.swiper-pagination-bullet) {
+    width: 8px;
+    height: 8px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    box-shadow: inset 0 0 2px rgba(255,255,255,0.3),
+                0 1px 4px rgba(0,0,0,0.1);
+    backdrop-filter: blur(6px);
+  }
+
+  .swiperWrapper :global(.swiper-pagination-bullet-active) {
+    width: 24px;
+    background: #1C2A44; /* основний преміум колір */
+    border: 1px solid rgba(255,255,255,0.5);
+    box-shadow: 0 3px 12px rgba(149, 203, 180, 0.25),
+                0 4px 16px rgba(230, 219, 202, 0.2);
+    transform: scale(1.05);
+  }
+
+  /* Картинки — трохи менший ефект збільшення */
+  .imageBackground:hover .productImage {
+    transform: scale(1.02);
+  }
 }
