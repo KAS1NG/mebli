@@ -1,6 +1,14 @@
 .invoicesTable {
-  padding: 24px;
+  padding: 40px 24px;
   background-color: #f9f9f9;
+
+  @media (max-width: 1024px) {
+    grid-template-columns: repeat(2, 1fr); // планшет
+  }
+
+  @media (max-width: 640px) {
+    padding: 16px;
+  }
 }
 
 .grid {

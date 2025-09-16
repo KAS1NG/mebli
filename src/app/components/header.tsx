@@ -22,6 +22,7 @@ const Header = () => {
   const router = usePathname();
 
   const categories = [
+    { name: 'Нове', mainUrl: '/products', href: '/products?page=1' },
     { name: 'Дивани', mainUrl: '/products/divany', href: '/products/divany?page=1&query=диван' },
     { name: 'Крісла', mainUrl: '/products/krisla', href: '/products/krisla?page=1&query=крісло' },
     { name: 'Стільці', mainUrl: '/products/stilci', href: '/products/stilci?page=1&query=стілець' },
@@ -75,6 +76,7 @@ const Header = () => {
           </Link>
         </div>
       </div>
+
       <div className={styles['categories-wrapper']}>
         <div className={styles.categories}>
           {categories.map((cat) => (
