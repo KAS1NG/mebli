@@ -28,16 +28,6 @@
   width: 100%;
   aspect-ratio: 4 / 3;
   overflow: hidden;
-
-  &::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: inherit;
-    filter: blur(25px) brightness(0.85);
-    transform: scale(1.2);
-    z-index: 0;
-  }
 }
 
 /* === Картинка займає 100% === */
@@ -49,6 +39,10 @@
   position: relative !important;
   z-index: 1;
   transition: transform 0.45s cubic-bezier(.22,.9,.31,1);
+
+   @media (max-width: 1024px) { 
+    object-fit: contain;
+  }
 }
 
 .imageBackground:hover .productImage {

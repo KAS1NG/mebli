@@ -26,12 +26,11 @@ export default async function Products(
     <main className="products">
       <section className="products__hero">
         <InvoicesTable query={query} currentPage={currentPage} />
-        {totalPages > 1 &&
-                            <Pagination
-                                totalPages={totalPages}
-                                currentPage={currentPage}
-                                query={query}
-                            />}
+        {totalPages > 1 && <Pagination
+          totalPages={totalPages}
+          currentPage={currentPage}
+          query={query}
+        />}
       </section>
     </main>
   )

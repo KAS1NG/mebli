@@ -67,6 +67,11 @@ export default function ProductDetailClient({ product, isAdmin, productProperty,
             transition={{ duration: 0.6, ease: "easeOut" }}
         >
             <h1 className={style.title}>{product.title}</h1>
+            {/* {product.brand && product.brand / 100 !== 0 &&
+                <span className={`${style.label} ${style.sale}`}>
+                    <span>Знижка</span> <Flame size={16} />
+                </span>
+            } */}
             <p className={style.description}>{product.description}</p>
             <ProductTags tags={tags} />
             <div className={style.priceRow}>

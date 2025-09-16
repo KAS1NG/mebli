@@ -21,8 +21,6 @@ export default function Pagination({
   const getHref = (pageOffset: number) =>
     `/products/${param}?page=${currentPage + pageOffset}${query ? '&query=' + query : ''}`;
 
-  console.log(getHref(-1))
-
   const isFirstPage = currentPage <= 1;
   const isLastPage = currentPage >= totalPages;
 

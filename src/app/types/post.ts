@@ -7,7 +7,7 @@ export interface IPost {
     updatedAt: string,
     views: number,
     tags: string,
-    images: string[]
+    images: string[],
 }
 
 export interface IPreviewPost {

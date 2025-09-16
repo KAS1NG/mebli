@@ -5,7 +5,7 @@ import Header from "./components/header";
 import Footer from "./components/footer";
 import AnalyticsProvider from "./providers/AnalyticsProvider";
 import ConsentBanner from "./components/ConsentBanner";
-import Preloader from "./components/Preloader";
+// import Preloader from "./components/Preloader";
 import Script from "next/script";
 import { businessSchema } from "./lib/constants";
 import "./globals.css";
@@ -95,7 +95,7 @@ export default function RootLayout({
   return (
     <html lang="uk">
       <body className={`${geistSans.variable} ${geistMono.variable} ${Geometria.variable} ${manrope.variable} ${raleway.variable}`}>
-        <Preloader />
+        {/* <Preloader /> */}
         <CartProvider>
         <Providers>
           <div className="heightContainer">

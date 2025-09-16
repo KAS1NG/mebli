@@ -1,7 +1,7 @@
 'use client';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination, EffectFade, Parallax } from 'swiper/modules';
+import { Navigation, Pagination } from 'swiper/modules';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
 import { useState, KeyboardEvent } from 'react';
@@ -36,7 +36,7 @@ export default function MySlider({ product, title }: ISliderProps) {
   return (
     <div className={style.gallery}>
       <Swiper
-        modules={[Navigation, Pagination, EffectFade, Parallax]}
+        modules={[Navigation, Pagination]}
         spaceBetween={30}
         navigation={slides.length > 1}
         pagination={slides.length > 1 ? { clickable: true, type: 'bullets' } : false}

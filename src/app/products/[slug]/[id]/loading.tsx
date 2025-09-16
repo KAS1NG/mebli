@@ -1,3 +1,7 @@
+import ProductSkeleton from '../../../components/ProductSkeleton';
+
 export default function Loading() {
-  return <p>Завантажуємо вміст товару...</p>;
+  return <main style={{ padding: 16 }}>
+    <ProductSkeleton />
+  </main>
 }
