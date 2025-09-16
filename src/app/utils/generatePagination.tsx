@@ -13,12 +13,15 @@ interface PaginationProps {
 
 export default function Pagination({
   totalPages,
-  currentPage,
+  currentPage = 1,
   query = '',
   param = '',
 }: PaginationProps) {
+
   const getHref = (pageOffset: number) =>
-    `/products/${param}?page=${currentPage + pageOffset}${query}`;
+    `/products/${param}?page=${currentPage + pageOffset}${query ? '&query=' + query : ''}`;
+
+  console.log(getHref(-1))
 
   const isFirstPage = currentPage <= 1;
   const isLastPage = currentPage >= totalPages;

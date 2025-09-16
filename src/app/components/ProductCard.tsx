@@ -16,8 +16,6 @@ interface ProductCardProps {
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const URL_LINK = `/products/${transliterateAndClear(product.title)}/${product.id}`;
 
-  console.log(!product.brand)
-
   return (
     <Link
       href={URL_LINK}

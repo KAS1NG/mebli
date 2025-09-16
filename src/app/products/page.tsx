@@ -1,8 +1,8 @@
 import { Metadata } from 'next';
 import { fetchPageCount } from '../actions/fetchPageCount';
 import InvoicesTable from '../components/table';
-import PaginationPages from '../utils/generatePagination';
 import '@/app/styles/products.scss'
+import Pagination from '../utils/generatePagination';
 
 type SearchParams = {
   page: string
@@ -26,7 +26,12 @@ export default async function Products(
     <main className="products">
       <section className="products__hero">
         <InvoicesTable query={query} currentPage={currentPage} />
-        {totalPages > 1 && <PaginationPages totalPages={totalPages} currentPage={currentPage} />}
+        {totalPages > 1 &&
+                            <Pagination
+                                totalPages={totalPages}
+                                currentPage={currentPage}
+                                query={query}
+                            />}
       </section>
     </main>
   )

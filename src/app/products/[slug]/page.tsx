@@ -9,7 +9,7 @@ type SearchParams = {
 }
 
 export default async function CategoryPage(
-    { searchParams }: PageProps<'/products/[slug]/[id]'> & { searchParams: Promise<SearchParams> }
+    { params, searchParams }: PageProps<'/products/[slug]/[id]'> & { searchParams: Promise<SearchParams> }
 ) {
     const { query = '', page = 1 } = await searchParams
 
@@ -24,6 +24,8 @@ export default async function CategoryPage(
                     <Pagination
                         totalPages={totalPages}
                         currentPage={currentPage}
+                        param={(await params).slug}
+                        query={query}
                     />}
             </section>
         </main>
