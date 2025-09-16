@@ -26,7 +26,8 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     >
       <div className={styles.card}>
         {product.brand && product.brand / 100 !== 0 &&
-          <span className={`${styles.label} ${styles.sale}`}>
+          <span className={`${styles.label} ${styles.sale}`} data-tooltip="Економія 200 грн"
+            title={`Економія ${product.price * product.brand} грн`}>
             <span>Знижка</span> <Flame size={16} />
           </span>
         }
@@ -37,6 +38,8 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             alt={`Image of ${product.title}`}
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            placeholder="blur"
+            blurDataURL={product.blurDataURL}
             className={styles.image}
             priority
           />
@@ -45,7 +48,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           <h3 className={styles.title}>{product.title}</h3>
           {!product.brand && <p className={styles.price}>{product.price} грн</p>}
           {product.brand && product.brand / 100 !== 0 &&
-            <div className={styles.priceWrapper}>
+            <div className={styles.priceWrapper}
+              title={`Економія ${product.price * product.brand} грн`}
+            >
               <span className={styles.oldPrice}>{product.price} грн</span>
               <span className={styles.newPrice}>{product.price - product.price * product.brand} грн</span>
               {product.price && (

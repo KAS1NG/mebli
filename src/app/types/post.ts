@@ -17,6 +17,7 @@ export interface IPreviewPost {
     brand: number | null
     thumbnail: string,
     qty?: number;
+    blurDataURL?: string;
 }
 
 export type Post = {
