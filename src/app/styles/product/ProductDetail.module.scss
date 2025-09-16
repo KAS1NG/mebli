@@ -15,6 +15,8 @@
     @media (max-width: 1024px) {
         padding: 30px;
         gap: 18px;
+        flex-wrap: wrap;
+        width: 100%;
     }
 
     @media (max-width: 768px) {
@@ -39,6 +41,10 @@
         color: #222;
         display: flex;
         flex-direction: column;
+
+        @media (max-width: 1024px) { 
+            width: 100%;
+        }
 
         .title {
             font-size: clamp(1.8rem, 2.5vw, 2.6rem);
@@ -166,7 +172,7 @@
 
         // 📱 Адаптивні стилі для планшетів і мобільних
         @media (max-width: 1024px) {
-            width: 60%;
+            width: 100%;
             padding: 1.8rem;
 
             .title {

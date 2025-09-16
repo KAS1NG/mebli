@@ -1,0 +1,138 @@
+.cardLink {
+    text-decoration: none;
+    color: inherit;
+}
+
+.card {
+    position: relative;
+    background-color: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    &:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+    }
+}
+
+.imageWrapper {
+    position: relative;
+    width: 100%;
+    padding-top: 75%; // співвідношення 4:3, можна змінити
+    overflow: hidden;
+}
+
+.image {
+    object-fit: cover;
+    transition: transform 0.3s ease;
+
+    .card:hover & {
+        transform: scale(1.05);
+    }
+}
+
+.info {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-grow: 1;
+}
+
+.title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #2d2d2d;
+    margin-bottom: 0.5rem;
+    line-height: 1.4;
+    letter-spacing: -0.02em;
+    transition: color 0.2s ease;
+
+    &:hover {
+        color: #1a1a1a;
+    }
+}
+
+.price {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #1a1a1a;
+}
+
+.priceWrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: auto; // щоб ціна завжди була внизу картки
+}
+
+.oldPrice {
+    font-size: 0.85rem;
+    color: #999;
+    text-decoration: line-through;
+}
+
+.newPrice {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #111; // головний акцент
+}
+
+.discount {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: #1e4637; // преміальний темно-бордовий замість яскраво-червоного
+    background: rgba(200, 240, 220, 0.8);
+    padding: 2px 6px;
+    border-radius: 6px;
+}
+
+
+/* Лейбл */
+.label {
+    position: absolute;
+    display: inline-flex;
+    align-items: center;
+    top: 12px;
+    left: 12px;
+    padding: 4px 10px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    border-radius: 9999px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    z-index: 2;
+    backdrop-filter: blur(6px);
+    background: rgba(255, 255, 255, 0.6);
+    color: #222;
+    animation: fadeIn 0.4s ease forwards;
+    backdrop-filter: blur(6px);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Кольори для різних лейблів у скандинавському стилі */
+
+.sale {
+    background: rgba(200, 240, 220, 0.8);
+    color: #1e4637;
+
+    svg {
+        stroke: #1e4637;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-6px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

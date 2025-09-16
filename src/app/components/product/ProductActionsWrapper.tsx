@@ -28,7 +28,8 @@ export default function ProductActionsWrapper({ product, user }: Props) {
             id: product.id,
             title: product.title,
             price: product.price,
-            thumbnail: product.images[0]
+            thumbnail: product.images[0],
+            brand: null
         })
         showToast('Товар додано до кошика!');
     }
