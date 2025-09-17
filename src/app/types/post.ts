@@ -8,6 +8,7 @@ export interface IPost {
     views: number,
     tags: string,
     images: string[],
+    brand: number | null
 }
 
 export interface IPreviewPost {

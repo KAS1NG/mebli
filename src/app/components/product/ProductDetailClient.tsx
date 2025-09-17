@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { IGetProperty, IPost } from "@/app/types/post";
-import { ShoppingCart } from "lucide-react";
+import { Flame, ShoppingCart } from "lucide-react";
 import DeliveryInfo from "./DeliveryInfo";
 import style from '../../styles/product/ProductDetail.module.scss'
 import ProductProperties from "./ProductProperties";
@@ -46,7 +46,7 @@ export default function ProductDetailClient({ product, isAdmin, productProperty,
             title: product.title,
             price: product.price,
             thumbnail: product.images[0],
-            brand: null
+            brand: product.brand
         })
         showToast('Товар додано до кошика!');
     }
@@ -66,16 +66,32 @@ export default function ProductDetailClient({ product, isAdmin, productProperty,
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
         >
-            <h1 className={style.title}>{product.title}</h1>
-            {/* {product.brand && product.brand / 100 !== 0 &&
+            {product.brand && product.brand / 100 !== 0 &&
                 <span className={`${style.label} ${style.sale}`}>
                     <span>Знижка</span> <Flame size={16} />
                 </span>
-            } */}
+            }
+            <h1 className={style.title}>{product.title}</h1>
             <p className={style.description}>{product.description}</p>
             <ProductTags tags={tags} />
             <div className={style.priceRow}>
-                <span className={style.price}>₴ {product.price} грн</span>
+                {product.brand == 0 && <span className={style.price}>₴ {product.price} грн</span>}
+                {!product.brand && <span className={style.price}>₴ {product.price} грн</span>}
+
+                {product.brand && product.brand / 100 !== 0 &&
+                    <div className={style.priceWrapper}
+                        title={`Економія ${product.price * product.brand} грн`}
+                    >
+                        <span className={style.oldPrice}>{product.price} грн</span>
+                        <span className={style.newPrice}>{product.price - product.price * product.brand} грн</span>
+                        {product.price && (
+                            <span className={style.discount}>
+                                -{Math.round(product.brand * 100)}%
+                            </span>
+                        )
+                        }
+                    </div>}
+
                 <motion.button
                     whileHover={{ scale: 1.03 }}
                     whileTap={{ scale: 0.97 }}

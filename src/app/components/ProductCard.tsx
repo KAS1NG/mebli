@@ -16,6 +16,8 @@ interface ProductCardProps {
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const URL_LINK = `/products/${transliterateAndClear(product.title)}/${product.id}`;
 
+  console.log(`${product.title} ${product.brand == 0} ${!product.brand}`)
+
   return (
     <Link
       href={URL_LINK}
@@ -25,7 +27,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
       style={{ viewTransitionName: `post-image-${product.id}-0` }}
     >
       <div className={styles.card}>
-        {product.brand && product.brand / 100 !== 0 &&
+        {product.brand && product.brand != 0 &&
           <span className={`${styles.label} ${styles.sale}`} data-tooltip="Економія 200 грн"
             title={`Економія ${product.price * product.brand} грн`}>
             <span>Знижка</span> <Flame size={16} />
@@ -46,8 +48,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         </div>
         <div className={styles.info}>
           <h3 className={styles.title}>{product.title}</h3>
+          {product.brand == 0 && <p className={styles.price}>{product.price} грн</p>}
           {!product.brand && <p className={styles.price}>{product.price} грн</p>}
-          {product.brand && product.brand / 100 !== 0 &&
+          {product.brand && product.brand != 0 &&
             <div className={styles.priceWrapper}
               title={`Економія ${product.price * product.brand} грн`}
             >

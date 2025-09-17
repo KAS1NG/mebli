@@ -84,8 +84,9 @@
 .discount {
     font-size: 0.75rem;
     font-weight: 500;
-    color: #1e4637; // преміальний темно-бордовий замість яскраво-червоного
-    background: rgba(200, 240, 220, 0.8);
+    background: rgba(195, 33, 72, 0.85);
+    color: #f5ebe6;
+
     padding: 2px 6px;
     border-radius: 6px;
 }
@@ -117,11 +118,11 @@
 /* Кольори для різних лейблів у скандинавському стилі */
 
 .sale {
-    background: rgba(200, 240, 220, 0.8);
-    color: #1e4637;
+    background: rgba(195, 33, 72, 0.85); /* cherry red */
+    color: #f5ebe6; /* теплий кремовий для контрасту */
 
     svg {
-        stroke: #1e4637;
+        stroke: #f5ebe6;
     }
 }
 
