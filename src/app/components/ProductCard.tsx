@@ -16,8 +16,6 @@ interface ProductCardProps {
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const URL_LINK = `/products/${transliterateAndClear(product.title)}/${product.id}`;
 
-  console.log(`${product.title} ${product.brand == 0} ${!product.brand}`)
-
   return (
     <Link
       href={URL_LINK}
@@ -40,8 +38,8 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             alt={`Image of ${product.title}`}
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            placeholder="blur"
-            blurDataURL={product.blurDataURL}
+            // placeholder="blur"
+            // blurDataURL={product.blurDataURL}
             className={styles.image}
             priority
           />

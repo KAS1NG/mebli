@@ -1,12 +1,9 @@
-import { SERVER_URL } from "../lib/constants";
+import { productLimit, SERVER_URL } from "../lib/constants";
 import { handleResponse } from "../utils/handleResponse";
 
 export const fetchPageCount = async (query: string): Promise<number> => {
-  const limit = 9
-  const page = 1
-
   try {
-    const response = await fetch(`${SERVER_URL}/posts/fetch?query=${query}&page=${page}&limit=${limit}`, {
+    const response = await fetch(`${SERVER_URL}/posts/fetch?query=${query}&page=1&limit=${productLimit}`, {
       next: { tags: ['pagination'] },
     });
     return await handleResponse(response);

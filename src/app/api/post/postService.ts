@@ -1,20 +1,29 @@
-import { SERVER_URL } from "@/app/lib/constants";
+import { productLimit, SERVER_URL } from "@/app/lib/constants";
 import { IGetProperty, IPost, IPreviewPost } from "@/app/types/post";
 import { handleResponse } from "@/app/utils/handleResponse"
 
 
-export const fetchPosts = async (page: string | number, limit: string | number, query?: string): Promise<IPreviewPost[]> => {
+export const fetchPosts = async (page: string | number, query?: string): Promise<IPreviewPost[]> => {
+
+  const params = new URLSearchParams({ page: String(page), limit: productLimit });
+  if (query) params.set('query', query);
+
+  const start = performance.now(); // час перед запитом
+
   try {
-    const response = await fetch(`${SERVER_URL}/posts/preview?page=${page}&limit=${limit}&query=${query || ''}`, {
-      next: { tags: ['posts'] },
+    const response = await fetch(`${SERVER_URL}/posts/preview?${params}`, {
+      next: { tags: ['posts'], revalidate: 30 },
     });
+
+    const end = performance.now(); // час після виконання
+    console.log(`fetchPosts виконано за ${(end - start).toFixed(2)} ms`);
 
     return await handleResponse(response);
   } catch (error) {
     console.error('Failed to fetch posts:', error);
     throw error;
   }
-};
+}
 
 /**
  * Базовий fetch-запит із дефолтними опціями.

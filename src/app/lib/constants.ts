@@ -1,4 +1,5 @@
 export const SERVER_URL = process.env.SERVER_URL
+export const productLimit = '9'
 
 export const businessSchema = {
     "@context": "https://schema.org",
