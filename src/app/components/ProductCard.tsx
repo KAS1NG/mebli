@@ -1,66 +1,60 @@
-"use client";
-
 import Link from "next/link";
 import Image from "next/image";
-import React from "react";
+
 import { IPreviewPost } from "../types/post";
-import { transliterateAndClear } from "../utils/clearUrlString";
 import { Flame } from "lucide-react";
 import styles from "../styles/products/ProductCard.module.scss";
+import { getProductUrl } from "../lib/getProductUrl";
 
 interface ProductCardProps {
   product: IPreviewPost;
-  index: number;
+  index: number
 }
 
-const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
-  const URL_LINK = `/products/${transliterateAndClear(product.title)}/${product.id}`;
+const ProductCard = ({ product, index }: ProductCardProps) => {
+  const URL_LINK = getProductUrl(product.title, product.id)
+
+  const brand = product.brand ?? 0;
+  const hasDiscount = brand > 0;
+  const discountValue = hasDiscount ? product.price * brand : 0;
+  const newPrice = hasDiscount ? product.price - discountValue : product.price;
 
   return (
     <Link
       href={URL_LINK}
-      passHref
       className={styles.cardLink}
       aria-label={`View details of ${product.title}`}
       style={{ viewTransitionName: `post-image-${product.id}-0` }}
+      scroll={true}
     >
-      <div className={styles.card}>
-        {product.brand && product.brand != 0 &&
-          <span className={`${styles.label} ${styles.sale}`} data-tooltip="Економія 200 грн"
-            title={`Економія ${product.price * product.brand} грн`}>
-            <span>Знижка</span> <Flame size={16} />
+      <div className={styles.card} role="link">
+        {hasDiscount && (
+          <span className={`${styles.label} ${styles.sale}`}>
+            <span>Знижка</span> <Flame size={16} aria-hidden="true" />
           </span>
-        }
+        )}
 
         <div className={styles.imageWrapper}>
           <Image
             src={product.thumbnail}
-            alt={`Image of ${product.title}`}
+            alt={`Купити ${product.title} за ${newPrice || product.price} грн`}
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            // placeholder="blur"
-            // blurDataURL={product.blurDataURL}
             className={styles.image}
-            priority
+            priority={index < 3}
           />
         </div>
         <div className={styles.info}>
           <h3 className={styles.title}>{product.title}</h3>
-          {product.brand == 0 && <p className={styles.price}>{product.price} грн</p>}
-          {!product.brand && <p className={styles.price}>{product.price} грн</p>}
-          {product.brand && product.brand != 0 &&
-            <div className={styles.priceWrapper}
-              title={`Економія ${product.price * product.brand} грн`}
-            >
+          {hasDiscount ? (
+            <div className={styles.priceWrapper} title={`Економія ${discountValue} грн`}>
               <span className={styles.oldPrice}>{product.price} грн</span>
-              <span className={styles.newPrice}>{product.price - product.price * product.brand} грн</span>
-              {product.price && (
-                <span className={styles.discount}>
-                  -{Math.round(product.brand * 100)}%
-                </span>
-              )
-              }
-            </div>}
+              <span className={styles.newPrice}>{newPrice} грн</span>
+              <span className={styles.discount}>-{Math.round(brand * 100)}%</span>
+            </div>
+          ) : (
+            <p className={styles.price}>{product.price} грн</p>
+          )}
         </div>
       </div>
     </Link>
@@ -68,4 +62,3 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 };
 
 export default ProductCard;
-

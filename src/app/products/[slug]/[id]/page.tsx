@@ -12,6 +12,7 @@ import {
 import { transliterateAndClear } from "@/app/utils/clearUrlString";
 import ProductDetail from "@/app/components/product/ProductDetail";
 import { stringToArray } from "@/app/utils/stringToArr";
+import { getProductUrl } from "@/app/lib/getProductUrl";
 
 type Params = {
   slug: string;
@@ -39,16 +40,16 @@ export async function generateMetadata(
   const { id } = await params; // ✅ треба await
   const product = await fetchOnePost(id, { next: { revalidate: 60 } });
   if (!product?.id) notFound();
-
+  
   const previousImages = (await parent).openGraph?.images || [];
   const img = product.images?.[0];
-  const cleanSlug = transliterateAndClear(product.title);
-  const URL_ITEM = `products/${cleanSlug}/${product.id}`;
+  // const cleanSlug = transliterateAndClear(product.title);
+  const URL_ITEM = getProductUrl(product.title, product.id)
 
   return {
     title: `${product.title} – Купити у Ромнах | Ціна ${product.price} ₴`,
-    description: `Купити ${product.title} у Ромнах. ${product.tags[0]} у Ромнах. Доставка, якісні меблі Сумська область.`,
-    alternates: { canonical: `https://mebliromny.com.ua/${URL_ITEM}` },
+    description: `Купити ${product.title} у Ромнах ${product.tags[0]} у Ромнах. Доставка, якісні меблі Сумська область.`,
+    alternates: { canonical: `https://mebliromny.com.ua${URL_ITEM}` },
     openGraph: {
       type: "article",
       title: product.title,
@@ -57,7 +58,7 @@ export async function generateMetadata(
         { url: img, width: 1200, height: 630, alt: `${product.title} у Ромнах` },
         ...previousImages,
       ],
-      url: `https://mebliromny.com.ua/${URL_ITEM}`,
+      url: `https://mebliromny.com.ua${URL_ITEM}`,
       siteName: "Меблі Ромни",
     },
     twitter: {
@@ -73,12 +74,8 @@ export async function generateMetadata(
 // ======================================================
 // 3️⃣ ProductPage — серверний компонент
 // ======================================================
-export default async function ProductPage({
-  params,
-}: {
-  params: Promise<Params>;
-}) {
-  const { id, slug } = await params; // ✅ await обов’язковий
+export default async function ProductPage({params,}: {params: Promise<Params>}) {
+  const { id, slug } = await params
 
   const [product, productProperty] = await Promise.all([
     fetchOnePost(id, { next: { revalidate: 60 } }),
@@ -95,7 +92,7 @@ export default async function ProductPage({
   const tagsArray = stringToArray(product.tags || "");
   const invoices = await fetchPosts(1, tagsArray[0]);
 
-  // ✅ schema.org Product JSON-LD
+    // ✅ schema.org Product JSON-LD
   const productSchema = {
     "@context": "https://schema.org",
     "@type": "Product",

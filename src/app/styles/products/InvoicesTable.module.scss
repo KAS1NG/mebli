@@ -1,26 +1,14 @@
-.invoicesTable {
-  padding: 40px 24px;
-  background-color: #f9f9f9;
+  .grid {
+    padding: 40px 24px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); // завжди 3 колонки
+    gap: 24px;
 
-  @media (max-width: 1024px) {
-    grid-template-columns: repeat(2, 1fr); // планшет
+    @media (max-width: 1024px) {
+      grid-template-columns: repeat(2, 1fr); // планшет
+    }
+
+    @media (max-width: 640px) {
+      grid-template-columns: 1fr; // мобільний
+    }
   }
-
-  @media (max-width: 640px) {
-    padding: 16px;
-  }
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr); // завжди 3 колонки
-  gap: 24px;
-
-  @media (max-width: 1024px) {
-    grid-template-columns: repeat(2, 1fr); // планшет
-  }
-
-  @media (max-width: 640px) {
-    grid-template-columns: 1fr; // мобільний
-  }
-}

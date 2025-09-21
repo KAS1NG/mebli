@@ -11,6 +11,7 @@ import Image from 'next/image';
 import { transliterateAndClear } from "@/app/utils/clearUrlString";
 import styles from "../../styles/product/ProductPage.module.scss";
 import Script from "next/script";
+import { Suspense } from "react";
 
 interface IProductPage {
     invoices: IPreviewPost[]
@@ -37,7 +38,7 @@ export default function ProductPage({ invoices, currentProductId }: IProductPage
     };
 
     return (
-        <>
+        <Suspense fallback={null}>
             <div className={styles.page}>
                 <div className={styles.recommendedSection}>
                     <h3>тобі може сподобатись</h3>
@@ -100,6 +101,6 @@ export default function ProductPage({ invoices, currentProductId }: IProductPage
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
             />
-        </>
+        </Suspense>
     );
 }
