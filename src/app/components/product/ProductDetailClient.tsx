@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import { IGetProperty, IPost } from "@/app/types/post";
 import { Flame, ShoppingCart } from "lucide-react";
 import DeliveryInfo from "./DeliveryInfo";
-import style from '../../styles/product/ProductDetail.module.scss'
 import ProductProperties from "./ProductProperties";
 import ProductTags from "./ProductTags";
 import { useCart } from "@/app/context/CartContext";
@@ -15,6 +14,7 @@ import { removePost } from "@/app/actions/removePost";
 import { useRouter } from "next/navigation";
 import AddProductProperties from "../AddProductProperties";
 import { useSession } from "next-auth/react";
+import style from '../../styles/product/ProductDetail.module.scss'
 
 interface User {
     role?: string;

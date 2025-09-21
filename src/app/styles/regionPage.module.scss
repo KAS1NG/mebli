@@ -1,0 +1,269 @@
+// === Organic Calm Elegant Palette ===
+// $color-bg: #F5F3EE;        // теплий білий фон
+$color-border: rgba(0, 0, 0, 0.06);
+
+$color-white: #FFFFFF;
+$color-dark: #2B2B2B;
+$color-soft-gray: rgba(0, 0, 0, 0.45);
+
+$color-lime: #C7D3B3; // приглушений трав’яний
+$color-aqua: #B7D1CF; // спокійний аквамарин
+$color-lavender: #D9CBE6; // дуже світла лаванда
+
+$transition: all 0.35s ease;
+
+.regionPage {
+    padding: 4rem 1rem;
+    background: #fafafa;
+    font-family: "Inter", sans-serif;
+    color: #333;
+
+    .container {
+        max-width: 900px;
+        margin: 0 auto;
+        background: #fff;
+        padding: 3rem;
+        border-radius: 1.5rem;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+    }
+
+    h1 {
+        font-size: 2.5rem;
+        font-weight: 700;
+        text-align: center;
+        margin-bottom: 1.5rem;
+        color: #1a1a1a;
+        position: relative;
+
+        &::after {
+            content: "";
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: #c19a6b;
+            margin: 0.75rem auto 0;
+            border-radius: 2px;
+        }
+    }
+
+    p {
+        text-align: center;
+        font-size: 1.1rem;
+        color: #555;
+        margin-bottom: 2rem;
+        line-height: 1.6;
+    }
+
+    section {
+        margin-top: 2rem;
+
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #222;
+        }
+
+        p,
+        ul {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #444;
+        }
+
+        ul {
+            padding-left: 1.5rem;
+            margin-top: 0.5rem;
+
+            li {
+                margin-bottom: 0.5rem;
+            }
+        }
+
+        blockquote,
+        .note {
+            background: #f4f4f4;
+            padding: 1.2rem;
+            border-left: 4px solid #c19a6b;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            color: #333;
+            text-align: center;
+            font-style: italic;
+            margin: 1.5rem 0;
+        }
+    }
+}
+
+
+.contacts__block {
+    margin-bottom: 2rem;
+
+    h2 {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 0.75rem;
+        color: #222;
+    }
+
+    p,
+    ul {
+        font-size: 1rem;
+        line-height: 1.6;
+        color: #444;
+    }
+
+    ul {
+        padding-left: 1.2rem;
+        list-style: disc;
+
+        li {
+            margin-bottom: 0.4rem;
+
+            a {
+                color: #c19a6b;
+                text-decoration: none;
+                transition: color 0.3s ease;
+
+                &:hover {
+                    color: #8a6848;
+                }
+            }
+        }
+    }
+}
+
+// === Wrapper з делікатним fade ===
+.categories-wrapper {
+    position: relative;
+
+    &::before,
+    &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 56px;
+        pointer-events: none;
+        z-index: 2;
+    }
+}
+
+// === Container ===
+.categories {
+    display: flex;
+    justify-content: center;
+    gap: 18px;
+    padding: 16px 28px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    position: relative;
+    z-index: 1;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
+    .category {
+        scroll-snap-align: center;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: max-content;
+        padding: 0.7rem 1.6rem;
+        border-radius: 999px;
+        font-size: 0.95rem;
+        font-weight: 500;
+        letter-spacing: 0.15px;
+        text-decoration: none;
+        cursor: pointer;
+
+        // Базовий стиль
+        color: $color-soft-gray;
+        background: rgba($color-white, 0.5);
+        backdrop-filter: blur(10px) saturate(160%);
+        border: 1px solid $color-border;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+        transition: $transition;
+
+        // Hover — елегантне підсвічування
+        &:hover {
+            background: rgba($color-white, 0.85);
+            color: $color-dark;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+            transform: translateY(-1px);
+        }
+
+        // Focus (для доступності)
+        &:focus-visible {
+            outline: 3px solid rgba($color-aqua, 0.35);
+            outline-offset: 3px;
+        }
+
+        // Active — градієнт дуже ніжний
+        &.active {
+            background: linear-gradient(135deg, $color-lime 0%, $color-aqua 100%);
+            color: $color-dark;
+            font-weight: 600;
+            border: none;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+            transform: translateY(-1px);
+        }
+    }
+
+    // === Responsive ===
+    @media (max-width: 1024px) {
+        gap: 14px;
+        padding: 14px 18px;
+    }
+
+    @media (max-width: 768px) {
+        justify-content: flex-start;
+        gap: 12px;
+        padding: 12px 14px;
+
+        .category {
+            font-size: 0.9rem;
+            padding: 0.6rem 1.3rem;
+        }
+    }
+}
+
+.addToCart {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem 1.5rem;
+    background: linear-gradient(135deg, #a8d8c1, #f1e3c6);
+    border: none;
+    border-radius: 50px;
+    color: #1a1a1a;
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+    svg {
+        margin-right: 0.5rem;
+    }
+}
+
+.addToCart:hover {
+    background: linear-gradient(135deg, #95cbb4, #e6dbca);
+    /* обраний градієнт */
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.addToCart:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+    svg {
+        margin-right: 0.5rem;
+    }
+}

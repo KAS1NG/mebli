@@ -49,19 +49,11 @@ const Geometria = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Меблі Ромни | Купити шафи-купе, кухні, дивани, столи з доставкою",
+  title: "Меблі Ромни | шафи-купе, кухні, дивани, столи, матраци",
   icons: {
     icon: "/icon.svg?v=2",
   },
-  description:
-    "Купити меблі у Ромнах – шафи-купе, кухні, столи, дивани, матраци. Висока якість, стильний дизайн і доступні ціни. Замовте меблі з доставкою по Ромнах вже сьогодні!",
-  keywords: [
-    "меблі Ромни",
-    "шафи купе Ромни",
-    "кухні на замовлення Ромни",
-    "дивани Ромни",
-    "купити меблі Ромни",
-  ],
+  description: "Купити меблі у Ромнах – шафи-купе, кухні, столи, дивани, матраци. По доступним цінам. Замовте меблі, доставка Ромни та Сумська область!",
   openGraph: {
     title: "Меблі Ромни – шафи, кухні, дивани, столи | Купити меблі",
     description:
@@ -72,12 +64,20 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "https://mebliromny.com.ua/_next/image?url=https%3A%2F%2Ffirebasestorage.googleapis.com%2Fv0%2Fb%2Fsicero-9aa5f.appspot.com%2Fo%2Fab6b1568-5878-4e76-ad1b-86f3373bd3ce.jpg%3Falt%3Dmedia&w=1920&q=75",
-        width: 1024,
-        height: 1077,
-        alt: "Сучасні меблі у Ромнах",
+        url: "https://res.cloudinary.com/dnwcmqbtm/image/upload/v1758481933/1_aouicz.png",
+        width: 1536,
+        height: 1024,
+        alt: "Купити меблі у Ромнах – ліжка, матраци, дивани, столи",
       },
     ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    site: "@mebliromny",
+    title: "Меблі Ромни – сучасні меблі з доставкою",
+    description:
+      "Шафи-купе, кухні, дивани, столи, матраци. Доставка по Ромнах та області.",
+    images: ["https://mebliromny.com.ua/og-image.jpg"],
   },
   alternates: {
     languages: {
@@ -100,13 +100,13 @@ export default function RootLayout({
       <body className={`${geistSans.variable} ${geistMono.variable} ${Geometria.variable} ${manrope.variable} ${raleway.variable}`}>
         {/* <Preloader /> */}
         <CartProvider>
-        <Providers>
-          <div className="heightContainer">
-            <Header />
-            {children}
-            <Footer />
-          </div>
-        </Providers>
+          <Providers>
+            <div className="heightContainer">
+              <Header />
+              {children}
+              <Footer />
+            </div>
+          </Providers>
         </CartProvider>
         <ConsentBanner />
         <AnalyticsProvider />

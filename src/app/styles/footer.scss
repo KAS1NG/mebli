@@ -41,6 +41,7 @@
     @media (max-width: 768px) {
       min-width: 250px;
       border: none;
+
       &:last-child {
         border: none;
       }
@@ -150,6 +151,27 @@
         color: #cfa56f;
         text-decoration: underline;
       }
+    }
+  }
+}
+
+.useful_links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .6rem;
+  // justify-content: space-between;
+
+  a {
+    display: inline-block;
+    font-size: 16px;
+    color: #767676;
+    line-height: 1.5;
+    color: #767676;
+    transition: .6s;
+
+    &:hover {
+      color: #cfa56f;
+      text-decoration: underline;
     }
   }
 }

@@ -1,6 +1,7 @@
 import type { MetadataRoute } from 'next'
 import { fetchAll } from './api/post/postService';
 import { transliterateAndClear } from './utils/clearUrlString';
+import { regions } from './lib/regions';
 
 const BASE_URL = "https://mebliromny.com.ua";
 
@@ -27,6 +28,30 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: 'daily',
       priority: 0.9,
     },
+    {
+      url: `${BASE_URL}/about`,
+      lastModified: new Date().toISOString(),
+      changeFrequency: 'monthly',
+      priority: 0.6,
+    },
+    {
+      url: `${BASE_URL}/contact`,
+      lastModified: new Date().toISOString(),
+      changeFrequency: 'monthly',
+      priority: 0.6,
+    },
+    {
+      url: `${BASE_URL}/delivery`,
+      lastModified: new Date().toISOString(),
+      changeFrequency: 'monthly',
+      priority: 0.6,
+    },
+    {
+      url: `${BASE_URL}/return-policy`,
+      lastModified: new Date().toISOString(),
+      changeFrequency: 'monthly',
+      priority: 0.6,
+    },
   ];
 
   const productPages: MetadataRoute.Sitemap = products.map((product) => ({
@@ -36,5 +61,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.8,
   }));
 
-  return [...staticPages, ...productPages];
+  // динамічні сторінки для всіх міст
+  const cityPages: MetadataRoute.Sitemap = Object.keys(regions).map((city) => ({
+    url: `${BASE_URL}/mebli/${city}`,
+    lastModified: new Date(),
+    changeFrequency: "weekly",
+    priority: 0.9,
+  }));
+
+  return [...staticPages, ...productPages, ...cityPages];
 }

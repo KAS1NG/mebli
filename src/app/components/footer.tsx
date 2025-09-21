@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
-import '@/app/styles/footer.scss'
 import Script from 'next/script';
+import '@/app/styles/footer.scss'
 
 const Footer = () => {
   return (
@@ -20,6 +20,8 @@ const Footer = () => {
               <li><Link href="/about">Про нас</Link></li>
               <li><Link href="/products">Меблі</Link></li>
               <li><Link href="/contact">Контакти</Link></li>
+              <li><Link href="/delivery">Доставка</Link></li>
+              <li><Link href="/return-policy">Політика повернення</Link></li>
             </ul>
           </div>
           <div className="footer__column">
@@ -29,6 +31,13 @@ const Footer = () => {
               mebelshuk@gmail.com<br />
               +38 050 307 34 36
             </p>
+            <h4 className="footer__heading" style={{"paddingTop":"10px"}}>Корисна інформація</h4>
+            <div className='useful_links'>
+              <Link href="/mebli/sumy">Меблі Суми</Link>
+              <Link href="/mebli/romny">Меблі Ромни</Link>
+              <Link href="/mebli/konotop">Меблі Конотоп</Link>
+              <Link href="/mebli/shostka">Меблі Шостка</Link>
+            </div>
           </div>
         </div>
       </div>
