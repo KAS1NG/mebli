@@ -8,15 +8,10 @@ export const fetchPosts = async (page: string | number, query?: string): Promise
   const params = new URLSearchParams({ page: String(page), limit: productLimit });
   if (query) params.set('query', query);
 
-  const start = performance.now(); // час перед запитом
-
   try {
     const response = await fetch(`${SERVER_URL}/posts/preview?${params}`, {
       next: { tags: ['posts'], revalidate: 30 },
     });
-
-    const end = performance.now(); // час після виконання
-    console.log(`fetchPosts виконано за ${(end - start).toFixed(2)} ms`);
 
     return await handleResponse(response);
   } catch (error) {

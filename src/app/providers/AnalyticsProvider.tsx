@@ -3,7 +3,7 @@
 import Script from 'next/script';
 import { useEffect } from 'react';
 
-const GA_ID = process.env.NEXT_PUBLIC_GA_ID; // зроби публічну змінну
+const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
 
 export default function AnalyticsProvider() {
   useEffect(() => {
@@ -20,7 +20,6 @@ export default function AnalyticsProvider() {
 
   return (
     <>
-      {/* Google Analytics */}
       <Script
         id="ga-script"
         src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
@@ -33,7 +32,7 @@ export default function AnalyticsProvider() {
           window.gtag = gtag;
 
           gtag('js', new Date());
-          gtag('config', '${GA_ID}', { anonymize_ip: true });
+          gtag('config', '${GA_ID}', { anonymize_ip: true, send_page_view: false });
 
           // Старт: все заборонено
           gtag('consent', 'default', {

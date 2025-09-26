@@ -5,14 +5,12 @@ import Header from "./components/header";
 import Footer from "./components/footer";
 import AnalyticsProvider from "./providers/AnalyticsProvider";
 import ConsentBanner from "./components/ConsentBanner";
-// import Preloader from "./components/Preloader";
 import Script from "next/script";
 import { businessSchema } from "./lib/constants";
-import "./globals.css";
 import { CartProvider } from "./context/CartContext";
-import { Manrope, Raleway } from "next/font/google";
+import { Manrope } from "next/font/google";
+import "./globals.css";
 
-// Основний шрифт (для тексту)
 const manrope = Manrope({
   subsets: ["latin", "cyrillic"],
   weight: ["400", "500", "600", "700"],
@@ -20,30 +18,9 @@ const manrope = Manrope({
   display: "swap",
 });
 
-// Додатковий (для заголовків)
-const raleway = Raleway({
-  subsets: ["latin", "cyrillic"],
-  weight: ["600", "700"],
-  variable: "--font-raleway",
-  display: "swap",
-});
-
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
-  weight: "100 900",
-  display: "swap",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-  display: "swap",
-});
-
-const Geometria = localFont({
-  src: "./fonts/Geometria.ttf",
-  variable: "--font-Geometria-mono",
   weight: "100 900",
   display: "swap",
 });
@@ -90,22 +67,18 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
+export default function RootLayout({ children }: Readonly<{
   children: React.ReactNode;
 }>) {
+
   return (
     <html lang="uk">
-      <body className={`${geistSans.variable} ${geistMono.variable} ${Geometria.variable} ${manrope.variable} ${raleway.variable}`}>
-        {/* <Preloader /> */}
+      <body className={`${geistSans.variable} ${manrope.variable}`}>
         <CartProvider>
           <Providers>
-            <div className="heightContainer">
-              <Header />
-              {children}
-              <Footer />
-            </div>
+            <Header />
+            {children}
+            <Footer />
           </Providers>
         </CartProvider>
         <ConsentBanner />

@@ -38,11 +38,9 @@
   /* базовий розмір верхнього рядка */
   --bottom-size: clamp(16px, 3.2vw, 28px);
   /* розмір нижнього рядка */
-
   position: absolute;
   top: 12px;
   left: 20%;
-  font-family: var(--font-Geometria-mono);
   margin: 0;
   display: grid;
   gap: 0.2em;
@@ -89,7 +87,7 @@
 
 .title span {
   font-size: var(--top-size);
-  font-weight: 800;
+  font-weight: 600;
 }
 
 .title div {
