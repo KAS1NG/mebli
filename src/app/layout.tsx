@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import Providers from "./providers";
-import Header from "./components/header";
+// import Header from "./components/header/header";
 import Footer from "./components/footer";
 import AnalyticsProvider from "./providers/AnalyticsProvider";
 import ConsentBanner from "./components/ConsentBanner";
@@ -10,6 +10,7 @@ import { businessSchema } from "./lib/constants";
 import { CartProvider } from "./context/CartContext";
 import { Manrope } from "next/font/google";
 import "./globals.css";
+import Header from "./components/header/Header.server";
 
 const manrope = Manrope({
   subsets: ["latin", "cyrillic"],
@@ -76,6 +77,7 @@ export default function RootLayout({ children }: Readonly<{
       <body className={`${geistSans.variable} ${manrope.variable}`}>
         <CartProvider>
           <Providers>
+            {/* <Header /> */}
             <Header />
             {children}
             <Footer />

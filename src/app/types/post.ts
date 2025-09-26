@@ -45,3 +45,9 @@ export interface IGetProperty {
     name: string
     text: string
 }
+
+export interface ICategory {
+    name: string, 
+    mainUrl: string, 
+    href: string
+}

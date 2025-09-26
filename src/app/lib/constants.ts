@@ -1,6 +1,17 @@
 export const SERVER_URL = process.env.SERVER_URL
 export const productLimit = '9'
 
+export const categories = [
+    { name: 'Нове', mainUrl: '/products', href: '/products?page=1' },
+    { name: 'Дивани', mainUrl: '/products/divany', href: '/products/divany?page=1&query=диван' },
+    { name: 'Крісла', mainUrl: '/products/krisla', href: '/products/krisla?page=1&query=крісло' },
+    { name: 'Стільці', mainUrl: '/products/stilci', href: '/products/stilci?page=1&query=стілець' },
+    { name: 'Ліжка', mainUrl: '/products/lizhka', href: '/products/lizhka?page=1&query=ліжко' },
+    { name: 'Шафи', mainUrl: '/products/shafi', href: '/products/shafi?page=1&query=шафа' },
+    { name: 'Столи', mainUrl: '/products/stoly', href: '/products/stoly?page=1&query=стіл' },
+    { name: 'Матраци', mainUrl: '/products/matrats', href: '/products/matrats?page=1&query=матрац' },
+];
+
 export const businessSchema = {
     "@context": "https://schema.org",
     "@type": "FurnitureStore",
