@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import Providers from "./providers";
-// import Header from "./components/header/header";
 import Footer from "./components/footer";
 import AnalyticsProvider from "./providers/AnalyticsProvider";
 import ConsentBanner from "./components/ConsentBanner";
