@@ -7,7 +7,7 @@ import "../styles/about.scss";
 export default function About() {
   return (
     <section className="about">
-      {/* <div className="container">
+      <div className="container">
         <h1 className="about__title">Про нас</h1>
         <p className="about__intro">
           Роменський меблевий комбінат — понад 30 років традицій у створенні якісних меблів.  
@@ -56,7 +56,7 @@ export default function About() {
             Це про історію, стиль та затишок, створені з любов’ю до людей та природи.
           </p>
         </div>
-      </div> */}
+      </div>
     </section>
   );
 }
