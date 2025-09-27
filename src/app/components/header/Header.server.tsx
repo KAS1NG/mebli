@@ -12,7 +12,6 @@ import { Сategories } from './Сategories';
 
 export default async function Header() {
     const session = (await getServerSession(authOptions)) as Session | null;
-    // const role = (session?.user as any)?.role;
     const role = (session?.user as unknown as { role?: string })?.role;
     const isAdmin = role === 'ROLE_ADMIN';
 
@@ -21,8 +20,13 @@ export default async function Header() {
             <div className={styles.container}>
                 <div className={styles.left}>
                     <Link href="/" className={styles.logo__container}>
-                        {/* import from /public for simpler static usage */}
-                        <Image src={logoPic} width={40} height={40} alt="Меблі Ромни" className={styles.logo} />
+                        <Image
+                            src={logoPic}
+                            width={40}
+                            height={40}
+                            alt="Логотип Роменського меблевого комбінату"
+                            className={styles.logo}
+                        />
                         <span className={styles.brand}>Меблі Ромни</span>
                     </Link>
                 </div>

@@ -27,7 +27,7 @@ const Footer = () => {
           <div className="footer__column">
             <h4 className="footer__heading">Контактна інформація</h4>
             <p className="footer__text">
-              м. Ромни, 1-й провулок Свободи, 10<br />
+              <Link href="https://maps.app.goo.gl/qyZYskLVoNGB1ggg7">м. Ромни, бульвар Свободи, 24</Link><br />
               mebelshuk@gmail.com<br />
               +38 050 307 34 36
             </p>
@@ -59,9 +59,9 @@ const Footer = () => {
             name: "Mebli Romny",
             url: "https://mebliromny.com.ua",
             telephone: "+380503073436",
-            address: { "@type": "PostalAddress", addressCountry: "UA", addressLocality: "Ромни", streetAddress: "1-й провулок Свободи, 10" },
+            address: { "@type": "PostalAddress", addressCountry: "UA", addressLocality: "Ромни", streetAddress: "бульвар Свободи, 24" },
             areaServed: "Сумська область",
-            openingHours: "Mo-Fr 09:00-18:00",
+            openingHours: "Mo-Su 09:00–17:00",
             sameAs: ["https://www.facebook.com/share/1EVjeSnw7c/", "https://www.instagram.com/manuf4cture_p"]
           })
         }}
