@@ -6,7 +6,6 @@ import type { Session } from 'next-auth';
 import { categories } from '@/app/lib/constants';
 import authOptions from '@/app/utils/authOptions';
 import HeaderClient from './Header.client';
-import logoPic from '@/app/public/logo.svg'
 import { Сategories } from './Сategories';
 
 
@@ -21,7 +20,7 @@ export default async function Header() {
                 <div className={styles.left}>
                     <Link href="/" className={styles.logo__container}>
                         <Image
-                            src={logoPic}
+                            src='favicon.svg'
                             width={40}
                             height={40}
                             alt="Логотип Роменського меблевого комбінату"

@@ -29,8 +29,13 @@ const geistSans = localFont({
 export const metadata: Metadata = {
   title: "Меблі Ромни | шафи-купе, кухні, дивани, столи, матраци",
   icons: {
-    icon: "/icon.svg?v=2",
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },        // класична іконка
+      { url: "/favicon.svg", type: "image/svg+xml" }
+    ],
+    apple: "/apple-touch-icon.png",
   },
+  manifest: "/manifest.json",
   description: "Купити меблі у Ромнах – шафи-купе, кухні, столи, дивани, матраци. По доступним цінам. Замовте меблі, доставка Ромни та Сумська область!",
   openGraph: {
     title: "Меблі Ромни – шафи, кухні, дивани, столи | Купити меблі",
