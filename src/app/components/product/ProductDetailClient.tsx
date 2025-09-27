@@ -75,15 +75,15 @@ export default function ProductDetailClient({ product, isAdmin, productProperty,
             <p className={style.description}>{product.description}</p>
             <ProductTags tags={tags} />
             <div className={style.priceRow}>
-                {product.brand == 0 && <span className={style.price}>₴ {product.price} грн</span>}
-                {!product.brand && <span className={style.price}>₴ {product.price} грн</span>}
+                {product.brand == 0 && <span className={style.price}>₴ {product.price.toLocaleString('uk-UA')} грн</span>}
+                {!product.brand && <span className={style.price}>₴ {product.price.toLocaleString('uk-UA')} грн</span>}
 
                 {product.brand && product.brand / 100 !== 0 &&
                     <div className={style.priceWrapper}
                         title={`Економія ${product.price * product.brand} грн`}
                     >
-                        <span className={style.oldPrice}>{product.price} грн</span>
-                        <span className={style.newPrice}>{product.price - product.price * product.brand} грн</span>
+                        <span className={style.oldPrice}>{product.price.toLocaleString('uk-UA')} грн</span>
+                        <span className={style.newPrice}>{(product.price - product.price * product.brand).toLocaleString('uk-UA')} грн</span>
                         {product.price && (
                             <span className={style.discount}>
                                 -{Math.round(product.brand * 100)}%

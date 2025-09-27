@@ -88,7 +88,7 @@ export default function ProductPage({ invoices, currentProductId }: IProductPage
                                             />
                                         </div>
                                         <p className={styles.name}>{p.title}</p>
-                                        <p className={styles.price}>{p.price} ₴</p>
+                                        <p className={styles.price}>{p.price.toLocaleString('uk-UA')} грн</p>
                                     </div>
                                 </Link>
                             </SwiperSlide>

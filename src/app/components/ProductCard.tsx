@@ -3,8 +3,8 @@ import Image from "next/image";
 
 import { IPreviewPost } from "../types/post";
 import { Flame } from "lucide-react";
-import styles from "../styles/products/ProductCard.module.scss";
 import { getProductUrl } from "../lib/getProductUrl";
+import styles from "../styles/products/ProductCard.module.scss";
 
 interface ProductCardProps {
   product: IPreviewPost;
@@ -48,12 +48,12 @@ const ProductCard = ({ product, index }: ProductCardProps) => {
           <h3 className={styles.title}>{product.title}</h3>
           {hasDiscount ? (
             <div className={styles.priceWrapper} title={`Економія ${discountValue} грн`}>
-              <span className={styles.oldPrice}>{product.price} грн</span>
-              <span className={styles.newPrice}>{newPrice} грн</span>
+              <span className={styles.oldPrice}>{product.price.toLocaleString('uk-UA')} грн</span>
+              <span className={styles.newPrice}>{newPrice.toLocaleString('uk-UA')} грн</span>
               <span className={styles.discount}>-{Math.round(brand * 100)}%</span>
             </div>
           ) : (
-            <p className={styles.price}>{product.price} грн</p>
+            <p className={styles.price}>{product.price.toLocaleString('uk-UA')} грн</p>
           )}
         </div>
       </div>
