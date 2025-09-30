@@ -14,11 +14,13 @@ export const Сategories = () => {
             <div className={styles.categories}>
                 {categories.map((cat) => {
                     const active = pathname === cat.mainUrl;
+                    const discount = pathname === '/products/znizhka'
+
                     return (
                         <Link
                             key={cat.href}
                             href={cat.href}
-                            className={`${styles.category} ${active ? styles.active : ''}`}
+                            className={`${styles.category} ${active ? styles.active : ''} ${discount ? styles.discount : ''}`}
                         >
                             {cat.name}
                         </Link>

@@ -214,7 +214,6 @@ $transition: all 0.35s ease;
       outline-offset: 3px;
     }
 
-    // Active — градієнт дуже ніжний
     &.active {
       background: linear-gradient(135deg, $color-lime 0%, $color-aqua 100%);
       color: $color-dark;

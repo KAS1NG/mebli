@@ -3,6 +3,7 @@ export const productLimit = '9'
 
 export const categories = [
     { name: 'Нове', mainUrl: '/products', href: '/products?page=1' },
+    { name: 'Знижка', mainUrl: '/products/znizhka', href: '/products/znizhka?page=1&query=знижка' },
     { name: 'Дивани', mainUrl: '/products/divany', href: '/products/divany?page=1&query=диван' },
     { name: 'Крісла', mainUrl: '/products/krisla', href: '/products/krisla?page=1&query=крісло' },
     { name: 'Стільці', mainUrl: '/products/stilci', href: '/products/stilci?page=1&query=стілець' },
