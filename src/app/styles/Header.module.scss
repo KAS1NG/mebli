@@ -222,6 +222,21 @@ $transition: all 0.35s ease;
       box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
       transform: translateY(-1px);
     }
+    
+    &.discountBasic {
+      background: linear-gradient(135deg, rgba(249, 199, 207, 0.8) 0%, rgba(255, 235, 221, 0.8) 100%);
+      color: $color-dark;
+    }
+
+    &.discount {
+      background: linear-gradient(135deg, #FF6B6B 0%, #FFD166 100%);
+      color: $color-dark;
+      font-weight: 600;
+      border: none;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+      transform: translateY(-1px);
+    }
+
   }
 
   // === Responsive ===
