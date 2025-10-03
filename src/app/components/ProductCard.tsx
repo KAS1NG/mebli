@@ -44,6 +44,7 @@ const ProductCard = ({ product, index }: ProductCardProps) => {
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 364px"
             className={styles.image}
             priority={index < 3}
+            quality={90}
           />
         </div>
 
