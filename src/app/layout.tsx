@@ -63,7 +63,8 @@ export const metadata: Metadata = {
   },
   alternates: {
     languages: {
-      'uk-UA': '/uk-UA',  // Українська
+      uk: 'https://mebliromny.com.ua/',       // Українська
+      'x-default': 'https://mebliromny.com.ua/'  // За замовчуванням
     },
   },
   robots: {
