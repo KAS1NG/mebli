@@ -39,7 +39,7 @@ const ProductCard = ({ product, index }: ProductCardProps) => {
             src={product.thumbnail}
             alt={`Купити ${product.title} за ${newPrice || product.price} грн`}
             fill
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 364px"
             className={styles.image}
             priority={index < 3}
           />
