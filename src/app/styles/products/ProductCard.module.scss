@@ -1,139 +1,424 @@
+// // ========================
+// // VARIABLES
+// // ========================
+// $color-text-dark: #111;
+// $color-text-gray: #999;
+// $color-text-title: #2d2d2d;
+// $color-card-bg: #fff;
+
+// $color-sale-bg: rgba(195, 33, 72, 0.85);
+// $color-sale-text: #f5ebe6;
+
+// $transition-default: 0.3s ease;
+
+// // ========================
+// // CARD LINK
+// // ========================
+// .cardLink {
+//   text-decoration: none;
+//   color: inherit;
+// }
+
+// // ========================
+// // CARD
+// // ========================
+// .card {
+//   position: relative;
+//   background-color: $color-card-bg;
+//   border-radius: 12px;
+//   overflow: hidden;
+//   display: flex;
+//   flex-direction: column;
+//   transition: transform $transition-default, box-shadow $transition-default;
+
+//   &:hover {
+//     transform: translateY(-6px);
+//     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+//   }
+// }
+
+// // ========================
+// // IMAGE
+// // ========================
+// .imageWrapper {
+//   position: relative;
+//   width: 100%;
+//   padding-top: 75%; // співвідношення 4:3
+//   overflow: hidden;
+// }
+
+// .image {
+//   object-fit: cover;
+//   width: 100%;
+//   height: 100%;
+//   transition: transform $transition-default;
+
+//   // Hover effect через клас .card
+//   @at-root .card:hover & {
+//     transform: scale(1.05);
+//   }
+// }
+
+// // ========================
+// // INFO
+// // ========================
+// .info {
+//   padding: 16px;
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: space-between;
+//   flex-grow: 1;
+// }
+
+// .title {
+//   font-size: 1.2rem;
+//   font-weight: 600;
+//   color: $color-text-title;
+//   margin-bottom: 0.5rem;
+//   line-height: 1.4;
+//   letter-spacing: -0.02em;
+//   transition: color 0.2s ease;
+
+//   &:hover {
+//     color: $color-text-dark;
+//   }
+// }
+
+// .priceWrapper {
+//   display: flex;
+//   align-items: center;
+//   gap: 8px;
+//   margin-top: auto;
+// }
+
+// .price {
+//   font-size: 1rem;
+//   font-weight: 600;
+//   color: $color-text-dark;
+// }
+
+// .oldPrice {
+//   font-size: 0.85rem;
+//   color: $color-text-gray;
+//   text-decoration: line-through;
+// }
+
+// .newPrice {
+//   font-size: 1.2rem;
+//   font-weight: 600;
+//   color: $color-text-dark;
+// }
+
+// .discount {
+//   font-size: 0.75rem;
+//   font-weight: 500;
+//   background: $color-sale-bg;
+//   color: $color-sale-text;
+//   padding: 2px 6px;
+//   border-radius: 6px;
+// }
+
+// // ========================
+// // LABEL
+// // ========================
+// .label {
+//   position: absolute;
+//   display: inline-flex;
+//   align-items: center;
+//   top: 12px;
+//   left: 12px;
+//   padding: 4px 10px;
+//   font-size: 0.75rem;
+//   font-weight: 500;
+//   border-radius: 9999px;
+//   letter-spacing: 0.5px;
+//   text-transform: uppercase;
+//   z-index: 2;
+//   background: rgba(255, 255, 255, 0.6);
+//   backdrop-filter: blur(6px);
+//   color: #222;
+//   animation: fadeIn 0.4s ease forwards;
+//   will-change: transform, opacity;
+
+//   &.sale {
+//     background: $color-sale-bg;
+//     color: $color-sale-text;
+
+//     svg {
+//       stroke: $color-sale-text;
+//     }
+//   }
+// }
+
+// // ========================
+// // ANIMATION
+// // ========================
+// @keyframes fadeIn {
+//   from {
+//     opacity: 0;
+//     transform: translateY(-6px);
+//   }
+//   to {
+//     opacity: 1;
+//     transform: translateY(0);
+//   }
+// }
+
+// // ========================
+// // RESPONSIVE
+// // ========================
+// @media (max-width: 768px) {
+//   .card {
+//     border-radius: 8px;
+//   }
+
+//   .title {
+//     font-size: 1rem;
+//   }
+
+//   .price {
+//     font-size: 0.9rem;
+//   }
+// }
+
+// @media (max-width: 480px) {
+//   .title {
+//     font-size: 0.95rem;
+//   }
+
+//   .price {
+//     font-size: 0.85rem;
+//   }
+// }
+
+
+// ========================
+// VARIABLES
+// ========================
+$color-text-dark: #111;
+$color-text-gray: #999;
+$color-text-title: #2d2d2d;
+$color-card-bg: #fff;
+
+$color-sale-bg: rgba(195, 33, 72, 0.85);
+$color-sale-text: #f5ebe6;
+
+$transition-default: 0.3s ease;
+
+// ========================
+// BASE STYLES
+// ========================
+
 .cardLink {
-    text-decoration: none;
-    color: inherit;
-}
+  text-decoration: none;
+  color: inherit;
 
-.card {
-    position: relative;
-    background-color: #fff;
+  &:focus-visible {
+    outline: 2px solid $color-sale-bg;
+    outline-offset: 4px;
     border-radius: 12px;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-
-    &:hover {
-        transform: translateY(-6px);
-        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
-    }
+  }
 }
 
+// ========================
+// CARD
+// ========================
+.card {
+  position: relative;
+  background-color: $color-card-bg;
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: transform $transition-default, box-shadow $transition-default, filter $transition-default;
+  will-change: transform;
+
+  &:hover {
+    transform: translateY(-6px) scale(1.01);
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.12);
+    filter: brightness(1.03);
+  }
+}
+
+// ========================
+// IMAGE
+// ========================
 .imageWrapper {
-    position: relative;
-    width: 100%;
-    padding-top: 75%; // співвідношення 4:3, можна змінити
-    overflow: hidden;
+  position: relative;
+  width: 100%;
+  padding-top: 75%; // 4:3
+  overflow: hidden;
+  background: #f8f8f8;
 }
 
 .image {
-    object-fit: cover;
-    transition: transform 0.3s ease;
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  transition: transform $transition-default;
+  will-change: transform;
 
-    .card:hover & {
-        transform: scale(1.05);
-    }
+  @at-root .card:hover & {
+    transform: scale(1.05);
+  }
 }
 
+// ========================
+// INFO
+// ========================
 .info {
-    padding: 16px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    flex-grow: 1;
+  padding: clamp(14px, 2vw, 20px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-grow: 1;
 }
 
 .title {
-    font-size: 1.2rem;
-    font-weight: 600;
-    color: #2d2d2d;
-    margin-bottom: 0.5rem;
-    line-height: 1.4;
-    letter-spacing: -0.02em;
-    transition: color 0.2s ease;
+  font-size: clamp(1rem, 1.2vw, 1.4rem);
+  font-weight: 600;
+  color: $color-text-title;
+  margin-bottom: 0.5rem;
+  line-height: 1.4;
+  letter-spacing: -0.02em;
+  transition: color 0.2s ease;
 
-    &:hover {
-        color: #1a1a1a;
-    }
-}
-
-.price {
-    font-size: 1rem;
-    font-weight: 600;
-    color: #1a1a1a;
+  &:hover {
+    color: $color-text-dark;
+  }
 }
 
 .priceWrapper {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-top: auto; // щоб ціна завжди була внизу картки
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: auto;
+}
+
+.price {
+  font-size: clamp(0.95rem, 1vw, 1.1rem);
+  font-weight: 600;
+  color: $color-text-dark;
 }
 
 .oldPrice {
-    font-size: 0.85rem;
-    color: #999;
-    text-decoration: line-through;
+  font-size: 0.85rem;
+  color: $color-text-gray;
+  text-decoration: line-through;
 }
 
 .newPrice {
-    font-size: 1.2rem;
-    font-weight: 600;
-    color: #111; // головний акцент
+  font-size: clamp(1.1rem, 1.3vw, 1.4rem);
+  font-weight: 600;
+  color: $color-text-dark;
 }
 
 .discount {
-    font-size: 0.75rem;
-    font-weight: 500;
-    background: rgba(195, 33, 72, 0.85);
-    color: #f5ebe6;
+  font-size: 0.75rem;
+  font-weight: 500;
+  background: $color-sale-bg;
+  color: $color-sale-text;
+  padding: 3px 8px;
+  border-radius: 6px;
+  transition: transform $transition-default;
 
-    padding: 2px 6px;
-    border-radius: 6px;
+  &:hover {
+    transform: scale(1.05);
+  }
 }
 
-
-/* Лейбл */
+// ========================
+// LABEL
+// ========================
 .label {
-    position: absolute;
-    display: inline-flex;
-    align-items: center;
-    top: 12px;
-    left: 12px;
-    padding: 4px 10px;
-    font-size: 0.75rem;
-    font-weight: 500;
-    border-radius: 9999px;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-    z-index: 2;
-    backdrop-filter: blur(6px);
-    background: rgba(255, 255, 255, 0.6);
-    color: #222;
-    animation: fadeIn 0.4s ease forwards;
-    backdrop-filter: blur(6px);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  top: 12px;
+  left: 12px;
+  padding: 4px 10px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  border-radius: 9999px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  z-index: 2;
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(8px);
+  color: #222;
+  animation: fadeIn 0.4s ease forwards;
+  will-change: transform, opacity;
 
-/* Кольори для різних лейблів у скандинавському стилі */
-
-.sale {
-    background: rgba(195, 33, 72, 0.85); /* cherry red */
-    color: #f5ebe6; /* теплий кремовий для контрасту */
+  &.sale {
+    background: $color-sale-bg;
+    color: $color-sale-text;
 
     svg {
-        stroke: #f5ebe6;
+      stroke: $color-sale-text;
     }
+  }
 }
 
+// ========================
+// ANIMATION
+// ========================
 @keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(-6px);
-    }
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+// ========================
+// DARK MODE
+// ========================
+// @media (prefers-color-scheme: dark) {
+//   .card {
+//     background-color: #1e1e1e;
+//     border: 1px solid rgba(255, 255, 255, 0.05);
+//     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+//   }
+
+//   .title, .price, .newPrice {
+//     color: #f1f1f1;
+//   }
+
+//   .label {
+//     background: rgba(255, 255, 255, 0.12);
+//     color: #f1f1f1;
+//   }
+// }
+
+// ========================
+// ACCESSIBILITY
+// ========================
+@media (prefers-reduced-motion: reduce) {
+  .card * {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+// ========================
+// RESPONSIVE
+// ========================
+@media (max-width: 768px) {
+  .card {
+    border-radius: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: clamp(0.9rem, 3vw, 1rem);
+  }
+  .price {
+    font-size: clamp(0.85rem, 2.5vw, 0.95rem);
+  }
 }
