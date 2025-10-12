@@ -8,8 +8,8 @@ import Script from "next/script";
 import { businessSchema } from "./lib/constants";
 import { CartProvider } from "./context/CartContext";
 import { Manrope } from "next/font/google";
-import "./globals.css";
 import Header from "./components/header/Header.server";
+import "./globals.css";
 
 const manrope = Manrope({
   subsets: ["latin", "cyrillic"],
@@ -82,7 +82,6 @@ export default function RootLayout({ children }: Readonly<{
       <body className={`${geistSans.variable} ${manrope.variable}`}>
         <CartProvider>
           <Providers>
-            {/* <Header /> */}
             <Header />
             {children}
             <Footer />

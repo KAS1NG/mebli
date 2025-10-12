@@ -24,6 +24,7 @@ export default function HeaderClient({ session, isAdmin }: Props) {
     return (
         <>
             <nav className={`${styles.nav} ${menuOpen ? styles.active : ''}`}>
+                <Link href="/gallery">Арт галерея</Link>
                 <Link href="/about">Про нас</Link>
                 <Link href="/contact">Контакти</Link>
 
