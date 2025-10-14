@@ -158,7 +158,7 @@ $transition: all 0.35s ease;
 
   &::after {
     right: 0;
-    background: linear-gradient(to left, $color-white 85%, transparent);
+    background: linear-gradient(to left, $color-white 2%, transparent);
   }
 }
 

@@ -2,17 +2,19 @@
     width: 100%;
     display: flex;
     justify-content: center;
-    background: #000;
+    background: #f9f9f9;
     overflow-x: hidden;
 }
 
 .imageContainer {
+    display: flex;
     position: relative;
     width: 100vw;
     height: auto;
 }
 
 .image {
+    padding-bottom: 10px;
     position: relative !important;
     width: 100%;
     height: auto !important;
