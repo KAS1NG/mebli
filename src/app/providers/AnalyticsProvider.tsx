@@ -3,7 +3,7 @@
 import Script from 'next/script';
 import { useEffect } from 'react';
 
-// const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
+const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
 
 export default function AnalyticsProvider() {
   useEffect(() => {
@@ -20,7 +20,7 @@ export default function AnalyticsProvider() {
 
   return (
     <>
-      {/* <Script
+      <Script
         id="ga-script"
         src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
         strategy="afterInteractive"
@@ -42,7 +42,7 @@ export default function AnalyticsProvider() {
             analytics_storage: 'denied'
           });
         `}
-      </Script> */}
+      </Script>
       <Script
         async
         src="https://www.googletagmanager.com/gtag/js?id=AW-17669744958"
