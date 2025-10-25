@@ -8,6 +8,7 @@ export default function HomePage() {
   return (
     <>
       <Hero />
+      {/* <HalloweenParticles /> */}
       <main className={styles.main}>
         <section className={styles.featured}>
           <h2>Топ по категоріях</h2>

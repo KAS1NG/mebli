@@ -1,3 +1,87 @@
+// Гелоуін стайл
+// neon.scss
+@use "sass:color";
+
+$base: #fceeaf; // білий текст
+$outline: #ee5b05; // помаранчевий контур
+$glow: #de3a02; // яскраво-червоне світіння
+
+@mixin neon-white-orange-red {
+  color: $base;
+  -webkit-text-stroke: 1.3px $outline; // чіткий контур
+  text-shadow:
+    0 0 2px $glow,
+    0 0 4px $glow,
+    0 0 8px rgba($glow, 0.9),
+    0 0 12px rgba($glow, 0.7),
+    0 0 20px rgba($glow, 0.5);
+  animation: flicker 3s infinite steps(1);
+}
+
+@keyframes flicker {
+
+  0%,
+  18%,
+  22%,
+  25%,
+  53%,
+  100% {
+    opacity: 1;
+  }
+
+  19%,
+  21%,
+  24%,
+  55% {
+    opacity: .9;
+  }
+
+  23% {
+    opacity: .8;
+  }
+
+  54% {
+    opacity: .95;
+  }
+}
+
+.sign {
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+  background: radial-gradient(circle at 50% 40%, #1a0804 0%, #0a0201 60%);
+}
+
+.sign__title {
+  @include neon-white-orange-red;
+  // font-size: clamp(36px, 8vw, 36px);
+  font-size: clamp(1.8rem, 6vw, 2.2rem);
+  text-transform: uppercase;
+  // text-align: center;
+  letter-spacing: 0.06em;
+  line-height: 1.45;
+  filter: drop-shadow(0 0 24px rgba($glow, .5)) drop-shadow(0 0 60px rgba($glow, .35));
+
+  position: absolute;
+  top: 26px;
+  left: 5%;
+  margin: 0;
+
+  span {
+    font-size: clamp(1.2rem, 4.5vw, 1.7rem);
+    font-weight: 600;
+  }
+
+  /* теплота довкола тексту (ореол на фон) */
+  // filter: drop-shadow(0 0 22px rgba($neon, .55)) drop-shadow(0 0 60px rgba($neon, .35));
+
+  // Робимо emoji також “неоновим”
+  // span,
+  // .emoji {
+  //   // filter: drop-shadow(0 0 8px rgba($neon, .8));
+  // }
+}
+
 .hero {
   position: relative;
   width: 100%;
@@ -16,7 +100,7 @@
 .bgWrapper {
   position: relative;
   width: 100%;
-  height: 380px;
+  height: 450px;
 
   picture {
     position: relative;
@@ -25,10 +109,48 @@
     width: 100%;
     height: 100%;
   }
+
+  img {
+    object-fit: cover; // <--- ось головне
+    object-position: center; // центрує зображення
+    background: radial-gradient(circle at center, #060606 0%, #1c140b 80%, #100c08 100%);
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-blend-mode: multiply;
+  }
 }
 
 .bgImage {
   object-fit: cover;
+}
+
+.bgImageHelloween {
+  object-fit: cover;
+  /* заповнює екран без спотворень */
+  object-position: center;
+  /* центрує головний об'єкт */
+  z-index: -1;
+  /* щоб не перекривало контент */
+  position: fixed;
+  /* або absolute — залежно від того, чи хочеш, щоб фон скролився */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  /* щоб фон не блокував кліки */
+  filter: brightness(0.9);
+  /* легке затемнення для контрасту контенту (опційно) */
+}
+
+/* адаптація для мобільних */
+@media (max-width: 768px) {
+  .bgImageHelloween {
+    object-position: center top;
+    /* трохи зсунь фокус */
+    filter: brightness(0.8);
+  }
 }
 
 .title {

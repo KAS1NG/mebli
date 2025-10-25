@@ -10,6 +10,9 @@
     "postinstall": "npm rebuild sharp"
   },
   "dependencies": {
+    "@tsparticles/engine": "^3.9.1",
+    "@tsparticles/react": "^3.0.0",
+    "@tsparticles/shape-image": "^3.9.1",
     "@types/js-cookie": "^3.0.6",
     "@types/next-auth": "^3.13.0",
     "@vercel/speed-insights": "^1.0.12",
@@ -23,9 +26,11 @@
     "plaiceholder": "^3.0.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
+    "react-halloween": "^0.3.2",
     "sass": "^1.92.0",
     "sharp": "^0.34.3",
     "swiper": "^11.1.14",
+    "tsparticles": "^3.9.1",
     "zod": "^3.23.8"
   },
   "devDependencies": {

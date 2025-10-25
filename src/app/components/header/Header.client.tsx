@@ -11,6 +11,7 @@ import { ICategory } from '@/app/types/post';
 import { useCart } from '@/app/context/CartContext';
 import CartHoverModal from '../cart/CartHoverModal';
 import { usePathname } from 'next/navigation';
+import HalloweenParticles from '../HalloweenParticles';
 
 interface Props {
     session: Session | null;
@@ -31,18 +32,17 @@ export default function HeaderClient({ session, isAdmin }: Props) {
 
     return (
         <>
+            <HalloweenParticles />
             <nav className={`${styles.nav} ${menuOpen ? styles.active : ''}`}>
                 <Link href="/gallery">Арт галерея</Link>
                 <Link href="/about">Про нас</Link>
                 <Link href="/contact">Контакти</Link>
 
-                {session ? (
+                {session ?
                     <button className={styles.signout} onClick={() => signOut()}>
                         Вийти
-                    </button>
-                ) : (
-                    <Link href="/auth/login">Вхід</Link>
-                )}
+                    </button> :
+                    <Link href="/auth/login">Вхід</Link>}
 
                 {isAdmin && <Link href="/admin/product/create">Створити</Link>}
             </nav>
