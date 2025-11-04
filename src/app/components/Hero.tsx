@@ -13,10 +13,10 @@ export default function Hero() {
                 <picture>
                     <source
                         media="(max-width: 880px)"
-                        srcSet="https://firebasestorage.googleapis.com/v0/b/sicero2-bfcd2.appspot.com/o/mebli%2FChatGPT%20Image%2021%20%D1%81%D0%B5%D1%80%D0%BF.%202025%20%D1%80.%2C%2018_06_59.png?alt=media"
+                        srcSet="https://res.cloudinary.com/dnwcmqbtm/image/upload/v1762240597/33606e21-fecf-4b21-8f45-1ea7c4182491.webp"
                     />
                     <Image
-                        src="https://res.cloudinary.com/dnwcmqbtm/image/upload/v1756537502/%D1%84%D0%BE%D0%BD_%D0%B3%D0%BE%D0%BB%D0%BE%D0%B2%D0%BD%D0%B0_w2h2ow.jpg"
+                        src="https://res.cloudinary.com/dnwcmqbtm/image/upload/v1762240598/19df9d0c-7bac-4f36-9b13-fbefa4ef19a7.webp"
                         alt="Роменський Меблевий Комбінат"
                         fill
                         quality={100}
