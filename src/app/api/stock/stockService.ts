@@ -1,5 +1,5 @@
 "use server"
-import { SERVER_URL } from "@/app/lib/constants";
+// import { SERVER_URL } from "@/app/lib/constants";
 import { IStock, IStockVariants } from "@/app/types/stock";
 
 import authOptions from "@/app/utils/authOptions";
@@ -7,6 +7,7 @@ import { handleResponse } from "@/app/utils/handleResponse";
 import { getServerSession } from "next-auth"
 import { revalidateTag } from "next/cache";
 
+const SERVER_URL = 'https://furniture-pypa-lmy0.onrender.com'
 
 export const fetchStock = async (): Promise<IStock[]> => {
 
