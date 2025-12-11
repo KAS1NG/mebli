@@ -1,0 +1,216 @@
+.tableWrapper {
+  width: 100%;
+  overflow-x: auto;
+  padding: 12px;
+
+  /* легка тінь для виділення таблиці */
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  border: 1px solid #e6e6e6;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 650px;
+  font-size: 14px;
+
+  thead {
+    background: #f3f4f6;
+
+    th {
+      text-align: left;
+      padding: 12px 10px;
+      font-weight: 600;
+      color: #333;
+      border-bottom: 2px solid #e0e0e0;
+      white-space: nowrap;
+    }
+  }
+
+  tbody {
+    tr {
+      transition: background 0.15s ease;
+
+      &:nth-child(even) {
+        background: #fafafa;
+      }
+
+      &:hover {
+        background: #f1f1f1;
+      }
+    }
+
+    td {
+      padding: 10px;
+      border-bottom: 1px solid #eaeaea;
+      color: #333;
+      vertical-align: middle;
+    }
+  }
+}
+
+/* 🔥 адаптивність */
+@media (max-width: 600px) {
+  .table {
+    min-width: 500px;
+    font-size: 13px;
+
+    thead th {
+      padding: 10px 6px;
+    }
+
+    tbody td {
+      padding: 8px 6px;
+    }
+  }
+
+  .tableWrapper {
+    padding: 8px;
+    border-radius: 10px;
+  }
+}
+
+/* 🔥 супер маленькі екрани */
+@media (max-width: 420px) {
+  .table {
+    min-width: 420px;
+    font-size: 12px;
+  }
+}
+
+
+.addButton {
+  background: #ffffff;
+  border: 1px solid #e5e5e5;
+  padding: 10px 18px;
+  margin: 10px 0;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+
+  &:hover {
+    background: #f7f7f7;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+    transform: translateY(-1px);
+  }
+
+  &:active {
+    transform: translateY(0);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+  }
+}
+
+@media (max-width: 480px) {
+  .addButton {
+    width: 100%;
+    text-align: center;
+    padding: 12px;
+  }
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(2px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  animation: fadeIn 0.2s ease;
+}
+
+.modal {
+  background: #fff;
+  width: 90%;
+  max-width: 420px;
+  padding: 20px 24px;
+  border-radius: 12px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+  animation: slideUp 0.25s ease;
+}
+
+.header {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 14px;
+  color: #333;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s;
+
+  &:focus {
+    border-color: #aaa;
+  }
+}
+
+.buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.btn {
+  padding: 8px 14px;
+  font-size: 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  border: 1px solid #ddd;
+  background: #fff;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: #f5f5f5;
+  }
+
+  &.primary {
+    background: #333;
+    color: #fff;
+    border-color: #333;
+
+    &:hover {
+      background: #444;
+    }
+  }
+}
+
+/* Анімації */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(10px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}

@@ -48,8 +48,6 @@ export default function LoginForm() {
   const credentialsAction = async (formData: FormData) => {
     setLoading(true);
 
-    // console.log(formData.get('files'))
-
     const productData = {
       title: formData.get('title') as string,
       price: Number(formData.get('price')),
