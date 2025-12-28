@@ -6,6 +6,7 @@ import Image from 'next/image';
 import dynamic from 'next/dynamic';
 import { useState, KeyboardEvent } from 'react';
 import { IPost } from '../types/post';
+import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 import style from '../styles/product/MySlider.module.scss';
 
 import 'swiper/css';
@@ -49,20 +50,40 @@ export default function MySlider({ product, title }: ISliderProps) {
       >
         {slides.map((image, index) => (
           <SwiperSlide key={image}>
-            <div className={style.imageBackground} data-swiper-parallax="20%">
-              <Image
-                src={image}
-                alt={`${title} — зображення ${index + 1}`}
-                fill
-                sizes="(max-width: 480px) 100vw, (max-width: 768px) 50vw, 600px"
-                className={style.productImage}
-                quality={index === 0 ? 100 : 90}
-                onClick={() => openModal(image)}
-                onKeyDown={(e) => handleKeyPress(e, image)}
-                tabIndex={0}
-                priority={index === 0}
-              />
-            </div>
+            {/* <div className={style.imageBackground} data-swiper-parallax="20%">
+              <TransformWrapper>
+                <TransformComponent>
+                  <Image
+                    src={image}
+                    alt={`${title} — зображення ${index + 1}`}
+                    fill
+                    sizes="(max-width: 480px) 100vw, (max-width: 768px) 50vw, 600px"
+                    className={style.productImage}
+                    quality={index === 0 ? 100 : 90}
+                    onClick={() => openModal(image)}
+                    onKeyDown={(e) => handleKeyPress(e, image)}
+                    tabIndex={0}
+                    priority={index === 0}
+                  />
+                </TransformComponent>
+              </TransformWrapper>
+            </div> */}
+              <TransformWrapper>
+                <TransformComponent wrapperClass={style.zoomWrapper}>
+                  <Image
+                    src={image}
+                    alt={`${title} — зображення ${index + 1}`}
+                    fill
+                    sizes="(max-width: 480px) 100vw, (max-width: 768px) 50vw, 600px"
+                    className={style.productImage}
+                    quality={index === 0 ? 100 : 90}
+                    onClick={() => openModal(image)}
+                    onKeyDown={(e) => handleKeyPress(e, image)}
+                    tabIndex={0}
+                    priority={index === 0}
+                  />
+                </TransformComponent>
+              </TransformWrapper>
           </SwiperSlide>
         ))}
       </Swiper>
