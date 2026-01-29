@@ -11,6 +11,8 @@ export const categories = [
     { name: 'Шафи', mainUrl: '/products/shafi', href: '/products/shafi?page=1&query=шафа' },
     { name: 'Столи', mainUrl: '/products/stoly', href: '/products/stoly?page=1&query=стіл' },
     { name: 'Матраци', mainUrl: '/products/matrats', href: '/products/matrats?page=1&query=матрац' },
+    { name: 'Тумби', mainUrl: '/products/tumbs', href: '/products/tumbs?page=1&query=тумба' },
+    { name: 'Комодики', mainUrl: '/products/tumbs', href: '/products/komods?page=1&query=комод' },
 ];
 
 export const businessSchema = {
