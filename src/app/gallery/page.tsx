@@ -10,6 +10,7 @@ const photos = [
   "https://res.cloudinary.com/dnwcmqbtm/image/upload/v1758790294/6fc0e5dd-c2a8-423d-80b6-3b3c7a3fb800.webp",
   "https://res.cloudinary.com/dnwcmqbtm/image/upload/v1760350497/file_0000000043e461f882570ce2a5ad9575_zyvhtn.png",
   "https://res.cloudinary.com/dnwcmqbtm/image/upload/v1760350497/file_000000005a70624384a03d3725bafb60_1_rvaskg.png",
+  "https://res.cloudinary.com/dnwcmqbtm/image/upload/v1769675217/12_h9fhcw.jpg"
 ];
 
 const items = [
@@ -101,6 +102,37 @@ const items5 = [
     position: { top: '40%', left: '50%' },
     preview: 'https://res.cloudinary.com/dnwcmqbtm/image/upload/v1758693602/c10d09e8-9c08-4841-b045-1ffa0f3e3f19.webp',
     link: '/products/dyvan-tokio/148'
+  },
+]
+
+const items6 = [
+  {
+    id: 1,
+    name: "Стілець Трініті",
+    position: { top: '47%', left: '84%' },
+    preview: 'https://res.cloudinary.com/dnwcmqbtm/image/upload/v1757397634/13d85caa-8775-4fdd-b4cc-b7cc7c198fbb.webp',
+    link: '/products/stilets-triniti/114'
+  },
+  {
+    id: 2,
+    name: "Диван Пума",
+    position: { top: '60%', left: '50%' },
+    preview: 'https://res.cloudinary.com/dnwcmqbtm/image/upload/v1769582970/file_00000000303471f48d38f6199b4960ca_sj30zc.png',
+    link: '/products/dyvan-puma/219'
+  },
+  {
+    id: 3,
+    name: "Шафа MebelStar Оскар 3-дверна 120 см Антрацит",
+    position: { top: '30%', left: '30%' },
+    preview: 'https://res.cloudinary.com/dnwcmqbtm/image/upload/v1769520406/file_000000009b5c720c876c4d67e15ca3a5_nd505t.png',
+    link: '/products/shafa-mebelstar-oskar-3-dverna-120-sm-antratsyt/217'
+  },
+  {
+    id: 4,
+    name: "Стіл обідній Річард",
+    position: { top: '53%', left: '70%' },
+    preview: 'https://res.cloudinary.com/dnwcmqbtm/image/upload/v1757397120/352a4d27-a9d7-47b9-91cd-1c815c5f4c62.webp',
+    link: '/products/stil-obidnii-richard/109'
   },
 ]
 
@@ -291,6 +323,45 @@ function page() {
                 <span className={styles.icon}>
                   <Circle />
                 </span>
+              </div>
+              <div className={styles.tooltip}>
+                <Image
+                  src={item.preview}
+                  alt={item.name}
+                   width={180}
+                  height={120}
+                  className={styles.preview}
+                />
+                <p>{item.name}</p>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+      <div className={styles.wrapper}>
+        <div className={styles.imageContainer}>
+          <Image
+            src={photos[5]}
+            alt="Інтер'єр кімнати в скандинавському стилі"
+            fill
+            priority
+            className={styles.image}
+            sizes="100vw"
+          />
+          {/* інтерактивні точки */}
+          {items6.map((item) => (
+            <a
+              key={item.id}
+              href={item.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.pin}
+              style={item.position}
+            >
+              <div className={styles.dot}>
+                <span className={styles.icon}>
+                  <Circle />
+                </span> 
               </div>
               <div className={styles.tooltip}>
                 <Image
