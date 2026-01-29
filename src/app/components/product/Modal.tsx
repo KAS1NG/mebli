@@ -8,6 +8,9 @@ import { useState } from 'react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/thumbs';
+
+import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
+
 import styles from '../../styles/product/Modal.module.scss';
 
 interface ModalProps {
@@ -40,13 +43,17 @@ export default function Modal({ images, selectedImage, closeModal }: ModalProps)
                     >
                         {images.map((img, idx) => (
                             <SwiperSlide key={idx}>
-                                <Image
-                                    src={img}
-                                    alt={`Фото ${idx + 1}`}
-                                    width={1000}
-                                    height={800}
-                                    className={styles.mainImage}
-                                />
+                                <TransformWrapper>
+                                    <TransformComponent>
+                                        <Image
+                                            src={img}
+                                            alt={`Фото ${idx + 1}`}
+                                            width={1000}
+                                            height={800}
+                                            className={styles.mainImage}
+                                        />
+                                    </TransformComponent>
+                                </TransformWrapper>
                             </SwiperSlide>
                         ))}
                     </Swiper>
