@@ -13,7 +13,7 @@ export const categories = [
     { name: 'Матраци', mainUrl: '/products/matrats', href: '/products/matrats?page=1&query=матрац' },
     { name: 'Тумби', mainUrl: '/products/tumbs', href: '/products/tumbs?page=1&query=тумба' },
     { name: 'Комоди', mainUrl: '/products/komods', href: '/products/komods?page=1&query=комод' },
-    { name: 'Постіль', mainUrl: '/products/postil', href: '/products/postil?page=1&query=постіль' },
+    { name: 'Постільне', mainUrl: '/products/postil', href: '/products/postil?page=1&query=постільне' },
 ];
 
 export const businessSchema = {

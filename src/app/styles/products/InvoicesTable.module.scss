@@ -6,10 +6,10 @@
 
     @media (max-width: 1024px) {
       grid-template-columns: repeat(2, 1fr); // планшет
+      padding: 20px 10px;
     }
 
     @media (max-width: 640px) {
       grid-template-columns: 1fr; // мобільний
-      padding: 20px 14px;
     }
   }
